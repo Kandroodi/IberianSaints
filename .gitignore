@@ -52,3 +52,6 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+
+# KEYS
+*/secret_key.py

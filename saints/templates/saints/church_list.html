@@ -1,0 +1,45 @@
+{% extends 'saints/base.html' %}
+{% load widget_tweaks %}
+{% block main_content %}
+
+<h2>Church list</h2>
+<table class="table table-borderless">
+    <thead class="border-bottom font-weight-bold">
+        <tr>
+            <td>Church Name</td>
+            <td>Start date </td>
+            <td>End date</td>
+            <td>Institution type</td>
+            <td>Political region</td>
+            <td>Ecclesiastical region</td>
+            <td>
+                 <a href="{% url 'saints:church-insert' %}" class="btn btn-outline-success"> <i class="fa fa-plus"></i> Add New</a>
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for church in church_list %}
+            <tr>
+                <td>{{church.name }}</td>
+                <td>{{church.start_date}}</td>
+                <td>{{church.end_date}}</td>
+                <td>{{church.institution_type}}</td>
+                <td>{{church.political_region}}</td>
+                <td>{{church.ecclesiastical_region}}</td>
+                <td>
+                    <a href="{% url 'saints:church-update' church.id %}" class="btn text-secondary px-0"><i class="fa fa-edit fa-lg"></i></a>
+                    <form action="{% url 'saints:church-delete' church.id %}" method="post" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn" onclick="return confirm('Are you sure you want to delete all entities connected to this from the database?')">
+<!--                        <button type="submit" class="btn">-->
+                        <i class="fa fa-trash fa-lg text-danger float-right"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor%}
+    </tbody>
+
+</table>
+
+{% endblock main_content %}
