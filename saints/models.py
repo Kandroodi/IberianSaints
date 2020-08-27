@@ -111,3 +111,35 @@ class Object(models.Model):
     def __str__(self):
         return self.name
 
+class ManuscriptType(models.Model):
+    name = models.CharField(max_length=100)  # calendar, commicus, antiphoner, misticus, liber canticorum, etc
+
+    def __str__(self):
+        return self.name
+
+
+class Rite(models.Model):
+    name = models.CharField(max_length=100)  # old Hispanic, Roman
+
+    def __str__(self):
+        return self.name
+
+
+class Feast(models.Model):
+    name = models.CharField(max_length=100)  #
+    date = PartialDateField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+class LiturgicalManuscript(models.Model):
+    shelf_no = models.CharField(max_length=100)
+    rite = models.ForeignKey(Rite, on_delete=models.CASCADE, blank=True, default='')
+    type = models.ForeignKey(ManuscriptType, on_delete=models.CASCADE, blank=True, default='')
+    date = PartialDateField(blank=True, null=True)
+    provenance = models.ForeignKey(Church, on_delete=models.CASCADE, blank=True, default='')
+    coordinate = models.ForeignKey(Location, on_delete=models.CASCADE, blank=True, default='')
+    feast = models.ForeignKey(Feast, on_delete=models.CASCADE, blank=True, default='')
+    external_link = models.ForeignKey(ExternalLink, on_delete=models.CASCADE, blank=True, default='')
+    bibliography = models.ForeignKey(Bibliography, on_delete=models.CASCADE, blank=True, default='')
+    description = models.TextField(default='', blank=True)
