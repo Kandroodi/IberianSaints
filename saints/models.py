@@ -31,9 +31,9 @@ class Location(models.Model):
 
 class Church(models.Model):
     name = models.CharField(max_length=100, blank=False)
-    start_date = models.DateField(default=datetime.date.today)
-    end_date = models.DateField(default=datetime.date.today)
-    # coordinates = models.ForeignKey(Location, on_delete=models.CASCADE, blank=True, default='')  # type: ForeignKey
+    start_date = PartialDateField(blank=True, null=True)
+    end_date = PartialDateField(blank=True, null=True)
+    coordinates = models.ForeignKey(Location, on_delete=models.CASCADE, blank=True, default='')  # type: ForeignKey
     institution_type = models.ForeignKey(InstitutionType, on_delete=models.CASCADE, blank=True, default='')
     political_region = models.CharField(max_length=100, blank=True)
     ecclesiastical_region = models.CharField(max_length=100, blank=True)
