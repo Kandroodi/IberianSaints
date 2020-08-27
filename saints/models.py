@@ -15,16 +15,18 @@ class InstitutionType(models.Model):
 
 
 class Bibliography(models.Model):
-    short_title = models.CharField(max_length=250, blank=True)
-    author = models.CharField(max_length=50, blank=True)
+    short_title = models.CharField(max_length=250, blank=True, null=True)
+    author = models.CharField(max_length=50, blank=True, null=True)
     year = PartialDateField(blank=True, null=True)
 
     def __str__(self):
         return self.short_title
 
 
-# class Location(models.Model):
-#     coordinates = models.PointField(srid=4326, blank=True)
+class Location(models.Model):
+    #     coordinates = models.PointField(srid=4326, blank=True)
+    coordinates = models.CharField(max_length=50, blank=True,
+                                   null=True)  # this is a placeholder and it will change to point field
 
 
 class Church(models.Model):
@@ -62,7 +64,7 @@ class Inscription(models.Model):
 
 
 class SaintType(models.Model):
-    name = models.CharField(max_length=100) # Just Man, Confessor, Virgin, Virgin Confessor, Apostle, etc
+    name = models.CharField(max_length=100)  # Just Man, Confessor, Virgin, Virgin Confessor, Apostle, etc
 
     def __str__(self):
         return self.name
@@ -81,5 +83,3 @@ class ObjectType(models.Model):
 
     def __str__(self):
         return self.name
-
-
