@@ -1,30 +1,30 @@
 from django.db import models
 from django.contrib.gis.db import models
 import datetime
-
+from partial_date import PartialDateField
 
 # Create your models here.
 from django.db.models import ForeignKey
 
 
 class InstitutionType(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
 
 
 class Bibliography(models.Model):
-    short_title = models.CharField(max_length=250, blank=False)
-    author = models.CharField(max_length=50, blank=False)
-    year = models.DateField(default=datetime.date.today)
+    short_title = models.CharField(max_length=250, blank=True)
+    author = models.CharField(max_length=50, blank=True)
+    year = PartialDateField(blank=True, null=True)
 
     def __str__(self):
         return self.short_title
 
 
-class Location(models.Model):
-    coordinates = models.PointField(srid=4326, blank=True)
+# class Location(models.Model):
+#     coordinates = models.PointField(srid=4326, blank=True)
 
 
 class Church(models.Model):
@@ -71,7 +71,7 @@ class SaintType(models.Model):
 class Saint(models.Model):
     name = models.CharField(max_length=256)
     death_date = models.DateField()
-    death_place = models.ForeignKey(Location, on_delete=models.CASCADE, blank=True, default='')
+    # death_place = models.ForeignKey(Location, on_delete=models.CASCADE, blank=True, default='')
     type = models.ForeignKey(SaintType, related_name='saints', on_delete=models.CASCADE, blank=True, default='')
     description = models.TextField(default='', blank=True)
 

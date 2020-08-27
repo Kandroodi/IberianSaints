@@ -7,6 +7,6 @@ admin.site.register(Church)
 admin.site.register(InstitutionType)
 admin.site.register(Bibliography)
 
-@admin.register(Location)
-class LocationAdmin(OSMGeoAdmin):
-    list_display = ('coordinates',)
+# @admin.register(Location)
+# class LocationAdmin(OSMGeoAdmin):
+#     list_display = ('coordinates',)

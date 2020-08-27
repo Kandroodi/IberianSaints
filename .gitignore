@@ -55,3 +55,7 @@ venv.bak/
 
 # KEYS
 */secret_key.py
+
+# migrations except __init__.py
+*/migrations/*
+!*/migrations/__init__.py
