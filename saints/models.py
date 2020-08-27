@@ -60,12 +60,12 @@ class Church(models.Model):
 
 
 class Inscription(models.Model):
-    # coordinates = models.ForeignKey(Location, on_delete=models.CASCADE, blank=True, default='')
-    date = models.DateField()
+    coordinates = models.ForeignKey(Location, on_delete=models.CASCADE, blank=True, default='')
+    date = PartialDateField(blank=True, null=True)
     institution_type = models.ForeignKey(InstitutionType, on_delete=models.CASCADE, blank=True, default='')
     text = models.TextField(max_length=256)
     description = models.TextField(default='', blank=True)
-    reference = models.CharField(max_length=50)
+    reference = models.CharField(max_length=100)
     external_link = models.URLField(max_length=128, default='', blank=True)
     bibliography = models.ForeignKey(Bibliography, on_delete=models.CASCADE, blank=True, default='')
 
