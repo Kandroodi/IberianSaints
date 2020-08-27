@@ -29,6 +29,13 @@ class Location(models.Model):
                                    null=True)  # this is a placeholder and it will change to point field
 
 
+class ExternalLink(models.Model):
+    link = models.URLField(max_length=256, default='', blank=True)
+
+    def __str__(self):
+        return self.link
+
+
 class Church(models.Model):
     name = models.CharField(max_length=100, blank=False)
     start_date = PartialDateField(blank=True, null=True)
@@ -47,7 +54,7 @@ class Church(models.Model):
         ('N', 'No'),
     )
     material_evidence = models.CharField(max_length=1, choices=MATERIAL, default='Y')
-    external_link = models.URLField(max_length=128, default='', blank=True)
+    external_link = models.ForeignKey(ExternalLink, on_delete=models.CASCADE, blank=True, default='')
     bibliography = models.ForeignKey(Bibliography, on_delete=models.CASCADE, blank=True, default='')
     description = models.TextField(default='', blank=True)
 
