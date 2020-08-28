@@ -95,8 +95,8 @@ class ObjectType(models.Model):
 class Object(models.Model):
     name = models.CharField(max_length=256)
     date = PartialDateField(blank=True, null=True)
-    location_original = models.ForeignKey(Church, on_delete=models.CASCADE, blank=True, default='')
-    location_current = models.ForeignKey(Church, on_delete=models.CASCADE, blank=True, default='')
+    original_location = models.ForeignKey(Church, related_name='originallocations', on_delete=models.CASCADE, blank=True, default='')
+    current_location = models.ForeignKey(Church, on_delete=models.CASCADE, blank=True, default='')
     coordinate = models.ForeignKey(Location, on_delete=models.CASCADE, blank=True, default='')
     type = models.ForeignKey(ObjectType, on_delete=models.CASCADE, blank=True, default='')
     TEXTUAL = (

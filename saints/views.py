@@ -91,3 +91,4 @@ def institutionTypeDelete(request, id):
     city = get_object_or_404(Church, pk=id)
     city.delete()
     return redirect('saints:institutionType-list')
+
