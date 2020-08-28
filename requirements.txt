@@ -1,4 +1,4 @@
-Django==2.1.15
+Django==2.2.13
 django-crispy-forms==1.9.1
 django-widget-tweaks==1.4.8
 partial-date==0.1
