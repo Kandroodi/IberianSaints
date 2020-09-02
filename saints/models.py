@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib.gis.db import models
 import datetime
 from partial_date import PartialDateField
 
