@@ -1,5 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import *
+from django.utils.decorators import method_decorator
+
+from django.views.generic import (View, TemplateView, ListView,
+                                  DetailView, CreateView, UpdateView,
+                                  DeleteView)
+from django.urls import reverse_lazy
+
 
 # Create your views here.
 
@@ -91,4 +98,34 @@ def institutionTypeDelete(request, id):
     city = get_object_or_404(Church, pk=id)
     city.delete()
     return redirect('saints:institutionType-list')
+
+
+# Class Based Views
+#-----------------------------------------------------------------------------------------------------------------------
+# @method_decorator(login_required, name='dispatch')
+class InscriptionListView(ListView):
+    model = Inscription
+    template_name = 'installations/inscription_list.html'
+    context_object_name = 'inscriptions'
+
+
+# @method_decorator(login_required, name='dispatch')
+class InscriptionCreatView(CreateView):
+    model = Inscription
+    fields = '__all__'
+    template_name = 'saints/inscription_form.html'
+    success_url = reverse_lazy('saints:inscription-list')
+
+
+# @method_decorator(login_required, name='dispatch')
+class InscriptionUpdateView(UpdateView):
+    model = Inscription
+    fields = '__all__'
+    success_url = reverse_lazy('saints:inscription-list')
+
+
+# @method_decorator(login_required, name='dispatch')
+class InscriptionDeleteView(DeleteView):
+    model = Inscription
+    success_url = reverse_lazy("saints:inscription-list")
 

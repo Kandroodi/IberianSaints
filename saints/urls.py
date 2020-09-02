@@ -2,6 +2,9 @@ from django.conf.urls import url
 from django.urls import path
 from . import views
 
+# TEMPLATE URLS
+app_name = 'saints'
+
 urlpatterns = [
     path('', views.home, name='home'), # get and post req. for insert operation
     path('church/new/', views.churchCreate, name='church-insert'), # get and post req. for insert operation
@@ -12,4 +15,8 @@ urlpatterns = [
     path('bibliography/new/<int:id>/', views.bibliographyCreate, name='bibliography-update'), # get and post req. for update operation
     path('bibliography/delete/<int:id>/', views.bibliographyDelete, name='bibliography-delete'),
     path('bibliography/list/', views.bibliographyList, name='bibliography-list'),  # get request to retrieve and display all records
+    url(r'^inscription/new/$', views.InscriptionCreatView.as_view(), name='inscription-insert'),
+    url(r'^inscription/new/(?P<pk>\d+)/$', views.InscriptionUpdateView.as_view(), name='inscription-update'),
+    url(r'^inscription/delete/(?P<pk>\d+)/$', views.InscriptionDeleteView.as_view(), name='inscription-delete'),
+    path('inscription/list', views.InscriptionListView.as_view(), name='inscription-list'),
 ]
