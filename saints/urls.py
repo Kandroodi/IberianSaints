@@ -51,4 +51,8 @@ urlpatterns = [
     url(r'^sainttype/new/(?P<pk>\d+)/$', views.SaintTypeUpdateView.as_view(), name='sainttype-update'),
     url(r'^sainttype/delete/(?P<pk>\d+)/$', views.SaintTypeDeleteView.as_view(), name='sainttype-delete'),
     path('sainttype/list', views.SaintTypeListView.as_view(), name='sainttype-list'),
+    url(r'^externallink/new/$', views.ExternalLinkCreatView.as_view(), name='externallink-insert'),
+    url(r'^externallink/new/(?P<pk>\d+)/$', views.ExternalLinkUpdateView.as_view(), name='externallink-update'),
+    url(r'^externallink/delete/(?P<pk>\d+)/$', views.ExternalLinkDeleteView.as_view(), name='externallink-delete'),
+    path('externallink/list', views.ExternalLinkListView.as_view(), name='externallink-list'),
 ]
