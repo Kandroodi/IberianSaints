@@ -55,4 +55,8 @@ urlpatterns = [
     url(r'^externallink/new/(?P<pk>\d+)/$', views.ExternalLinkUpdateView.as_view(), name='externallink-update'),
     url(r'^externallink/delete/(?P<pk>\d+)/$', views.ExternalLinkDeleteView.as_view(), name='externallink-delete'),
     path('externallink/list', views.ExternalLinkListView.as_view(), name='externallink-list'),
+    url(r'^location/new/$', views.LocationCreatView.as_view(), name='location-insert'),
+    url(r'^location/new/(?P<pk>\d+)/$', views.LocationUpdateView.as_view(), name='location-update'),
+    url(r'^location/delete/(?P<pk>\d+)/$', views.LocationDeleteView.as_view(), name='location-delete'),
+    path('location/list', views.LocationListView.as_view(), name='location-list'),
 ]
