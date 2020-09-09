@@ -242,3 +242,32 @@ class LiturgicalManuscriptUpdateView(UpdateView):
 class LiturgicalManuscriptDeleteView(DeleteView):
     model = LiturgicalManuscript
     success_url = reverse_lazy("saints:liturgicalmanuscript-list")
+
+
+# Rite
+# @method_decorator(login_required, name='dispatch')
+class RiteListView(ListView):
+    model = Rite
+    template_name = 'installations/rite_list.html'
+    context_object_name = 'rites'
+
+
+# @method_decorator(login_required, name='dispatch')
+class RiteCreatView(CreateView):
+    model = Rite
+    fields = '__all__'
+    template_name = 'saints/rite_form.html'
+    success_url = reverse_lazy('saints:rite-list')
+
+
+# @method_decorator(login_required, name='dispatch')
+class RiteUpdateView(UpdateView):
+    model = Rite
+    fields = '__all__'
+    success_url = reverse_lazy('saints:rite-list')
+
+
+# @method_decorator(login_required, name='dispatch')
+class RiteDeleteView(DeleteView):
+    model = Rite
+    success_url = reverse_lazy("saints:rite-list")

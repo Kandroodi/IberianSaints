@@ -35,4 +35,8 @@ urlpatterns = [
     url(r'^liturgicalmanuscript/new/(?P<pk>\d+)/$', views.LiturgicalManuscriptUpdateView.as_view(), name='liturgicalmanuscript-update'),
     url(r'^liturgicalmanuscript/delete/(?P<pk>\d+)/$', views.LiturgicalManuscriptDeleteView.as_view(), name='liturgicalmanuscript-delete'),
     path('liturgicalmanuscript/list', views.LiturgicalManuscriptListView.as_view(), name='liturgicalmanuscript-list'),
+    url(r'^rite/new/$', views.RiteCreatView.as_view(), name='rite-insert'),
+    url(r'^rite/new/(?P<pk>\d+)/$', views.RiteUpdateView.as_view(), name='rite-update'),
+    url(r'^rite/delete/(?P<pk>\d+)/$', views.RiteDeleteView.as_view(), name='rite-delete'),
+    path('rite/list', views.RiteListView.as_view(), name='rite-list'),
 ]
