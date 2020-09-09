@@ -415,3 +415,32 @@ class LocationUpdateView(UpdateView):
 class LocationDeleteView(DeleteView):
     model = Location
     success_url = reverse_lazy("saints:location-list")
+
+
+# InstitutionType
+# @method_decorator(login_required, name='dispatch')
+class InstitutionTypeListView(ListView):
+    model = InstitutionType
+    template_name = 'installations/institutiontype_list.html'
+    context_object_name = 'institutiontypes'
+
+
+# @method_decorator(login_required, name='dispatch')
+class InstitutionTypeCreatView(CreateView):
+    model = InstitutionType
+    fields = '__all__'
+    template_name = 'saints/institutiontype_form.html'
+    success_url = reverse_lazy('saints:institutiontype-list')
+
+
+# @method_decorator(login_required, name='dispatch')
+class InstitutionTypeUpdateView(UpdateView):
+    model = InstitutionType
+    fields = '__all__'
+    success_url = reverse_lazy('saints:institutiontype-list')
+
+
+# @method_decorator(login_required, name='dispatch')
+class InstitutionTypeDeleteView(DeleteView):
+    model = InstitutionType
+    success_url = reverse_lazy("saints:institutiontype-list")

@@ -1,14 +1,13 @@
 {% extends 'saints/base.html' %}
-{% load widget_tweaks %}  <!-- related to forms, the old method, befor the crispy forms -->
 {% load crispy_forms_tags %}
 
 {% block main_content %}
 
     <h2>
         {% if not form.instance.pk %}
-            Add Inscription
+            Add Institution type
         {% else %}
-            Update Inscription "{{form.instance.reference}}"
+            Update Institution type "{{form.instance.name}}"
         {% endif %}
     </h2>
 
@@ -23,7 +22,7 @@
             {% else %}
                 <button type="submit" class="btn btn-success"><i class="fa fa-database"></i>Update</button>
             {% endif %}
-            <a href="{% url 'saints:inscription-list' %}" class="btn btn-default">Cancel</a>
+            <a href="{% url 'saints:institutiontype-list' %}" class="btn btn-default">Cancel</a>
         </div>
     </form>
 

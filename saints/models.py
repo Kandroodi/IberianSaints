@@ -26,7 +26,8 @@ class Location(models.Model):
     #     coordinates = models.PointField(srid=4326, blank=True)
     coordinates = models.CharField(max_length=50, blank=True,
                                    null=True)  # this is a placeholder and it will change to point field
-
+    def __str__(self):
+        return self.coordinates
 
 class ExternalLink(models.Model):
     link = models.URLField(max_length=256, default='', blank=True)
@@ -39,10 +40,10 @@ class Church(models.Model):
     name = models.CharField(max_length=100, blank=False)
     start_date = PartialDateField(blank=True, null=True)
     end_date = PartialDateField(blank=True, null=True)
-    coordinates = models.ForeignKey(Location, on_delete=models.CASCADE, blank=True, default='')  # type: ForeignKey
-    institution_type = models.ForeignKey(InstitutionType, on_delete=models.CASCADE, blank=True, default='')
-    political_region = models.CharField(max_length=100, blank=True)
-    ecclesiastical_region = models.CharField(max_length=100, blank=True)
+    coordinates = models.ForeignKey(Location, on_delete=models.CASCADE, blank=True, default='', null=True)  # type: ForeignKey
+    institution_type = models.ForeignKey(InstitutionType, on_delete=models.CASCADE, blank=True, default='', null=True)
+    political_region = models.CharField(max_length=100, blank=True, null=True)
+    ecclesiastical_region = models.CharField(max_length=100, blank=True, null=True)
     TEXTUAL = (
         ('Y', 'Yes'),
         ('N', 'No'),
@@ -53,8 +54,8 @@ class Church(models.Model):
         ('N', 'No'),
     )
     material_evidence = models.CharField(max_length=1, choices=MATERIAL, default='Y')
-    external_link = models.ForeignKey(ExternalLink, on_delete=models.CASCADE, blank=True, default='')
-    bibliography = models.ForeignKey(Bibliography, on_delete=models.CASCADE, blank=True, default='')
+    external_link = models.ForeignKey(ExternalLink, on_delete=models.CASCADE, blank=True, default='', null=True)
+    bibliography = models.ForeignKey(Bibliography, on_delete=models.CASCADE, blank=True, default='', null=True)
     description = models.TextField(default='', blank=True)
 
 
@@ -62,11 +63,11 @@ class Inscription(models.Model):
     coordinates = models.ForeignKey(Location, on_delete=models.CASCADE, blank=True, null=True, default='')
     date = PartialDateField(blank=True, null=True)
     institution_type = models.ForeignKey(InstitutionType, on_delete=models.CASCADE, blank=True, null=True, default='')
-    text = models.TextField(max_length=256)
-    description = models.TextField(default='', blank=True)
-    reference = models.CharField(max_length=100)
-    external_link = models.URLField(max_length=128, default='', blank=True)
-    bibliography = models.ForeignKey(Bibliography, on_delete=models.CASCADE, blank=True, default='')
+    text = models.TextField(max_length=256, blank=True, null=True)
+    description = models.TextField(default='', blank=True, null=True)
+    reference = models.CharField(max_length=100, blank=True, null=True)
+    external_link = models.URLField(max_length=128, default='', blank=True, null=True)
+    bibliography = models.ForeignKey(Bibliography, on_delete=models.CASCADE, blank=True, default='', null=True)
 
     def __str__(self):
         return self.reference

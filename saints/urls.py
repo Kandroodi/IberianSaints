@@ -59,4 +59,8 @@ urlpatterns = [
     url(r'^location/new/(?P<pk>\d+)/$', views.LocationUpdateView.as_view(), name='location-update'),
     url(r'^location/delete/(?P<pk>\d+)/$', views.LocationDeleteView.as_view(), name='location-delete'),
     path('location/list', views.LocationListView.as_view(), name='location-list'),
+    url(r'^institutiontype/new/$', views.InstitutionTypeCreatView.as_view(), name='institutiontype-insert'),
+    url(r'^institutiontype/new/(?P<pk>\d+)/$', views.InstitutionTypeUpdateView.as_view(), name='institutiontype-update'),
+    url(r'^institutiontype/delete/(?P<pk>\d+)/$', views.InstitutionTypeDeleteView.as_view(), name='institutiontype-delete'),
+    path('institutiontype/list', views.InstitutionTypeListView.as_view(), name='institutiontype-list'),
 ]
