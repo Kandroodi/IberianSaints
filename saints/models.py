@@ -96,18 +96,18 @@ class ObjectType(models.Model):
 class Object(models.Model):
     name = models.CharField(max_length=256)
     date = PartialDateField(blank=True, null=True)
-    original_location = models.ForeignKey(Church, related_name='originallocations', on_delete=models.CASCADE, blank=True, default='')
-    current_location = models.ForeignKey(Church, on_delete=models.CASCADE, blank=True, default='')
-    coordinate = models.ForeignKey(Location, on_delete=models.CASCADE, blank=True, default='')
-    type = models.ForeignKey(ObjectType, on_delete=models.CASCADE, blank=True, default='')
+    original_location = models.ForeignKey(Church, related_name='originallocations', on_delete=models.CASCADE, blank=True, default='', null=True)
+    current_location = models.ForeignKey(Church, on_delete=models.CASCADE, blank=True, default='', null=True)
+    coordinate = models.ForeignKey(Location, on_delete=models.CASCADE, blank=True, default='', null=True)
+    type = models.ForeignKey(ObjectType, on_delete=models.CASCADE, blank=True, default='', null=True)
     TEXTUAL = (
         ('Y', 'Yes'),
         ('N', 'No'),
     )
     textual_evidence = models.CharField(max_length=1, choices=TEXTUAL, default='Y')
-    external_link = models.URLField(max_length=128, default='', blank=True)
-    bibliography = models.ForeignKey(Bibliography, on_delete=models.CASCADE, blank=True, default='')
-    description = models.TextField(default='', blank=True)
+    external_link = models.URLField(max_length=128, default='', blank=True, null=True)
+    bibliography = models.ForeignKey(Bibliography, on_delete=models.CASCADE, blank=True, default='', null=True)
+    description = models.TextField(default='', blank=True, null=True)
 
     def __str__(self):
         return self.name

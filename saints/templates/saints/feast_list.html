@@ -2,35 +2,29 @@
 {% load widget_tweaks %}
 
 {% block main_content %}
-    <h2>Object list</h2>
+    <h2>Feast list</h2>
     <table class="table table-borderless">
         <thead class="border-bottom font-weight-bold">
             <tr>
                 <th scope="col">Name</th>
                 <th scope="col">Date</th>
-                <th scope="col">Original location</th>
-                <th scope="col">Current location</th>
-                <th scope="col">type</th>
                 <td>
-                    <a href= "{% url 'saints:object-insert' %}"
+                    <a href= "{% url 'saints:feast-insert' %}"
                        class="btn btn-outline-success"
                        target="popup"
-                       onclick="window.open('{% url 'saints:object-insert' %}','popup','width=600,height=600'); return false;">
+                       onclick="window.open('{% url 'saints:feast-insert' %}','popup','width=600,height=600'); return false;">
                         <i class="fa fa-plus"></i> Add New</a>
                 </td>
             </tr>
         </thead>
         <tbody>
-            {% for object in objects %}
+            {% for feast in feasts %}
             <tr>
-                <td>{{object.name}}</td>
-                <td>{{object.date}}</td>
-                <td>{{object.original_location}}</td>
-                <td>{{object.current_location}}</td>
-                <td>{{object.type}}</td>
+                <td>{{feast.name}}</td>
+                <td>{{feast.date}}</td>
                 <td>
-                    <a href="{% url 'saints:object-update' object.id %}" class="btn text-secondary px-0"><i class="fa fa-edit fa-lg"></i></a>
-                    <form action="{% url 'saints:object-delete' object.id %}" method="post" class="d-inline">
+                    <a href="{% url 'saints:feast-update' feast.id %}" class="btn text-secondary px-0"><i class="fa fa-edit fa-lg"></i></a>
+                    <form action="{% url 'saints:feast-delete' feast.id %}" method="post" class="d-inline">
                         {% csrf_token %}
                         <button type="submit" class="btn" onclick="return confirm('Are you sure you want to delete all entities connected to this from the database?')">
                         <i class="fa fa-trash fa-lg text-danger float-right"></i>

@@ -156,3 +156,60 @@ class SaintUpdateView(UpdateView):
 class SaintDeleteView(DeleteView):
     model = Saint
     success_url = reverse_lazy("saints:saint-list")
+
+# Object
+# @method_decorator(login_required, name='dispatch')
+class ObjectListView(ListView):
+    model = Object
+    template_name = 'installations/object_list.html'
+    context_object_name = 'objects'
+
+
+# @method_decorator(login_required, name='dispatch')
+class ObjectCreatView(CreateView):
+    model = Object
+    fields = '__all__'
+    template_name = 'saints/object_form.html'
+    success_url = reverse_lazy('saints:object-list')
+
+
+# @method_decorator(login_required, name='dispatch')
+class ObjectUpdateView(UpdateView):
+    model = Object
+    fields = '__all__'
+    success_url = reverse_lazy('saints:object-list')
+
+
+# @method_decorator(login_required, name='dispatch')
+class ObjectDeleteView(DeleteView):
+    model = Object
+    success_url = reverse_lazy("saints:object-list")
+
+
+# Feast
+# @method_decorator(login_required, name='dispatch')
+class FeastListView(ListView):
+    model = Feast
+    template_name = 'installations/feast_list.html'
+    context_object_name = 'feasts'
+
+
+# @method_decorator(login_required, name='dispatch')
+class FeastCreatView(CreateView):
+    model = Feast
+    fields = '__all__'
+    template_name = 'saints/feast_form.html'
+    success_url = reverse_lazy('saints:feast-list')
+
+
+# @method_decorator(login_required, name='dispatch')
+class FeastUpdateView(UpdateView):
+    model = Feast
+    fields = '__all__'
+    success_url = reverse_lazy('saints:feast-list')
+
+
+# @method_decorator(login_required, name='dispatch')
+class FeastDeleteView(DeleteView):
+    model = Feast
+    success_url = reverse_lazy("saints:feast-list")

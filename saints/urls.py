@@ -23,4 +23,12 @@ urlpatterns = [
     url(r'^saint/new/(?P<pk>\d+)/$', views.SaintUpdateView.as_view(), name='saint-update'),
     url(r'^saint/delete/(?P<pk>\d+)/$', views.SaintDeleteView.as_view(), name='saint-delete'),
     path('saint/list', views.SaintListView.as_view(), name='saint-list'),
+    url(r'^object/new/$', views.ObjectCreatView.as_view(), name='object-insert'),
+    url(r'^object/new/(?P<pk>\d+)/$', views.ObjectUpdateView.as_view(), name='object-update'),
+    url(r'^object/delete/(?P<pk>\d+)/$', views.ObjectDeleteView.as_view(), name='object-delete'),
+    path('object/list', views.ObjectListView.as_view(), name='object-list'),
+    url(r'^feast/new/$', views.FeastCreatView.as_view(), name='feast-insert'),
+    url(r'^feast/new/(?P<pk>\d+)/$', views.FeastUpdateView.as_view(), name='feast-update'),
+    url(r'^feast/delete/(?P<pk>\d+)/$', views.FeastDeleteView.as_view(), name='feast-delete'),
+    path('feast/list', views.FeastListView.as_view(), name='feast-list'),
 ]
