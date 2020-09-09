@@ -47,4 +47,8 @@ urlpatterns = [
     url(r'^objecttype/new/(?P<pk>\d+)/$', views.ObjectTypeUpdateView.as_view(), name='objecttype-update'),
     url(r'^objecttype/delete/(?P<pk>\d+)/$', views.ObjectTypeDeleteView.as_view(), name='objecttype-delete'),
     path('objecttype/list', views.ObjectTypeListView.as_view(), name='objecttype-list'),
+    url(r'^sainttype/new/$', views.SaintTypeCreatView.as_view(), name='sainttype-insert'),
+    url(r'^sainttype/new/(?P<pk>\d+)/$', views.SaintTypeUpdateView.as_view(), name='sainttype-update'),
+    url(r'^sainttype/delete/(?P<pk>\d+)/$', views.SaintTypeDeleteView.as_view(), name='sainttype-delete'),
+    path('sainttype/list', views.SaintTypeListView.as_view(), name='sainttype-list'),
 ]

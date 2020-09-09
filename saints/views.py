@@ -329,3 +329,32 @@ class ObjectTypeUpdateView(UpdateView):
 class ObjectTypeDeleteView(DeleteView):
     model = ObjectType
     success_url = reverse_lazy("saints:objecttype-list")
+
+
+# SaintType
+# @method_decorator(login_required, name='dispatch')
+class SaintTypeListView(ListView):
+    model = SaintType
+    template_name = 'installations/sainttype_list.html'
+    context_object_name = 'sainttypes'
+
+
+# @method_decorator(login_required, name='dispatch')
+class SaintTypeCreatView(CreateView):
+    model = SaintType
+    fields = '__all__'
+    template_name = 'saints/sainttype_form.html'
+    success_url = reverse_lazy('saints:sainttype-list')
+
+
+# @method_decorator(login_required, name='dispatch')
+class SaintTypeUpdateView(UpdateView):
+    model = SaintType
+    fields = '__all__'
+    success_url = reverse_lazy('saints:sainttype-list')
+
+
+# @method_decorator(login_required, name='dispatch')
+class SaintTypeDeleteView(DeleteView):
+    model = SaintType
+    success_url = reverse_lazy("saints:sainttype-list")
