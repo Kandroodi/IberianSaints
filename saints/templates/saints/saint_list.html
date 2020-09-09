@@ -1,0 +1,42 @@
+{% extends 'saints/base.html' %}
+{% load widget_tweaks %}
+
+{% block main_content %}
+    <h2>Saint list</h2>
+    <table class="table table-borderless">
+        <thead class="border-bottom font-weight-bold">
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Date of death</th>
+                <th scope="col">Place of death</th>
+                <th scope="col">type</th>
+                <td>
+                    <a href= "{% url 'saints:saint-insert' %}"
+                       class="btn btn-outline-success"
+                       target="popup"
+                       onclick="window.open('{% url 'saints:saint-insert' %}','popup','width=600,height=600'); return false;">
+                        <i class="fa fa-plus"></i> Add New</a>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for saint in saints %}
+            <tr>
+                <td>{{saint.name}}</td>
+                <td>{{saint.death_date}}</td>
+                <td>{{saint.death_place}}</td>
+                <td>{{saint.type}}</td>
+                <td>
+                    <a href="{% url 'saints:saint-update' saint.id %}" class="btn text-secondary px-0"><i class="fa fa-edit fa-lg"></i></a>
+                    <form action="{% url 'saints:saint-delete' saint.id %}" method="post" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn" onclick="return confirm('Are you sure you want to delete all entities connected to this from the database?')">
+                        <i class="fa fa-trash fa-lg text-danger float-right"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
