@@ -129,3 +129,30 @@ class InscriptionDeleteView(DeleteView):
     model = Inscription
     success_url = reverse_lazy("saints:inscription-list")
 
+# Saint
+# @method_decorator(login_required, name='dispatch')
+class SaintListView(ListView):
+    model = Saint
+    template_name = 'installations/saint_list.html'
+    context_object_name = 'saints'
+
+
+# @method_decorator(login_required, name='dispatch')
+class SaintCreatView(CreateView):
+    model = Saint
+    fields = '__all__'
+    template_name = 'saints/saint_form.html'
+    success_url = reverse_lazy('saints:saint-list')
+
+
+# @method_decorator(login_required, name='dispatch')
+class SaintUpdateView(UpdateView):
+    model = Saint
+    fields = '__all__'
+    success_url = reverse_lazy('saints:saint-list')
+
+
+# @method_decorator(login_required, name='dispatch')
+class SaintDeleteView(DeleteView):
+    model = Saint
+    success_url = reverse_lazy("saints:saint-list")

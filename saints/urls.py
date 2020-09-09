@@ -19,4 +19,8 @@ urlpatterns = [
     url(r'^inscription/new/(?P<pk>\d+)/$', views.InscriptionUpdateView.as_view(), name='inscription-update'),
     url(r'^inscription/delete/(?P<pk>\d+)/$', views.InscriptionDeleteView.as_view(), name='inscription-delete'),
     path('inscription/list', views.InscriptionListView.as_view(), name='inscription-list'),
+    url(r'^saint/new/$', views.SaintCreatView.as_view(), name='saint-insert'),
+    url(r'^saint/new/(?P<pk>\d+)/$', views.SaintUpdateView.as_view(), name='saint-update'),
+    url(r'^saint/delete/(?P<pk>\d+)/$', views.SaintDeleteView.as_view(), name='saint-delete'),
+    path('saint/list', views.SaintListView.as_view(), name='saint-list'),
 ]
