@@ -271,3 +271,61 @@ class RiteUpdateView(UpdateView):
 class RiteDeleteView(DeleteView):
     model = Rite
     success_url = reverse_lazy("saints:rite-list")
+
+
+# ManuscriptType
+# @method_decorator(login_required, name='dispatch')
+class ManuscriptTypeListView(ListView):
+    model = ManuscriptType
+    template_name = 'installations/manuscripttype_list.html'
+    context_object_name = 'manuscripttypes'
+
+
+# @method_decorator(login_required, name='dispatch')
+class ManuscriptTypeCreatView(CreateView):
+    model = ManuscriptType
+    fields = '__all__'
+    template_name = 'saints/manuscripttype_form.html'
+    success_url = reverse_lazy('saints:manuscripttype-list')
+
+
+# @method_decorator(login_required, name='dispatch')
+class ManuscriptTypeUpdateView(UpdateView):
+    model = ManuscriptType
+    fields = '__all__'
+    success_url = reverse_lazy('saints:manuscripttype-list')
+
+
+# @method_decorator(login_required, name='dispatch')
+class ManuscriptTypeDeleteView(DeleteView):
+    model = ManuscriptType
+    success_url = reverse_lazy("saints:manuscripttype-list")
+
+
+# ObjectType
+# @method_decorator(login_required, name='dispatch')
+class ObjectTypeListView(ListView):
+    model = ObjectType
+    template_name = 'installations/objecttype_list.html'
+    context_object_name = 'objecttypes'
+
+
+# @method_decorator(login_required, name='dispatch')
+class ObjectTypeCreatView(CreateView):
+    model = ObjectType
+    fields = '__all__'
+    template_name = 'saints/objecttype_form.html'
+    success_url = reverse_lazy('saints:objecttype-list')
+
+
+# @method_decorator(login_required, name='dispatch')
+class ObjectTypeUpdateView(UpdateView):
+    model = ObjectType
+    fields = '__all__'
+    success_url = reverse_lazy('saints:objecttype-list')
+
+
+# @method_decorator(login_required, name='dispatch')
+class ObjectTypeDeleteView(DeleteView):
+    model = ObjectType
+    success_url = reverse_lazy("saints:objecttype-list")

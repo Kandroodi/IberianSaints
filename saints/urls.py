@@ -39,4 +39,12 @@ urlpatterns = [
     url(r'^rite/new/(?P<pk>\d+)/$', views.RiteUpdateView.as_view(), name='rite-update'),
     url(r'^rite/delete/(?P<pk>\d+)/$', views.RiteDeleteView.as_view(), name='rite-delete'),
     path('rite/list', views.RiteListView.as_view(), name='rite-list'),
+    url(r'^manuscripttype/new/$', views.ManuscriptTypeCreatView.as_view(), name='manuscripttype-insert'),
+    url(r'^manuscripttype/new/(?P<pk>\d+)/$', views.ManuscriptTypeUpdateView.as_view(), name='manuscripttype-update'),
+    url(r'^manuscripttype/delete/(?P<pk>\d+)/$', views.ManuscriptTypeDeleteView.as_view(), name='manuscripttype-delete'),
+    path('manuscripttype/list', views.ManuscriptTypeListView.as_view(), name='manuscripttype-list'),
+    url(r'^objecttype/new/$', views.ObjectTypeCreatView.as_view(), name='objecttype-insert'),
+    url(r'^objecttype/new/(?P<pk>\d+)/$', views.ObjectTypeUpdateView.as_view(), name='objecttype-update'),
+    url(r'^objecttype/delete/(?P<pk>\d+)/$', views.ObjectTypeDeleteView.as_view(), name='objecttype-delete'),
+    path('objecttype/list', views.ObjectTypeListView.as_view(), name='objecttype-list'),
 ]
