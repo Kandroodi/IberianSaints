@@ -1,0 +1,44 @@
+{% extends 'saints/base.html' %}
+{% load widget_tweaks %}
+
+{% block main_content %}
+    <h2>Liturgical Manuscript list</h2>
+    <table class="table table-borderless">
+        <thead class="border-bottom font-weight-bold">
+            <tr>
+                <th scope="col">Shelf no</th>
+                <th scope="col">Rite</th>
+                <th scope="col">Type</th>
+                <th scope="col">Provenance</th>
+                <th scope="col">Date</th>
+                <td>
+                    <a href= "{% url 'saints:liturgicalmanuscript-insert' %}"
+                       class="btn btn-outline-success"
+                       target="popup"
+                       onclick="window.open('{% url 'saints:liturgicalmanuscript-insert' %}','popup','width=600,height=600'); return false;">
+                        <i class="fa fa-plus"></i> Add New</a>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for liturgicalmanuscript in liturgicalmanuscripts %}
+            <tr>
+                <td>{{liturgicalmanuscript.shelf_no}}</td>
+                <td>{{liturgicalmanuscript.rite}}</td>
+                <td>{{liturgicalmanuscript.type}}</td>
+                <td>{{liturgicalmanuscript.provenance}}</td>
+                <td>{{liturgicalmanuscript.date}}</td>
+                <td>
+                    <a href="{% url 'saints:liturgicalmanuscript-update' liturgicalmanuscript.id %}" class="btn text-secondary px-0"><i class="fa fa-edit fa-lg"></i></a>
+                    <form action="{% url 'saints:liturgicalmanuscript-delete' liturgicalmanuscript.id %}" method="post" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn" onclick="return confirm('Are you sure you want to delete all entities connected to this from the database?')">
+                        <i class="fa fa-trash fa-lg text-danger float-right"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

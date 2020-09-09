@@ -31,4 +31,8 @@ urlpatterns = [
     url(r'^feast/new/(?P<pk>\d+)/$', views.FeastUpdateView.as_view(), name='feast-update'),
     url(r'^feast/delete/(?P<pk>\d+)/$', views.FeastDeleteView.as_view(), name='feast-delete'),
     path('feast/list', views.FeastListView.as_view(), name='feast-list'),
+    url(r'^liturgicalmanuscript/new/$', views.LiturgicalManuscriptCreatView.as_view(), name='liturgicalmanuscript-insert'),
+    url(r'^liturgicalmanuscript/new/(?P<pk>\d+)/$', views.LiturgicalManuscriptUpdateView.as_view(), name='liturgicalmanuscript-update'),
+    url(r'^liturgicalmanuscript/delete/(?P<pk>\d+)/$', views.LiturgicalManuscriptDeleteView.as_view(), name='liturgicalmanuscript-delete'),
+    path('liturgicalmanuscript/list', views.LiturgicalManuscriptListView.as_view(), name='liturgicalmanuscript-list'),
 ]

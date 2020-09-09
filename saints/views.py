@@ -213,3 +213,32 @@ class FeastUpdateView(UpdateView):
 class FeastDeleteView(DeleteView):
     model = Feast
     success_url = reverse_lazy("saints:feast-list")
+
+
+# LiturgicalManuscript
+# @method_decorator(login_required, name='dispatch')
+class LiturgicalManuscriptListView(ListView):
+    model = LiturgicalManuscript
+    template_name = 'installations/liturgicalmanuscript_list.html'
+    context_object_name = 'liturgicalmanuscripts'
+
+
+# @method_decorator(login_required, name='dispatch')
+class LiturgicalManuscriptCreatView(CreateView):
+    model = LiturgicalManuscript
+    fields = '__all__'
+    template_name = 'saints/liturgicalmanuscript_form.html'
+    success_url = reverse_lazy('saints:liturgicalmanuscript-list')
+
+
+# @method_decorator(login_required, name='dispatch')
+class LiturgicalManuscriptUpdateView(UpdateView):
+    model = LiturgicalManuscript
+    fields = '__all__'
+    success_url = reverse_lazy('saints:liturgicalmanuscript-list')
+
+
+# @method_decorator(login_required, name='dispatch')
+class LiturgicalManuscriptDeleteView(DeleteView):
+    model = LiturgicalManuscript
+    success_url = reverse_lazy("saints:liturgicalmanuscript-list")
