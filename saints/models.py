@@ -24,10 +24,14 @@ class Bibliography(models.Model):
 
 class Location(models.Model):
     #     coordinates = models.PointField(srid=4326, blank=True)
-    coordinates = models.CharField(max_length=50, blank=True,
-                                   null=True)  # this is a placeholder and it will change to point field
+    # coordinates = models.CharField(max_length=50, blank=True,
+    #                                null=True)  # this is a placeholder and it will change to point field
+    latitude = models.DecimalField(max_digits=9, decimal_places=7, null=True, blank=True, default='0.0')
+    longitude = models.DecimalField(max_digits=9, decimal_places=7, null=True, blank=True, default='0.0')
+
     def __str__(self):
-        return self.coordinates
+        return 'Latitude: ' + str(round(self.latitude,7)) + ' | Longitude: ' + str(round(self.longitude,7))
+
 
 class ExternalLink(models.Model):
     link = models.URLField(max_length=256, default='', blank=True)
@@ -40,7 +44,8 @@ class Church(models.Model):
     name = models.CharField(max_length=100, blank=False)
     start_date = PartialDateField(blank=True, null=True)
     end_date = PartialDateField(blank=True, null=True)
-    coordinates = models.ForeignKey(Location, on_delete=models.CASCADE, blank=True, default='', null=True)  # type: ForeignKey
+    coordinates = models.ForeignKey(Location, on_delete=models.CASCADE, blank=True, default='select location',
+                                    null=True)  # type: ForeignKey
     institution_type = models.ForeignKey(InstitutionType, on_delete=models.CASCADE, blank=True, default='', null=True)
     political_region = models.CharField(max_length=100, blank=True, null=True)
     ecclesiastical_region = models.CharField(max_length=100, blank=True, null=True)
@@ -48,15 +53,18 @@ class Church(models.Model):
         ('Y', 'Yes'),
         ('N', 'No'),
     )
-    textual_evidence = models.CharField(max_length=1, choices=TEXTUAL, default='Y')
+    textual_evidence = models.CharField(max_length=1, choices=TEXTUAL, default='Y', blank=True, null=True)
     MATERIAL = (
         ('Y', 'Yes'),
         ('N', 'No'),
     )
-    material_evidence = models.CharField(max_length=1, choices=MATERIAL, default='Y')
+    material_evidence = models.CharField(max_length=1, choices=MATERIAL, default='Y', blank=True, null=True)
     external_link = models.ForeignKey(ExternalLink, on_delete=models.CASCADE, blank=True, default='', null=True)
     bibliography = models.ForeignKey(Bibliography, on_delete=models.CASCADE, blank=True, default='', null=True)
     description = models.TextField(default='', blank=True)
+
+    def __str__(self):
+        return self.name
 
 
 class Inscription(models.Model):
@@ -72,6 +80,7 @@ class Inscription(models.Model):
     def __str__(self):
         return self.reference
 
+
 class SaintType(models.Model):
     name = models.CharField(max_length=100)  # Just Man, Confessor, Virgin, Virgin Confessor, Apostle, etc
 
@@ -83,7 +92,8 @@ class Saint(models.Model):
     name = models.CharField(max_length=256)
     death_date = PartialDateField(blank=True, null=True)
     death_place = models.ForeignKey(Location, on_delete=models.CASCADE, blank=True, default='', null=True)
-    type = models.ForeignKey(SaintType, related_name='saints', on_delete=models.CASCADE, blank=True, default='', null=True)
+    type = models.ForeignKey(SaintType, related_name='saints', on_delete=models.CASCADE, blank=True, default='',
+                             null=True)
     description = models.TextField(default='', blank=True, null=True)
 
 
@@ -97,7 +107,8 @@ class ObjectType(models.Model):
 class Object(models.Model):
     name = models.CharField(max_length=256)
     date = PartialDateField(blank=True, null=True)
-    original_location = models.ForeignKey(Church, related_name='originallocations', on_delete=models.CASCADE, blank=True, default='', null=True)
+    original_location = models.ForeignKey(Church, related_name='originallocations', on_delete=models.CASCADE,
+                                          blank=True, default='', null=True)
     current_location = models.ForeignKey(Church, on_delete=models.CASCADE, blank=True, default='', null=True)
     coordinate = models.ForeignKey(Location, on_delete=models.CASCADE, blank=True, default='', null=True)
     type = models.ForeignKey(ObjectType, on_delete=models.CASCADE, blank=True, default='', null=True)
@@ -105,13 +116,14 @@ class Object(models.Model):
         ('Y', 'Yes'),
         ('N', 'No'),
     )
-    textual_evidence = models.CharField(max_length=1, choices=TEXTUAL, default='Y')
+    textual_evidence = models.CharField(max_length=1, choices=TEXTUAL, default='Y', blank=True, null=True)
     external_link = models.URLField(max_length=128, default='', blank=True, null=True)
     bibliography = models.ForeignKey(Bibliography, on_delete=models.CASCADE, blank=True, default='', null=True)
     description = models.TextField(default='', blank=True, null=True)
 
     def __str__(self):
         return self.name
+
 
 class ManuscriptType(models.Model):
     name = models.CharField(max_length=100)  # calendar, commicus, antiphoner, misticus, liber canticorum, etc
@@ -133,6 +145,7 @@ class Feast(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class LiturgicalManuscript(models.Model):
     shelf_no = models.CharField(max_length=100)
