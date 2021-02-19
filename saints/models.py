@@ -201,3 +201,20 @@ class SaintInscriptionRelation(models.Model):
         message = self.saint + "and" + self.church
         return message
 
+
+class SaintObjectRelation(models.Model):
+    saint = models.ForeignKey(Saint, on_delete=models.CASCADE, blank=True)
+    object = models.ForeignKey(Object, on_delete=models.CASCADE, blank=True)
+
+    def __str__(self):
+        message = self.saint + "and" + self.object
+        return message
+
+
+class SaintLitManuscriptRelation(models.Model):
+    saint = models.ForeignKey(Saint, on_delete=models.CASCADE, blank=True)
+    liturgical_manuscript = models.ForeignKey(LiturgicalManuscript, on_delete=models.CASCADE, blank=True)
+
+    def __str__(self):
+        message = self.saint + "and" + self.liturgical_manuscript
+        return message
