@@ -47,8 +47,6 @@ class Church(models.Model):
     coordinates = models.ForeignKey(Location, on_delete=models.CASCADE, default='', blank=True,
                                     null=True)  # type: ForeignKey
     institution_type = models.ForeignKey(InstitutionType, on_delete=models.CASCADE, blank=True, default='', null=True)
-    political_region = models.CharField(max_length=100, blank=True, null=True)
-    ecclesiastical_region = models.CharField(max_length=100, blank=True, null=True)
     TEXTUAL = (
         ('Y', 'Yes'),
         ('N', 'No'),
