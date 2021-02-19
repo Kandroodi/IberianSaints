@@ -174,7 +174,7 @@ class ObjectChurchRelation(models.Model):
 
 
 class LitManuscriptChurchRelation(models.Model):
-    liturgical_manuscript = models.ForeignKey(LiturgicalManuscript, on_delete=models.CASCADE, blank=True)
+    liturgical_manuscript = models.ForeignKey(LiturgicalManuscript, on_delete=models.CASCADE, blank=True, null=True)
     church = models.ForeignKey(Church, on_delete=models.CASCADE, blank=True)
     start_date = PartialDateField(blank=True, null=True)
     end_date = PartialDateField(blank=True, null=True)
@@ -182,3 +182,22 @@ class LitManuscriptChurchRelation(models.Model):
     def __str__(self):
         message = self.liturgical_manuscript + "and" + self.church
         return message
+
+
+class SaintChurchRelation(models.Model):
+    saint = models.ForeignKey(Saint, on_delete=models.CASCADE, blank=True)
+    church = models.ForeignKey(Church, on_delete=models.CASCADE, blank=True)
+
+    def __str__(self):
+        message = self.saint + "and" + self.church
+        return message
+
+
+class SaintInscriptionRelation(models.Model):
+    saint = models.ForeignKey(Saint, on_delete=models.CASCADE, blank=True)
+    inscription = models.ForeignKey(Inscription, on_delete=models.CASCADE, blank=True)
+
+    def __str__(self):
+        message = self.saint + "and" + self.church
+        return message
+
