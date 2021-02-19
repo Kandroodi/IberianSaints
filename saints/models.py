@@ -66,17 +66,16 @@ class Church(models.Model):
 
 
 class Inscription(models.Model):
-    coordinates = models.ForeignKey(Location, on_delete=models.CASCADE, blank=True, null=True, default='')
     date = PartialDateField(blank=True, null=True)
-    institution_type = models.ForeignKey(InstitutionType, on_delete=models.CASCADE, blank=True, null=True, default='')
+    original_location = models.ForeignKey(Church, on_delete=models.SET_NULL, blank=True, default='', null=True)
+    reference_no = models.CharField(max_length=100, blank=True, null=True)
+    external_link = models.ForeignKey(ExternalLink, on_delete=models.SET_NULL, blank=True, default='', null=True)
+    bibliography = models.ForeignKey(Bibliography, on_delete=models.SET_NULL, blank=True, default='', null=True)
     text = models.TextField(max_length=256, blank=True, null=True)
     description = models.TextField(default='', blank=True, null=True)
-    reference = models.CharField(max_length=100, blank=True, null=True)
-    external_link = models.URLField(max_length=128, default='', blank=True, null=True)
-    bibliography = models.ForeignKey(Bibliography, on_delete=models.CASCADE, blank=True, default='', null=True)
 
     def __str__(self):
-        return self.reference
+        return self.reference_no
 
 
 class SaintType(models.Model):
@@ -106,8 +105,7 @@ class ObjectType(models.Model):
 class Object(models.Model):
     name = models.CharField(max_length=256)
     date = PartialDateField(blank=True, null=True)
-    original_location = models.ForeignKey(Church, related_name='originallocations', on_delete=models.CASCADE,
-                                          blank=True, default='', null=True)
+    original_location = models.ForeignKey(Church, related_name='originallocations', on_delete=models.CASCADE, blank=True, default='', null=True)
     current_location = models.ForeignKey(Church, on_delete=models.CASCADE, blank=True, default='', null=True)
     type = models.ForeignKey(ObjectType, on_delete=models.CASCADE, blank=True, default='', null=True)
     TEXTUAL = (
