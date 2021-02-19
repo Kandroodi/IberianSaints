@@ -105,7 +105,8 @@ class ObjectType(models.Model):
 class Object(models.Model):
     name = models.CharField(max_length=256)
     date = PartialDateField(blank=True, null=True)
-    original_location = models.ForeignKey(Church, related_name='originallocations', on_delete=models.CASCADE, blank=True, default='', null=True)
+    original_location = models.ForeignKey(Church, related_name='originallocations', on_delete=models.CASCADE,
+                                          blank=True, default='', null=True)
     current_location = models.ForeignKey(Church, on_delete=models.CASCADE, blank=True, default='', null=True)
     type = models.ForeignKey(ObjectType, on_delete=models.CASCADE, blank=True, default='', null=True)
     TEXTUAL = (
@@ -158,3 +159,26 @@ class LiturgicalManuscript(models.Model):
     external_link = models.ForeignKey(ExternalLink, on_delete=models.SET_NULL, blank=True, default='', null=True)
     bibliography = models.ForeignKey(Bibliography, on_delete=models.SET_NULL, blank=True, default='', null=True)
     description = models.TextField(default='', blank=True, null=True)
+
+
+# RELATIONS
+class ObjectChurchRelation(models.Model):
+    object = models.ForeignKey(Object, on_delete=models.CASCADE, blank=True)
+    church = models.ForeignKey(Church, on_delete=models.CASCADE, blank=True)
+    start_date = PartialDateField(blank=True, null=True)
+    end_date = PartialDateField(blank=True, null=True)
+
+    def __str__(self):
+        message = self.object + "and" + self.church
+        return message
+
+
+class LitManuscriptChurchRelation(models.Model):
+    liturgical_manuscript = models.ForeignKey(LiturgicalManuscript, on_delete=models.CASCADE, blank=True)
+    church = models.ForeignKey(Church, on_delete=models.CASCADE, blank=True)
+    start_date = PartialDateField(blank=True, null=True)
+    end_date = PartialDateField(blank=True, null=True)
+
+    def __str__(self):
+        message = self.liturgical_manuscript + "and" + self.church
+        return message
