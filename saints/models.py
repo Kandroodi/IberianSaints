@@ -150,12 +150,11 @@ class Feast(models.Model):
 
 class LiturgicalManuscript(models.Model):
     shelf_no = models.CharField(max_length=100)
-    rite = models.ForeignKey(Rite, on_delete=models.CASCADE, blank=True, default='', null=True)
-    type = models.ForeignKey(ManuscriptType, on_delete=models.CASCADE, blank=True, default='', null=True)
+    rite = models.ForeignKey(Rite, on_delete=models.SET_NULL, blank=True, default='', null=True)
+    type = models.ForeignKey(ManuscriptType, on_delete=models.SET_NULL, blank=True, default='', null=True)
     date = PartialDateField(blank=True, null=True)
-    provenance = models.ForeignKey(Church, on_delete=models.CASCADE, blank=True, default='', null=True)
-    coordinate = models.ForeignKey(Location, on_delete=models.CASCADE, blank=True, default='', null=True)
-    feast = models.ForeignKey(Feast, on_delete=models.CASCADE, blank=True, default='', null=True)
-    external_link = models.ForeignKey(ExternalLink, on_delete=models.CASCADE, blank=True, default='', null=True)
-    bibliography = models.ForeignKey(Bibliography, on_delete=models.CASCADE, blank=True, default='', null=True)
+    provenance = models.ForeignKey(Church, on_delete=models.SET_NULL, blank=True, default='', null=True)
+    feast = models.ForeignKey(Feast, on_delete=models.SET_NULL, blank=True, default='', null=True)
+    external_link = models.ForeignKey(ExternalLink, on_delete=models.SET_NULL, blank=True, default='', null=True)
+    bibliography = models.ForeignKey(Bibliography, on_delete=models.SET_NULL, blank=True, default='', null=True)
     description = models.TextField(default='', blank=True, null=True)
