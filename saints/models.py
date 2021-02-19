@@ -29,8 +29,9 @@ class Location(models.Model):
     latitude = models.DecimalField(max_digits=9, decimal_places=7, null=True, blank=True, default='0.0')
     longitude = models.DecimalField(max_digits=9, decimal_places=7, null=True, blank=True, default='0.0')
 
-    def __str__(self):
-        return 'Latitude: ' + str(round(self.latitude,7)) + ' | Longitude: ' + str(round(self.longitude,7))
+
+    # def __str__(self):
+    #     return 'Latitude: ' + str(round(self.latitude,7)) + ' | Longitude: ' + str(round(self.longitude,7))
 
 
 class ExternalLink(models.Model):
@@ -44,8 +45,7 @@ class Church(models.Model):
     name = models.CharField(max_length=100, blank=False)
     start_date = PartialDateField(blank=True, null=True)
     end_date = PartialDateField(blank=True, null=True)
-    coordinates = models.ForeignKey(Location, on_delete=models.CASCADE, blank=True, default='select location',
-                                    null=True)  # type: ForeignKey
+    coordinates = models.ForeignKey(Location, on_delete=models.CASCADE, default='', blank=True, null=True)  # type: ForeignKey
     institution_type = models.ForeignKey(InstitutionType, on_delete=models.CASCADE, blank=True, default='', null=True)
     political_region = models.CharField(max_length=100, blank=True, null=True)
     ecclesiastical_region = models.CharField(max_length=100, blank=True, null=True)
@@ -107,8 +107,7 @@ class ObjectType(models.Model):
 class Object(models.Model):
     name = models.CharField(max_length=256)
     date = PartialDateField(blank=True, null=True)
-    original_location = models.ForeignKey(Church, related_name='originallocations', on_delete=models.CASCADE,
-                                          blank=True, default='', null=True)
+    original_location = models.ForeignKey(Church, related_name='originallocations', on_delete=models.CASCADE, blank=True, default='', null=True)
     current_location = models.ForeignKey(Church, on_delete=models.CASCADE, blank=True, default='', null=True)
     coordinate = models.ForeignKey(Location, on_delete=models.CASCADE, blank=True, default='', null=True)
     type = models.ForeignKey(ObjectType, on_delete=models.CASCADE, blank=True, default='', null=True)
