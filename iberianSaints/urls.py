@@ -20,4 +20,5 @@ from django.conf.urls import url, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     url('', include(('saints.urls', 'saints'), namespace="saints")),
+    path("select2/", include("django_select2.urls")),
 ]

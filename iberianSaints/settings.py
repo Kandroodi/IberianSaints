@@ -47,6 +47,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'saints',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -56,7 +57,7 @@ INSTALLED_APPS = [
     # 'django.contrib.gis',
     'crispy_forms',
     'widget_tweaks',
-    'saints',
+    'django_select2',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -129,6 +130,21 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+CACHES = {"default": {
+    "BACKEND": "django_redis.cache.RedisCache",
+    "LOCATION": "redis://127.0.0.1:6379/1",
+    "OPTIONS": {"CLIENT_CLASS": "django_redis.client.DefaultClient", }
+},
+    "select2": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/2",
+        "TIMEOUT": None,
+        "OPTIONS": {"CLIENT_CLASS": "django_redis.client.DefaultClient", }
+    }
+}
+
+SELECT2_CACHE_BACKEND = 'select2'
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
