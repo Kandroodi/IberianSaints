@@ -89,7 +89,7 @@ class Saint(models.Model):
     name = models.CharField(max_length=256)
     feast_day = PartialDateField(blank=True, null=True)
     death_date = PartialDateField(blank=True, null=True)
-    death_place = models.CharField(max_length=256)
+    death_place = models.CharField(max_length=256, blank=True, null=True)
     type = models.ForeignKey(SaintType, related_name='saints', on_delete=models.CASCADE, blank=True, default='',
                              null=True)
     external_link = models.ForeignKey(ExternalLink, on_delete=models.CASCADE, blank=True, default='', null=True)

@@ -140,7 +140,7 @@ class SaintListView(ListView):
 # @method_decorator(login_required, name='dispatch')
 class SaintCreatView(CreateView):
     model = Saint
-    fields = '__all__'
+    form_class = SaintForm
     template_name = 'saints/saint_form.html'
     success_url = reverse_lazy('saints:saint-list')
 

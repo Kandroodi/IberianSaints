@@ -15,7 +15,6 @@
         {% csrf_token %}
         <table>
             {{ form|crispy }}
-<!--            {{ form.as_table}}-->
         </table>
         <div class="form-group">
             {% if not form.instance.pk %}
