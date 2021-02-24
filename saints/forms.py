@@ -20,13 +20,31 @@ class SaintForm(forms.ModelForm):
     class Meta:
         model = Saint
         fields = '__all__'
-        widgets = {
-            "type": SaintTypeWidget,
-            "external_link": ExternalLinkWidget,
-        }
+
+    type = forms.ModelChoiceField(
+        queryset=SaintType.objects.all().order_by('name'),
+        # this line refreshes the list when a new item is entered using the plus button
+        widget=SaintTypeWidget(
+            attrs={'data-placeholder': 'Select saint type',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
+        required=False)
+
+    external_link = forms.ModelChoiceField(
+        queryset=ExternalLink.objects.all().order_by('link'),
+        # this line refreshes the list when a new item is entered using the plus button
+        widget=ExternalLinkWidget(
+            attrs={'data-placeholder': 'Select external link',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
+        required=False)
+    description = forms.CharField(widget=forms.Textarea(
+        attrs={'style': 'width:100%', 'rows': 3}),
+        required=False)
 
     def __init__(self, *args, **kwargs):
         super(SaintForm, self).__init__(*args, **kwargs)
+        self.fields['name'].required = True
         self.fields['type'].required = False
 
 

@@ -141,7 +141,7 @@ class SaintListView(ListView):
 class SaintCreatView(CreateView):
     model = Saint
     form_class = SaintForm
-    template_name = 'saints/saint_form.html'
+    template_name = 'saints/add_saint.html'
     success_url = reverse_lazy('saints:saint-list')
 
 
