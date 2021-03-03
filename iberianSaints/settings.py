@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'widget_tweaks',
     'django_select2',
+    'easyaudit',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -71,6 +72,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'easyaudit.middleware.easyaudit.EasyAuditMiddleware',
 ]
 
 ROOT_URLCONF = 'iberianSaints.urls'

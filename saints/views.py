@@ -6,6 +6,8 @@ from django.views.generic import (View, TemplateView, ListView,
                                   DetailView, CreateView, UpdateView,
                                   DeleteView)
 from django.urls import reverse_lazy
+from utilities.views import edit_model
+
 
 
 # Create your views here.
@@ -135,6 +137,14 @@ class SaintListView(ListView):
     model = Saint
     template_name = 'installations/saint_list.html'
     context_object_name = 'saints'
+
+
+def edit_saint(request, pk=None, focus='', view='complete'):
+    names = 'saintchurch_formset,saintinscription_formset,saintobject_formset,saintliturgicalmanuscript_formset'
+    return edit_model(request, __name__, 'Saint', 'saints', pk, formset_names=names,
+                      focus=focus, view=view)
+
+
 
 
 # @method_decorator(login_required, name='dispatch')

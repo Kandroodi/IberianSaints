@@ -1,4 +1,4 @@
-from django.forms import ModelForm
+from django.forms import ModelForm, inlineformset_factory
 from django import forms
 
 from .models import *
@@ -8,6 +8,14 @@ from django_select2 import forms as s2forms
 
 # Widgets
 class SaintTypeWidget(s2forms.ModelSelect2Widget):
+    search_fields = ['name__icontains']
+
+
+class SaintWidget(s2forms.ModelSelect2Widget):
+    search_fields = ['name__icontains']
+
+
+class ChurchWidget(s2forms.ModelSelect2Widget):
     search_fields = ['name__icontains']
 
 
@@ -83,3 +91,82 @@ class InstitutionTypeForm(ModelForm):
     class Meta:
         model = InstitutionType
         fields = '__all__'
+
+
+# Relations form
+class SaintChurchRelationForm(ModelForm):
+    saint = forms.ModelChoiceField(
+        queryset=Saint.objects.all(),
+    )
+
+    church = forms.ModelChoiceField(
+        queryset=Church.objects.all(),
+    )
+
+    class Meta:
+        model = SaintChurchRelation
+        fields = ('saint', 'church')
+
+
+class SaintInscriptionRelationForm(ModelForm):
+    saint = forms.ModelChoiceField(
+        queryset=Saint.objects.all(),
+    )
+    inscription = forms.ModelChoiceField(
+        queryset=Inscription.objects.all(),
+    )
+
+    class Meta:
+        model = SaintInscriptionRelation
+        fields = ('saint', 'inscription')
+
+
+class SaintObjectRelationForm(ModelForm):
+    saint = forms.ModelChoiceField(
+        queryset=Saint.objects.all(),
+    )
+
+    object = forms.ModelChoiceField(
+        queryset=Object.objects.all(),
+    )
+
+    class Meta:
+        model = SaintObjectRelation
+        fields = ('saint', 'object')
+
+
+class SaintLitManuscriptRelationForm(ModelForm):
+    saint = forms.ModelChoiceField(
+        queryset=Saint.objects.all(),
+    )
+
+    liturgical_manuscript = forms.ModelChoiceField(
+        queryset=LiturgicalManuscript.objects.all(),
+    )
+
+    class Meta:
+        model = SaintLitManuscriptRelation
+        fields = ('saint', 'liturgical_manuscript')
+
+
+# Formsets
+
+saintchurch_formset = inlineformset_factory(
+    Saint, SaintChurchRelation, form=SaintChurchRelationForm, extra=1)
+churchsaint_formset = inlineformset_factory(
+    Church, SaintChurchRelation, form=SaintChurchRelationForm, extra=1)
+
+saintinscription_formset = inlineformset_factory(
+    Saint, SaintInscriptionRelation, form=SaintInscriptionRelationForm, extra=1)
+inscriptionsaint_formset = inlineformset_factory(
+    Inscription, SaintInscriptionRelation, form=SaintInscriptionRelationForm, extra=1)
+
+saintobject_formset = inlineformset_factory(
+    Saint, SaintObjectRelation, form=SaintObjectRelationForm, extra=1)
+objectsaint_formset = inlineformset_factory(
+    Object, SaintObjectRelation, form=SaintObjectRelationForm, extra=1)
+
+saintliturgicalmanuscript_formset = inlineformset_factory(
+    Saint, SaintLitManuscriptRelation, form=SaintLitManuscriptRelationForm, extra=1)
+liturgicalmanuscriptsaint_formset = inlineformset_factory(
+    LiturgicalManuscript, SaintLitManuscriptRelation, form=SaintLitManuscriptRelationForm, extra=1)

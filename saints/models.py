@@ -66,9 +66,9 @@ class Church(models.Model):
 
 
 class Inscription(models.Model):
-    date = PartialDateField(blank=True, null=True)
-    original_location = models.ForeignKey(Church, on_delete=models.SET_NULL, blank=True, default='', null=True)
     reference_no = models.CharField(max_length=100, blank=True, null=True)
+    original_location = models.ForeignKey(Church, on_delete=models.SET_NULL, blank=True, default='', null=True)
+    date = PartialDateField(blank=True, null=True)
     external_link = models.ForeignKey(ExternalLink, on_delete=models.SET_NULL, blank=True, default='', null=True)
     bibliography = models.ForeignKey(Bibliography, on_delete=models.SET_NULL, blank=True, default='', null=True)
     text = models.TextField(max_length=256, blank=True, null=True)
@@ -161,6 +161,8 @@ class LiturgicalManuscript(models.Model):
     bibliography = models.ForeignKey(Bibliography, on_delete=models.SET_NULL, blank=True, default='', null=True)
     description = models.TextField(default='', blank=True, null=True)
 
+    def __str__(self):
+        return self.shelf_no
 
 # RELATIONS
 class ObjectChurchRelation(models.Model):
