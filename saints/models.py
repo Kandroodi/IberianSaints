@@ -14,7 +14,7 @@ class InstitutionType(models.Model):
 
 
 class Bibliography(models.Model):
-    short_title = models.CharField(max_length=250, blank=True, null=True)
+    short_title = models.CharField(max_length=250, blank=False, default='')
     author = models.CharField(max_length=50, blank=True, null=True)
     year = PartialDateField(blank=True, null=True)
 
