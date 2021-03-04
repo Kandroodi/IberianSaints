@@ -99,7 +99,7 @@ class ChurchForm(ModelForm):
                    'data-minimum-input-length': '1'}),
         required=False)
     institution_type = forms.ModelChoiceField(
-        queryset=Location.objects.all(),
+        queryset=InstitutionType.objects.all(),
         # this line refreshes the list when a new item is entered using the plus button
         widget=InstitutionTypeWidget(
             attrs={'data-placeholder': 'Select institution type',
@@ -115,7 +115,7 @@ class ChurchForm(ModelForm):
                    'data-minimum-input-length': '1'}),
         required=False)
     bibliography = forms.ModelChoiceField(
-        queryset=ExternalLink.objects.all(),
+        queryset=Bibliography.objects.all(),
         # this line refreshes the list when a new item is entered using the plus button
         widget=BibliographyWidget(
             attrs={'data-placeholder': 'Select bibliography',

@@ -1,0 +1,45 @@
+{% extends "saints/base.html" %}
+
+{% block main_content %}
+    <h2>
+        {% if not form.instance.pk %}
+            Add Church
+        {% else %}
+            Update Church "{{form.instance.name}}"
+        {% endif %}
+    </h2>
+
+<form method="post" enctype="multipart/form-data" onsubmit="dosubmit();">
+{% csrf_token %}
+
+
+<!-- Church form is defined in a separate template -->
+    {% include 'saints/_church_form.html' %}
+
+{% if view == "inline" %}
+{% else %}
+
+
+
+{% endif %}
+
+<input type="hidden" name="navbar" id="navbar" value="" />
+<input type="hidden" name="navcontent" id="navcontent" value="" />
+<input type="hidden" name="focus" id="focus" value="" />
+<button type="submit" value="Submit" class ="btn btn-success">Save</button>
+	{% if view == "inline" %}
+		<a type="reset" value="Cancel" class ="btn btn-light"
+		href="{% url 'utilities:close' %}">Cancel</a>
+	{% else %}
+		<button type="submit" name="save" value="add_another"
+			 class ="btn btn-outline-success">Save | add another</button>
+	{% endif %}
+	{% if page_name == "Edit church"%}
+    <button type="submit" name="save" value="delete"
+		 class ="btn btn-outline-danger">delete</button>
+	{% endif %}
+
+
+{% include 'utilities/tab_selector.html' %}
+</form>
+{% endblock main_content %}

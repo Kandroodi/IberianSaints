@@ -16,6 +16,12 @@ def home(request):
     return render(request, 'saints/home.html')
 
 
+def edit_church(request, pk=None, focus='', view='complete'):
+    names = ''
+    return edit_model(request, __name__, 'Church', 'saints', pk, formset_names=names,
+                      focus=focus, view=view)
+
+
 def churchCreate(request, id=0):
     if request.method == "GET":
         if id == 0:
