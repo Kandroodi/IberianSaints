@@ -19,6 +19,84 @@
 {% if view == "inline" %}
 {% else %}
 
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link" id="Saintsa" data-toggle="tab" href="#Saints" role="tab" aria-controls="Saints" aria-selected="true">Saints</a>
+    </li>
+	<li class="nav-item">
+        <a class="nav-link" id="Objectsa" data-toggle="tab" href="#Objects" role="tab" aria-controls="Objects" aria-selected="false">Objects</a>
+    </li>
+	<li class="nav-item">
+        <a class="nav-link" id="Liturgicalmanuscriptsa" data-toggle="tab" href="#Liturgicalmanuscripts" role="tab" aria-controls="Liturgicalmanuscripts" aria-selected="false">Liturgical manuscripts</a>
+    </li>
+</ul>
+
+<div class="tab-content" id="myTabContent">
+    <!--Saints -->
+    <div class="tab-pane fade" id="Saints">
+		{{churchsaint_formset.management_form}}
+		<table class="table table-borderless">
+		<tr class ="d-flex">
+		<th class="col-8">Saint
+			<a class = "btn btn-link btn-sm ml-auto" target = "_blank"
+				href ="{% url 'saints:saint-insert' %}" role="button">
+				 <i class="fa fa-plus"></i></a>
+			</th>
+		<th class="col-1" style="text-align:center"><i class="fa fa-times text-danger"></i></th>
+		</tr>
+		{% for f in churchsaint_formset.forms %}
+			<tr class ="d-flex">
+			<td class="col-8">{{f.saint}} {{f.saint.errors}}</td>
+			<td class="col-1" style="text-align:left">{{f.DELETE}} {{f.id}}</td>
+			</tr>
+		{% endfor %}
+		</table>
+	</div>
+
+	<!--Objects -->
+	<div class="tab-pane fade" id="Objects">
+		{{churchobject_formset.management_form}}
+		<table class="table table-borderless">
+		<tr class ="d-flex">
+		    <th class="col-8">Object
+			<a class = "btn btn-link btn-sm ml-auto" target = "_blank"
+				href ="{% url 'saints:object-insert' %}" role="button">
+				 <i class="fa fa-plus"></i></a>
+			</th>
+		<th class="col-1" style="text-align:center"><i class="fa fa-times text-danger"></i></th>
+		</tr>
+		{{churchobject_formset.management_form}}
+		{% for f in churchobject_formset.forms %}
+			<tr class ="d-flex">
+			<td class="col-8">{{f.object}} {{f.object.errors}}</td>
+			<td class="col-1">{{f.DELETE}} {{f.id}}</td>
+			</tr>
+		{% endfor %}
+		</table>
+	</div>
+	<!--Liturgicalmanuscripts -->
+	<div class="tab-pane fade" id="Liturgicalmanuscripts">
+		{{churchliturgicalmanuscript_formset.management_form}}
+		<table class="table table-borderless">
+		<tr class ="d-flex">
+		    <th class="col-8">Liturgical manuscripts
+			<a class = "btn btn-link btn-sm ml-auto" target = "_blank"
+				href ="{% url 'saints:liturgicalmanuscript-insert' %}" role="button">
+				 <i class="fa fa-plus"></i></a>
+			</th>
+		<th class="col-1" style="text-align:center"><i class="fa fa-times text-danger"></i></th>
+		</tr>
+		{{churchliturgicalmanuscript_formset.management_form}}
+		{% for f in churchliturgicalmanuscript_formset.forms %}
+			<tr class ="d-flex">
+			<td class="col-8">{{f.liturgical_manuscript}} {{f.liturgical_manuscript.errors}}</td>
+			<td class="col-1">{{f.DELETE}} {{f.id}}</td>
+			</tr>
+		{% endfor %}
+		</table>
+	</div>
+
+</div>
 
 
 {% endif %}

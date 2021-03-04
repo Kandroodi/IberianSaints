@@ -238,6 +238,50 @@ class SaintLitManuscriptRelationForm(ModelForm):
         fields = ('saint', 'liturgical_manuscript')
 
 
+class ChurchObjectRelationForm(ModelForm):
+    church = forms.ModelChoiceField(
+        queryset=Church.objects.all(),
+        widget=ChurchWidget(
+            attrs={'data-placeholder': 'Select church',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
+    )
+
+    object = forms.ModelChoiceField(
+        queryset=Object.objects.all(),
+        widget=ObjectWidget(
+            attrs={'data-placeholder': 'Select object',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
+    )
+
+    class Meta:
+        model = ChurchObjectRelation
+        fields = ('church', 'object')
+
+
+class ChurchLitManuscriptRelationForm(ModelForm):
+    church = forms.ModelChoiceField(
+        queryset=Church.objects.all(),
+        widget=ChurchWidget(
+            attrs={'data-placeholder': 'Select church',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
+    )
+
+    liturgical_manuscript = forms.ModelChoiceField(
+        queryset=LiturgicalManuscript.objects.all(),
+        widget=LiturgicalManuscriptWidget(
+            attrs={'data-placeholder': 'Select liturgical manuscript',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
+    )
+
+    class Meta:
+        model = ChurchLitManuscriptRelation
+        fields = ('church', 'liturgical_manuscript')
+
+
 # Formsets
 
 saintchurch_formset = inlineformset_factory(
@@ -259,3 +303,13 @@ saintliturgicalmanuscript_formset = inlineformset_factory(
     Saint, SaintLitManuscriptRelation, form=SaintLitManuscriptRelationForm, extra=1)
 liturgicalmanuscriptsaint_formset = inlineformset_factory(
     LiturgicalManuscript, SaintLitManuscriptRelation, form=SaintLitManuscriptRelationForm, extra=1)
+
+churchobject_formset = inlineformset_factory(
+    Church, ChurchObjectRelation, form=ChurchObjectRelationForm, extra=1)
+objectchurch_formset = inlineformset_factory(
+    Object, ChurchObjectRelation, form=ChurchObjectRelationForm, extra=1)
+
+churchliturgicalmanuscript_formset = inlineformset_factory(
+    Church, ChurchLitManuscriptRelation, form=ChurchLitManuscriptRelationForm, extra=1)
+liturgicalmanuscriptchurch_formset = inlineformset_factory(
+    LiturgicalManuscript, ChurchLitManuscriptRelation, form=ChurchLitManuscriptRelationForm, extra=1)

@@ -17,7 +17,7 @@ def home(request):
 
 
 def edit_church(request, pk=None, focus='', view='complete'):
-    names = ''
+    names = 'churchsaint_formset,churchobject_formset,churchliturgicalmanuscript_formset'
     return edit_model(request, __name__, 'Church', 'saints', pk, formset_names=names,
                       focus=focus, view=view)
 
