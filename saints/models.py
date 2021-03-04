@@ -161,8 +161,9 @@ class LiturgicalManuscript(models.Model):
     bibliography = models.ForeignKey(Bibliography, on_delete=models.SET_NULL, blank=True, default='', null=True)
     description = models.TextField(default='', blank=True, null=True)
 
-    def __str__(self):
-        return self.shelf_no
+    # def __str__(self):
+    #     return self.shelf_no
+
 
 # RELATIONS
 class ObjectChurchRelation(models.Model):
