@@ -40,7 +40,7 @@
 		{{saintchurch_formset.management_form}}
 		<table class="table table-borderless">
 		<tr class ="d-flex">
-		<th class="col-4">Churche
+		<th class="col-8">Churche
 			<a class = "btn btn-link btn-sm ml-auto" target = "_blank"
 				href ="{% url 'saints:church-insert' %}" role="button">
 				 <i class="fa fa-plus"></i></a>
@@ -49,7 +49,7 @@
 		</tr>
 		{% for f in saintchurch_formset.forms %}
 			<tr class ="d-flex">
-			<td class="col-4">{{f.church}} {{f.church.errors}}</td>
+			<td class="col-8">{{f.church}} {{f.church.errors}}</td>
 			<td class="col-1" style="text-align:left">{{f.DELETE}} {{f.id}}</td>
 			</tr>
 		{% endfor %}
@@ -60,7 +60,7 @@
 		{{saintinscription_formset.management_form}}
 		<table class="table table-borderless">
 		<tr class ="d-flex">
-		    <th class="col-4">Inscription
+		    <th class="col-8">Inscription
 			<a class = "btn btn-link btn-sm ml-auto" target = "_blank"
 				href ="{% url 'saints:inscription-insert' %}" role="button">
 				 <i class="fa fa-plus"></i></a>
@@ -70,7 +70,7 @@
 		{{saintinscription_formset.management_form}}
 		{% for f in saintinscription_formset.forms %}
 			<tr class ="d-flex">
-			<td class="col-4">{{f.inscription}} {{f.inscription.errors}}</td>
+			<td class="col-8">{{f.inscription}} {{f.inscription.errors}}</td>
 			<td class="col-1">{{f.DELETE}} {{f.id}}</td>
 			</tr>
 		{% endfor %}
@@ -81,7 +81,7 @@
 		{{saintobject_formset.management_form}}
 		<table class="table table-borderless">
 		<tr class ="d-flex">
-		    <th class="col-4">Object
+		    <th class="col-8">Object
 			<a class = "btn btn-link btn-sm ml-auto" target = "_blank"
 				href ="{% url 'saints:object-insert' %}" role="button">
 				 <i class="fa fa-plus"></i></a>
@@ -91,7 +91,7 @@
 		{{saintobject_formset.management_form}}
 		{% for f in saintobject_formset.forms %}
 			<tr class ="d-flex">
-			<td class="col-4">{{f.object}} {{f.object.errors}}</td>
+			<td class="col-8">{{f.object}} {{f.object.errors}}</td>
 			<td class="col-1">{{f.DELETE}} {{f.id}}</td>
 			</tr>
 		{% endfor %}
@@ -102,7 +102,7 @@
 		{{saintliturgicalmanuscript_formset.management_form}}
 		<table class="table table-borderless">
 		<tr class ="d-flex">
-		    <th class="col-4">Liturgical manuscripts
+		    <th class="col-8">Liturgical manuscripts
 			<a class = "btn btn-link btn-sm ml-auto" target = "_blank"
 				href ="{% url 'saints:liturgicalmanuscript-insert' %}" role="button">
 				 <i class="fa fa-plus"></i></a>
@@ -112,7 +112,7 @@
 		{{saintliturgicalmanuscript_formset.management_form}}
 		{% for f in saintliturgicalmanuscript_formset.forms %}
 			<tr class ="d-flex">
-			<td class="col-4">{{f.liturgical_manuscript}} {{f.liturgical_manuscript.errors}}</td>
+			<td class="col-8">{{f.liturgical_manuscript}} {{f.liturgical_manuscript.errors}}</td>
 			<td class="col-1">{{f.DELETE}} {{f.id}}</td>
 			</tr>
 		{% endfor %}

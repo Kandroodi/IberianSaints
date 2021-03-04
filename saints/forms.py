@@ -19,6 +19,18 @@ class ChurchWidget(s2forms.ModelSelect2Widget):
     search_fields = ['name__icontains']
 
 
+class InscriptionWidget(s2forms.ModelSelect2Widget):
+    search_fields = ['reference_no__icontains']
+
+
+class ObjectWidget(s2forms.ModelSelect2Widget):
+    search_fields = ['name__icontains']
+
+
+class LiturgicalManuscriptWidget(s2forms.ModelSelect2Widget):
+    search_fields = ['shelf_no__icontains']
+
+
 class ExternalLinkWidget(s2forms.ModelSelect2Widget):
     search_fields = ['link__icontains']
 
@@ -97,10 +109,18 @@ class InstitutionTypeForm(ModelForm):
 class SaintChurchRelationForm(ModelForm):
     saint = forms.ModelChoiceField(
         queryset=Saint.objects.all(),
+        widget=SaintWidget(
+            attrs={'data-placeholder': 'Select saint',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
     )
 
     church = forms.ModelChoiceField(
         queryset=Church.objects.all(),
+        widget=ChurchWidget(
+            attrs={'data-placeholder': 'Select church',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
     )
 
     class Meta:
@@ -111,9 +131,17 @@ class SaintChurchRelationForm(ModelForm):
 class SaintInscriptionRelationForm(ModelForm):
     saint = forms.ModelChoiceField(
         queryset=Saint.objects.all(),
+        widget=SaintWidget(
+            attrs={'data-placeholder': 'Select saint',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
     )
     inscription = forms.ModelChoiceField(
         queryset=Inscription.objects.all(),
+        widget=InscriptionWidget(
+            attrs={'data-placeholder': 'Select inscription',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
     )
 
     class Meta:
@@ -124,10 +152,18 @@ class SaintInscriptionRelationForm(ModelForm):
 class SaintObjectRelationForm(ModelForm):
     saint = forms.ModelChoiceField(
         queryset=Saint.objects.all(),
+        widget=SaintWidget(
+            attrs={'data-placeholder': 'Select saint',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
     )
 
     object = forms.ModelChoiceField(
         queryset=Object.objects.all(),
+        widget=ObjectWidget(
+            attrs={'data-placeholder': 'Select object',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
     )
 
     class Meta:
@@ -138,10 +174,18 @@ class SaintObjectRelationForm(ModelForm):
 class SaintLitManuscriptRelationForm(ModelForm):
     saint = forms.ModelChoiceField(
         queryset=Saint.objects.all(),
+        widget=SaintWidget(
+            attrs={'data-placeholder': 'Select saint',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
     )
 
     liturgical_manuscript = forms.ModelChoiceField(
         queryset=LiturgicalManuscript.objects.all(),
+        widget=LiturgicalManuscriptWidget(
+            attrs={'data-placeholder': 'Select liturgical manuscript',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
     )
 
     class Meta:

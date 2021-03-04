@@ -41,7 +41,7 @@ class ExternalLink(models.Model):
 
 
 class Church(models.Model):
-    name = models.CharField(max_length=100, blank=False)
+    name = models.CharField(max_length=100, blank=False, default='')
     start_date = PartialDateField(blank=True, null=True)
     end_date = PartialDateField(blank=True, null=True)
     coordinates = models.ForeignKey(Location, on_delete=models.CASCADE, default='', blank=True,
@@ -66,7 +66,7 @@ class Church(models.Model):
 
 
 class Inscription(models.Model):
-    reference_no = models.CharField(max_length=100, blank=True, null=True)
+    reference_no = models.CharField(max_length=100, blank=False, default='')
     original_location = models.ForeignKey(Church, on_delete=models.SET_NULL, blank=True, default='', null=True)
     date = PartialDateField(blank=True, null=True)
     external_link = models.ForeignKey(ExternalLink, on_delete=models.SET_NULL, blank=True, default='', null=True)
@@ -104,7 +104,7 @@ class ObjectType(models.Model):
 
 
 class Object(models.Model):
-    name = models.CharField(max_length=256)
+    name = models.CharField(max_length=256, blank=False, default='')
     date = PartialDateField(blank=True, null=True)
     original_location = models.ForeignKey(Church, related_name='originallocations', on_delete=models.CASCADE,
                                           blank=True, default='', null=True)
@@ -151,7 +151,7 @@ class Feast(models.Model):
 
 
 class LiturgicalManuscript(models.Model):
-    shelf_no = models.CharField(max_length=100)
+    shelf_no = models.CharField(max_length=100, blank=False, default='')
     rite = models.ForeignKey(Rite, on_delete=models.SET_NULL, blank=True, default='', null=True)
     type = models.ForeignKey(ManuscriptType, on_delete=models.SET_NULL, blank=True, default='', null=True)
     date = PartialDateField(blank=True, null=True)
