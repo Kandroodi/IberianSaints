@@ -161,8 +161,8 @@ class LiturgicalManuscript(models.Model):
     bibliography = models.ForeignKey(Bibliography, on_delete=models.SET_NULL, blank=True, default='', null=True)
     description = models.TextField(default='', blank=True, null=True)
 
-    # def __str__(self):
-    #     return self.shelf_no
+    def __str__(self):
+        return self.shelf_no
 
 
 # RELATIONS
@@ -224,19 +224,19 @@ class SaintLitManuscriptRelation(models.Model):
         return message
 
 
-class ChurchObjectRelation(models.Model):
-    church = models.ForeignKey(Church, on_delete=models.CASCADE, blank=True)
-    object = models.ForeignKey(Object, on_delete=models.CASCADE, blank=True)
-
-    def __str__(self):
-        message = self.church + "and" + self.object
-        return message
-
-
-class ChurchLitManuscriptRelation(models.Model):
-    church = models.ForeignKey(Church, on_delete=models.CASCADE, blank=True)
-    liturgical_manuscript = models.ForeignKey(LiturgicalManuscript, on_delete=models.CASCADE, blank=True)
-
-    def __str__(self):
-        message = self.church + "and" + self.liturgical_manuscript
-        return message
+# class ChurchObjectRelation(models.Model):
+#     church = models.ForeignKey(Church, on_delete=models.CASCADE, blank=True)
+#     object = models.ForeignKey(Object, on_delete=models.CASCADE, blank=True)
+#
+#     def __str__(self):
+#         message = self.church + "and" + self.object
+#         return message
+#
+#
+# class ChurchLitManuscriptRelation(models.Model):
+#     church = models.ForeignKey(Church, on_delete=models.CASCADE, blank=True)
+#     liturgical_manuscript = models.ForeignKey(LiturgicalManuscript, on_delete=models.CASCADE, blank=True)
+#
+#     def __str__(self):
+#         message = self.church + "and" + self.liturgical_manuscript
+#         return message

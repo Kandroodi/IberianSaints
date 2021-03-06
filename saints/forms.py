@@ -256,8 +256,8 @@ class ChurchObjectRelationForm(ModelForm):
     )
 
     class Meta:
-        model = ChurchObjectRelation
-        fields = ('church', 'object')
+        model = ObjectChurchRelation
+        fields = ('church', 'object', 'start_date', 'end_date')
 
 
 class ChurchLitManuscriptRelationForm(ModelForm):
@@ -278,8 +278,8 @@ class ChurchLitManuscriptRelationForm(ModelForm):
     )
 
     class Meta:
-        model = ChurchLitManuscriptRelation
-        fields = ('church', 'liturgical_manuscript')
+        model = LitManuscriptChurchRelation
+        fields = ('church', 'liturgical_manuscript', 'start_date', 'end_date')
 
 
 # Formsets
@@ -305,11 +305,11 @@ liturgicalmanuscriptsaint_formset = inlineformset_factory(
     LiturgicalManuscript, SaintLitManuscriptRelation, form=SaintLitManuscriptRelationForm, extra=1)
 
 churchobject_formset = inlineformset_factory(
-    Church, ChurchObjectRelation, form=ChurchObjectRelationForm, extra=1)
+    Church, ObjectChurchRelation, form=ChurchObjectRelationForm, extra=1)
 objectchurch_formset = inlineformset_factory(
-    Object, ChurchObjectRelation, form=ChurchObjectRelationForm, extra=1)
+    Object, ObjectChurchRelation, form=ChurchObjectRelationForm, extra=1)
 
 churchliturgicalmanuscript_formset = inlineformset_factory(
-    Church, ChurchLitManuscriptRelation, form=ChurchLitManuscriptRelationForm, extra=1)
+    Church, LitManuscriptChurchRelation, form=ChurchLitManuscriptRelationForm, extra=1)
 liturgicalmanuscriptchurch_formset = inlineformset_factory(
-    LiturgicalManuscript, ChurchLitManuscriptRelation, form=ChurchLitManuscriptRelationForm, extra=1)
+    LiturgicalManuscript, LitManuscriptChurchRelation, form=ChurchLitManuscriptRelationForm, extra=1)

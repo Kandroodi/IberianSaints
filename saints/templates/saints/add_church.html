@@ -37,12 +37,12 @@
 		{{churchsaint_formset.management_form}}
 		<table class="table table-borderless">
 		<tr class ="d-flex">
-		<th class="col-8">Saint
+			<th class="col-8">Saint
 			<a class = "btn btn-link btn-sm ml-auto" target = "_blank"
 				href ="{% url 'saints:saint-insert' %}" role="button">
 				 <i class="fa fa-plus"></i></a>
 			</th>
-		<th class="col-1" style="text-align:center"><i class="fa fa-times text-danger"></i></th>
+			<th class="col-1" style="text-align:center"><i class="fa fa-times text-danger"></i></th>
 		</tr>
 		{% for f in churchsaint_formset.forms %}
 			<tr class ="d-flex">
@@ -58,18 +58,22 @@
 		{{churchobject_formset.management_form}}
 		<table class="table table-borderless">
 		<tr class ="d-flex">
-		    <th class="col-8">Object
+		    <th class="col-5">Object
 			<a class = "btn btn-link btn-sm ml-auto" target = "_blank"
 				href ="{% url 'saints:object-insert' %}" role="button">
 				 <i class="fa fa-plus"></i></a>
 			</th>
-		<th class="col-1" style="text-align:center"><i class="fa fa-times text-danger"></i></th>
+			<th class="col-3">Start date </th>
+			<th class="col-3">End date </th>
+			<th class="col-1" style="text-align:center"><i class="fa fa-times text-danger"></i></th>
 		</tr>
 		{{churchobject_formset.management_form}}
 		{% for f in churchobject_formset.forms %}
 			<tr class ="d-flex">
-			<td class="col-8">{{f.object}} {{f.object.errors}}</td>
-			<td class="col-1">{{f.DELETE}} {{f.id}}</td>
+				<td class="col-5">{{f.object}} {{f.object.errors}}</td>
+				<td class="col-3">{{f.start_date}} {{f.start_date.errors}}</td>
+				<td class="col-3">{{f.end_date}} {{f.end_date.errors}}</td>
+				<td class="col-1">{{f.DELETE}} {{f.id}}</td>
 			</tr>
 		{% endfor %}
 		</table>
@@ -79,18 +83,22 @@
 		{{churchliturgicalmanuscript_formset.management_form}}
 		<table class="table table-borderless">
 		<tr class ="d-flex">
-		    <th class="col-8">Liturgical manuscripts
+		    <th class="col-5">Liturgical manuscripts
 			<a class = "btn btn-link btn-sm ml-auto" target = "_blank"
 				href ="{% url 'saints:liturgicalmanuscript-insert' %}" role="button">
 				 <i class="fa fa-plus"></i></a>
 			</th>
-		<th class="col-1" style="text-align:center"><i class="fa fa-times text-danger"></i></th>
+			<th class="col-3">Start date </th>
+			<th class="col-3">End date </th>
+			<th class="col-1" style="text-align:center"><i class="fa fa-times text-danger"></i></th>
 		</tr>
 		{{churchliturgicalmanuscript_formset.management_form}}
 		{% for f in churchliturgicalmanuscript_formset.forms %}
 			<tr class ="d-flex">
-			<td class="col-8">{{f.liturgical_manuscript}} {{f.liturgical_manuscript.errors}}</td>
-			<td class="col-1">{{f.DELETE}} {{f.id}}</td>
+				<td class="col-5">{{f.liturgical_manuscript}} {{f.liturgical_manuscript.errors}}</td>
+				<td class="col-3">{{f.start_date}} {{f.start_date.errors}}</td>
+				<td class="col-3">{{f.end_date}} {{f.end_date.errors}}</td>
+				<td class="col-1">{{f.DELETE}} {{f.id}}</td>
 			</tr>
 		{% endfor %}
 		</table>
