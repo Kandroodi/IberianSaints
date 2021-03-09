@@ -422,8 +422,8 @@ def make_tabs(tab_type, focus=0, focus_names=''):
         t = 'Saints, Objects, Liturgical manuscripts'
         relations = Tab(t, focus)
         return Tabs([minimize, relations], 'minimize,relations', focus_names)
-    if tab_type == 'institution':
-        t = 'Persons,Installations,Evidences'
+    if tab_type == 'object':
+        t = 'Saints, Churches'
         relations = Tab(t, focus)
         return Tabs([minimize, relations], 'minimize,relations', focus_names)
     if tab_type == 'evidence':

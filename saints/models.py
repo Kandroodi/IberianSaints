@@ -95,6 +95,9 @@ class Saint(models.Model):
     external_link = models.ForeignKey(ExternalLink, on_delete=models.CASCADE, blank=True, default='', null=True)
     description = models.TextField(default='', blank=True, null=True)
 
+    def __str__(self):
+        return self.name
+
 
 class ObjectType(models.Model):
     name = models.CharField(max_length=100)  #
@@ -222,7 +225,6 @@ class SaintLitManuscriptRelation(models.Model):
     def __str__(self):
         message = self.saint + "and" + self.liturgical_manuscript
         return message
-
 
 # class ChurchObjectRelation(models.Model):
 #     church = models.ForeignKey(Church, on_delete=models.CASCADE, blank=True)

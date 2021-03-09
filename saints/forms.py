@@ -27,6 +27,10 @@ class ObjectWidget(s2forms.ModelSelect2Widget):
     search_fields = ['name__icontains']
 
 
+class ObjectTypeWidget(s2forms.ModelSelect2Widget):
+    search_fields = ['name__icontains']
+
+
 class LiturgicalManuscriptWidget(s2forms.ModelSelect2Widget):
     search_fields = ['shelf_no__icontains']
 
@@ -129,6 +133,51 @@ class ChurchForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(ChurchForm, self).__init__(*args, **kwargs)
         self.fields['name'].required = True
+
+
+class ObjectForm(ModelForm):
+    class Meta:
+        model = Object
+        fields = '__all__'
+
+    original_location = forms.ModelChoiceField(
+        queryset=Church.objects.all(),
+        widget=ChurchWidget(
+            attrs={'data-placeholder': 'Select original location',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
+        required=False)
+    current_location = forms.ModelChoiceField(
+        queryset=Church.objects.all(),
+        widget=ChurchWidget(
+            attrs={'data-placeholder': 'Select current location',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
+        required=False)
+    type = forms.ModelChoiceField(
+        queryset=ObjectType.objects.all().order_by('name'),
+        widget=ObjectTypeWidget(
+            attrs={'data-placeholder': 'Select object type',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
+        required=False)
+    external_link = forms.ModelChoiceField(
+        queryset=ExternalLink.objects.all().order_by('link'),
+        widget=ExternalLinkWidget(
+            attrs={'data-placeholder': 'Select external link',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
+        required=False)
+    bibliography = forms.ModelChoiceField(
+        queryset=Bibliography.objects.all(),
+        widget=BibliographyWidget(
+            attrs={'data-placeholder': 'Select bibliography',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
+        required=False)
+    description = forms.CharField(widget=forms.Textarea(
+        attrs={'style': 'width:100%', 'rows': 3}),
+        required=False)
 
 
 class BibliographyForm(ModelForm):

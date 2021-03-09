@@ -181,12 +181,18 @@ class ObjectListView(ListView):
     context_object_name = 'objects'
 
 
+def edit_object(request, pk=None, focus='', view='complete'):
+    names = 'objectsaint_formset,objectchurch_formset'
+    return edit_model(request, __name__, 'Object', 'saints', pk, formset_names=names,
+                      focus=focus, view=view)
+
+
 # @method_decorator(login_required, name='dispatch')
-class ObjectCreatView(CreateView):
-    model = Object
-    fields = '__all__'
-    template_name = 'saints/object_form.html'
-    success_url = reverse_lazy('saints:object-list')
+# class ObjectCreatView(CreateView):
+#     model = Object
+#     fields = '__all__'
+#     template_name = 'saints/object_form.html'
+#     success_url = reverse_lazy('saints:object-list')
 
 
 # @method_decorator(login_required, name='dispatch')
