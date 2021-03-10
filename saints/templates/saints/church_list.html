@@ -10,8 +10,6 @@
             <td>Start date </td>
             <td>End date</td>
             <td>Institution type</td>
-            <td>Political region</td>
-            <td>Ecclesiastical region</td>
             <td>
                  <a href="{% url 'saints:church-insert' %}" class="btn btn-outline-success"> <i class="fa fa-plus"></i> Add New</a>
             </td>
@@ -24,8 +22,6 @@
                 <td>{{church.start_date}}</td>
                 <td>{{church.end_date}}</td>
                 <td>{{church.institution_type}}</td>
-                <td>{{church.political_region}}</td>
-                <td>{{church.ecclesiastical_region}}</td>
                 <td>
                     <a href="{% url 'saints:church-update' church.id %}" class="btn text-secondary px-0"><i class="fa fa-edit fa-lg"></i></a>
                     <form action="{% url 'saints:church-delete' church.id %}" method="post" class="d-inline">

@@ -8,7 +8,7 @@
         <thead class="border-bottom font-weight-bold">
             <tr>
                 <th scope="col">Reference</th>
-                <th scope="col">Coordinates</th>
+                <th scope="col">Original location</th>
                 <th scope="col">Date</th>
                 <th scope="col">Bibliography</th>
                 <td>
@@ -23,8 +23,8 @@
         <tbody>
             {% for inscription in inscriptions %}
             <tr>
-                <td>{{inscription.reference}}</td>
-                <td>{{inscription.coordinates}}</td>
+                <td>{{inscription.reference_no}}</td>
+                <td>{{inscription.original_location}}</td>
                 <td>{{inscription.date}}</td>
                 <td>{{inscription.bibliography}}</td>
                 <td>
