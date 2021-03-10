@@ -9,7 +9,6 @@ from django.urls import reverse_lazy
 from utilities.views import edit_model
 
 
-
 # Create your views here.
 
 def home(request):
@@ -22,28 +21,10 @@ def edit_church(request, pk=None, focus='', view='complete'):
                       focus=focus, view=view)
 
 
-def churchCreate(request, id=0):
-    if request.method == "GET":
-        if id == 0:
-            form = ChurchForm()
-        else:
-            church = Church.objects.get(pk=id)
-            form = ChurchForm(instance=church)
-        return render(request, 'saints/church_form.html', {'form': form})
-    else:  # request.method == "POST":
-        if id == 0:
-            form = ChurchForm(request.POST)
-        else:
-            church = Church.objects.get(pk=id)
-            form = ChurchForm(request.POST, instance=church)
-        if form.is_valid():
-            form.save()
-        return redirect('saints:church-list')  # after save redirect to the city list
-
-
 def churchList(request):
     context = {'church_list': Church.objects.all()}
     return render(request, 'saints/church_list.html', context)
+
 
 def churchDelete(request, id):
     city = get_object_or_404(Church, pk=id)
@@ -74,10 +55,12 @@ def bibliographyList(request):
     context = {'bibliography_list': Bibliography.objects.all()}
     return render(request, 'saints/bibliography_list.html', context)
 
+
 def bibliographyDelete(request, id):
     city = get_object_or_404(Church, pk=id)
     city.delete()
     return redirect('saints:bibliography-list')
+
 
 def institutionTypeCreate(request, id=0):
     if request.method == "GET":
@@ -102,6 +85,7 @@ def institutionTypeList(request):
     context = {'institutionType_list': InstitutionType.objects.all()}
     return render(request, 'saints/institutionType_list.html', context)
 
+
 def institutionTypeDelete(request, id):
     city = get_object_or_404(Church, pk=id)
     city.delete()
@@ -109,7 +93,7 @@ def institutionTypeDelete(request, id):
 
 
 # Class Based Views
-#-----------------------------------------------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------------------------------------------
 # @method_decorator(login_required, name='dispatch')
 class InscriptionListView(ListView):
     model = Inscription
@@ -124,14 +108,6 @@ def edit_inscription(request, pk=None, focus='', view='complete'):
 
 
 # @method_decorator(login_required, name='dispatch')
-class InscriptionCreatView(CreateView):
-    model = Inscription
-    fields = '__all__'
-    template_name = 'saints/inscription_form.html'
-    success_url = reverse_lazy('saints:inscription-list')
-
-
-# @method_decorator(login_required, name='dispatch')
 class InscriptionUpdateView(UpdateView):
     model = Inscription
     fields = '__all__'
@@ -142,6 +118,7 @@ class InscriptionUpdateView(UpdateView):
 class InscriptionDeleteView(DeleteView):
     model = Inscription
     success_url = reverse_lazy("saints:inscription-list")
+
 
 # Saint
 # @method_decorator(login_required, name='dispatch')
@@ -157,16 +134,6 @@ def edit_saint(request, pk=None, focus='', view='complete'):
                       focus=focus, view=view)
 
 
-
-
-# @method_decorator(login_required, name='dispatch')
-class SaintCreatView(CreateView):
-    model = Saint
-    form_class = SaintForm
-    template_name = 'saints/add_saint.html'
-    success_url = reverse_lazy('saints:saint-list')
-
-
 # @method_decorator(login_required, name='dispatch')
 class SaintUpdateView(UpdateView):
     model = Saint
@@ -178,6 +145,7 @@ class SaintUpdateView(UpdateView):
 class SaintDeleteView(DeleteView):
     model = Saint
     success_url = reverse_lazy("saints:saint-list")
+
 
 # Object
 # @method_decorator(login_required, name='dispatch')
@@ -191,14 +159,6 @@ def edit_object(request, pk=None, focus='', view='complete'):
     names = 'objectsaint_formset,objectchurch_formset'
     return edit_model(request, __name__, 'Object', 'saints', pk, formset_names=names,
                       focus=focus, view=view)
-
-
-# @method_decorator(login_required, name='dispatch')
-# class ObjectCreatView(CreateView):
-#     model = Object
-#     fields = '__all__'
-#     template_name = 'saints/object_form.html'
-#     success_url = reverse_lazy('saints:object-list')
 
 
 # @method_decorator(login_required, name='dispatch')
@@ -255,15 +215,6 @@ def edit_liturgicalmanuscript(request, pk=None, focus='', view='complete'):
     names = 'liturgicalmanuscriptsaint_formset,liturgicalmanuscriptchurch_formset'
     return edit_model(request, __name__, 'LiturgicalManuscript', 'saints', pk, formset_names=names,
                       focus=focus, view=view)
-
-
-
-# @method_decorator(login_required, name='dispatch')
-# class LiturgicalManuscriptCreatView(CreateView):
-#     model = LiturgicalManuscript
-#     fields = '__all__'
-#     template_name = 'saints/_liturgicalmanuscript_form.html'
-#     success_url = reverse_lazy('saints:liturgicalmanuscript-list')
 
 
 # @method_decorator(login_required, name='dispatch')
@@ -393,6 +344,7 @@ class SaintTypeUpdateView(UpdateView):
 class SaintTypeDeleteView(DeleteView):
     model = SaintType
     success_url = reverse_lazy("saints:sainttype-list")
+
 
 # ExternalLink
 # @method_decorator(login_required, name='dispatch')
