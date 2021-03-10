@@ -180,6 +180,40 @@ class ObjectForm(ModelForm):
         required=False)
 
 
+class InscriptionForm(ModelForm):
+    class Meta:
+        model = Inscription
+        fields = '__all__'
+
+    original_location = forms.ModelChoiceField(
+        queryset=Church.objects.all(),
+        widget=ChurchWidget(
+            attrs={'data-placeholder': 'Select original location',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
+        required=False)
+    external_link = forms.ModelChoiceField(
+        queryset=ExternalLink.objects.all().order_by('link'),
+        widget=ExternalLinkWidget(
+            attrs={'data-placeholder': 'Select external link',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
+        required=False)
+    bibliography = forms.ModelChoiceField(
+        queryset=Bibliography.objects.all(),
+        widget=BibliographyWidget(
+            attrs={'data-placeholder': 'Select bibliography',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
+        required=False)
+    text = forms.CharField(widget=forms.Textarea(
+        attrs={'style': 'width:100%', 'rows': 3}),
+        required=False)
+    description = forms.CharField(widget=forms.Textarea(
+        attrs={'style': 'width:100%', 'rows': 3}),
+        required=False)
+
+
 class BibliographyForm(ModelForm):
     class Meta:
         model = Bibliography

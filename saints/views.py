@@ -117,6 +117,12 @@ class InscriptionListView(ListView):
     context_object_name = 'inscriptions'
 
 
+def edit_inscription(request, pk=None, focus='', view='complete'):
+    names = 'inscriptionsaint_formset'
+    return edit_model(request, __name__, 'Inscription', 'saints', pk, formset_names=names,
+                      focus=focus, view=view)
+
+
 # @method_decorator(login_required, name='dispatch')
 class InscriptionCreatView(CreateView):
     model = Inscription
