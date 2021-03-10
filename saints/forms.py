@@ -49,6 +49,18 @@ class InstitutionTypeWidget(s2forms.ModelSelect2Widget):
     search_fields = ['name__icontains']
 
 
+class RiteWidget(s2forms.ModelSelect2Widget):
+    search_fields = ['name__icontains']
+
+
+class FeastWidget(s2forms.ModelSelect2Widget):
+    search_fields = ['name__icontains']
+
+
+class ManuscriptTypeWidget(s2forms.ModelSelect2Widget):
+    search_fields = ['name__icontains']
+
+
 class BibliographyWidget(s2forms.ModelSelect2Widget):
     search_fields = ['short_title__icontains']
 
@@ -208,6 +220,58 @@ class InscriptionForm(ModelForm):
         required=False)
     text = forms.CharField(widget=forms.Textarea(
         attrs={'style': 'width:100%', 'rows': 3}),
+        required=False)
+    description = forms.CharField(widget=forms.Textarea(
+        attrs={'style': 'width:100%', 'rows': 3}),
+        required=False)
+
+
+class LiturgicalManuscriptForm(ModelForm):
+    class Meta:
+        model = LiturgicalManuscript
+        fields = '__all__'
+
+    rite = forms.ModelChoiceField(
+        queryset=Rite.objects.all(),
+        widget=RiteWidget(
+            attrs={'data-placeholder': 'Select rite',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
+        required=False)
+    type = forms.ModelChoiceField(
+        queryset=ManuscriptType.objects.all(),
+        widget=ManuscriptTypeWidget(
+            attrs={'data-placeholder': 'Select manuscript type',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
+        required=False)
+    provenance = forms.ModelChoiceField(
+        queryset=Church.objects.all(),
+        widget=ChurchWidget(
+            attrs={'data-placeholder': 'Select provenance',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
+        required=False)
+    feast = forms.ModelChoiceField(
+        queryset=Rite.objects.all(),
+        widget=FeastWidget(
+            attrs={'data-placeholder': 'Select feast',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
+        required=False)
+    external_link = forms.ModelChoiceField(
+        queryset=ExternalLink.objects.all().order_by('link'),
+        widget=ExternalLinkWidget(
+            attrs={'data-placeholder': 'Select external link',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
+        required=False)
+    bibliography = forms.ModelChoiceField(
+        queryset=Bibliography.objects.all(),
+        widget=BibliographyWidget(
+            attrs={'data-placeholder': 'Select bibliography',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
         required=False)
     description = forms.CharField(widget=forms.Textarea(
         attrs={'style': 'width:100%', 'rows': 3}),

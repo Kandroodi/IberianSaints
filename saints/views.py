@@ -251,12 +251,19 @@ class LiturgicalManuscriptListView(ListView):
     context_object_name = 'liturgicalmanuscripts'
 
 
+def edit_liturgicalmanuscript(request, pk=None, focus='', view='complete'):
+    names = 'liturgicalmanuscriptsaint_formset,liturgicalmanuscriptchurch_formset'
+    return edit_model(request, __name__, 'LiturgicalManuscript', 'saints', pk, formset_names=names,
+                      focus=focus, view=view)
+
+
+
 # @method_decorator(login_required, name='dispatch')
-class LiturgicalManuscriptCreatView(CreateView):
-    model = LiturgicalManuscript
-    fields = '__all__'
-    template_name = 'saints/liturgicalmanuscript_form.html'
-    success_url = reverse_lazy('saints:liturgicalmanuscript-list')
+# class LiturgicalManuscriptCreatView(CreateView):
+#     model = LiturgicalManuscript
+#     fields = '__all__'
+#     template_name = 'saints/_liturgicalmanuscript_form.html'
+#     success_url = reverse_lazy('saints:liturgicalmanuscript-list')
 
 
 # @method_decorator(login_required, name='dispatch')

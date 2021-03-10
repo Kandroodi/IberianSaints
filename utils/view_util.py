@@ -430,6 +430,10 @@ def make_tabs(tab_type, focus=0, focus_names=''):
         t = 'Saints'
         relations = Tab(t, focus)
         return Tabs([minimize, relations], 'minimize,relations', focus_names)
+    if tab_type == 'liturgicalmanuscript':
+        t = 'Saints, Churches'
+        relations = Tab(t, focus)
+        return Tabs([minimize, relations], 'minimize,relations', focus_names)
 
 
 def generate_num(app_name, model_name):
