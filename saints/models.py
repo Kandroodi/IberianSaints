@@ -70,7 +70,8 @@ class Church(models.Model):
 class Inscription(models.Model):
     reference_no = models.CharField(max_length=100, blank=False, default='')
     original_location = models.ForeignKey(Church, on_delete=models.SET_NULL, blank=True, default='', null=True)
-    date = PartialDateField(blank=True, null=True)
+    date_lower = PartialDateField(blank=True, null=True)
+    date_upper = PartialDateField(blank=True, null=True)
     external_link = models.ForeignKey(ExternalLink, on_delete=models.SET_NULL, blank=True, default='', null=True)
     bibliography = models.ForeignKey(Bibliography, on_delete=models.SET_NULL, blank=True, default='', null=True)
     text = models.TextField(max_length=256, blank=True, null=True)

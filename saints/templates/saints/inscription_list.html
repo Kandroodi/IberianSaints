@@ -25,7 +25,13 @@
             <tr>
                 <td>{{inscription.reference_no}}</td>
                 <td>{{inscription.original_location}}</td>
-                <td>{{inscription.date}}</td>
+                <td>
+                    {% if inscription.date_lower == inscription.date_upper %}
+                    {{inscription.date_lower}}
+                    {% else %}
+                    {{inscription.date_lower}} - {{inscription.date_upper}}
+                    {% endif %}
+                </td>
                 <td>{{inscription.bibliography}}</td>
                 <td>
                     <a href="{% url 'saints:inscription-update' inscription.id %}" class="btn text-secondary px-0"><i class="fa fa-edit fa-lg"></i></a>

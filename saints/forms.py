@@ -212,6 +212,9 @@ class InscriptionForm(ModelForm):
         model = Inscription
         fields = '__all__'
 
+    date_lower = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Please enter lower bound'}))
+    date_upper = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Please enter upper bound'}))
+
     original_location = forms.ModelChoiceField(
         queryset=Church.objects.all(),
         widget=ChurchWidget(
@@ -239,6 +242,11 @@ class InscriptionForm(ModelForm):
     description = forms.CharField(widget=forms.Textarea(
         attrs={'style': 'width:100%', 'rows': 3}),
         required=False)
+
+    def __init__(self, *args, **kwargs):
+        super(InscriptionForm, self).__init__(*args, **kwargs)
+        self.fields['date_lower'].required = False
+        self.fields['date_upper'].required = False
 
 
 class LiturgicalManuscriptForm(ModelForm):
