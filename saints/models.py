@@ -42,8 +42,10 @@ class ExternalLink(models.Model):
 
 class Church(models.Model):
     name = models.CharField(max_length=100, blank=False, default='')
-    start_date = PartialDateField(blank=True, null=True)
-    end_date = PartialDateField(blank=True, null=True)
+    start_date_lower = PartialDateField(blank=True, null=True)
+    start_date_upper = PartialDateField(blank=True, null=True)
+    end_date_lower = PartialDateField(blank=True, null=True)
+    end_date_upper = PartialDateField(blank=True, null=True)
     coordinates = models.ForeignKey(Location, on_delete=models.CASCADE, default='', blank=True,
                                     null=True)  # type: ForeignKey
     institution_type = models.ForeignKey(InstitutionType, on_delete=models.CASCADE, blank=True, default='', null=True)

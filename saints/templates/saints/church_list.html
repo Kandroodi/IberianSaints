@@ -19,8 +19,20 @@
         {% for church in church_list %}
             <tr>
                 <td>{{church.name }}</td>
-                <td>{{church.start_date}}</td>
-                <td>{{church.end_date}}</td>
+                <td>
+                    {% if church.start_date_lower == church.start_date_upper %}
+                    {{church.start_date_lower}}
+                    {% else %}
+                    {{church.start_date_lower}} - {{church.start_date_upper}}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if church.end_date_lower == church.end_date_upper %}
+                    {{church.end_date_lower}}
+                    {% else %}
+                    {{church.end_date_lower}} - {{church.end_date_upper}}
+                    {% endif %}
+                </td>
                 <td>{{church.institution_type}}</td>
                 <td>
                     <a href="{% url 'saints:church-update' church.id %}" class="btn text-secondary px-0"><i class="fa fa-edit fa-lg"></i></a>
