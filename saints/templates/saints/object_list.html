@@ -24,7 +24,13 @@
             {% for object in objects %}
             <tr>
                 <td>{{object.name}}</td>
-                <td>{{object.date}}</td>
+                <td>
+                    {% if object.date_lower == object.date_upper %}
+                    {{object.date_lower}}
+                    {% else %}
+                    {{object.date_lower}} - {{object.date_upper}}
+                    {% endif %}
+                </td>
                 <td>{{object.original_location}}</td>
                 <td>{{object.current_location}}</td>
                 <td>{{object.type}}</td>
