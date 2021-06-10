@@ -201,6 +201,11 @@ class ObjectForm(ModelForm):
         attrs={'style': 'width:100%', 'rows': 3}),
         required=False)
 
+    def __init__(self, *args, **kwargs):
+        super(ObjectForm, self).__init__(*args, **kwargs)
+        self.fields['date_lower'].required = False
+        self.fields['date_upper'].required = False
+
 
 class InscriptionForm(ModelForm):
     class Meta:
