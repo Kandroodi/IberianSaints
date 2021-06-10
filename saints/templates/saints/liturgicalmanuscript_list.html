@@ -27,7 +27,13 @@
                 <td>{{liturgicalmanuscript.rite}}</td>
                 <td>{{liturgicalmanuscript.type}}</td>
                 <td>{{liturgicalmanuscript.provenance}}</td>
-                <td>{{liturgicalmanuscript.date}}</td>
+                <td>
+                    {% if liturgicalmanuscript.date_lower == liturgicalmanuscript.date_upper %}
+                    {{liturgicalmanuscript.date_lower}}
+                    {% else %}
+                    {{liturgicalmanuscript.date_lower}} - {{liturgicalmanuscript.date_upper}}
+                    {% endif %}
+                </td>
                 <td>
                     <a href="{% url 'saints:liturgicalmanuscript-update' liturgicalmanuscript.id %}" class="btn text-secondary px-0"><i class="fa fa-edit fa-lg"></i></a>
                     <form action="{% url 'saints:liturgicalmanuscript-delete' liturgicalmanuscript.id %}" method="post" class="d-inline">
