@@ -160,6 +160,8 @@ class ObjectForm(ModelForm):
         model = Object
         fields = '__all__'
 
+    date_lower = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Please enter lower bound'}))
+    date_upper = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Please enter upper bound'}))
     original_location = forms.ModelChoiceField(
         queryset=Church.objects.all(),
         widget=ChurchWidget(

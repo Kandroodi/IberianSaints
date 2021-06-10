@@ -110,7 +110,8 @@ class ObjectType(models.Model):
 
 class Object(models.Model):
     name = models.CharField(max_length=256, blank=False, default='')
-    date = PartialDateField(blank=True, null=True)
+    date_lower = PartialDateField(blank=True, null=True)
+    date_upper = PartialDateField(blank=True, null=True)
     original_location = models.ForeignKey(Church, related_name='originallocations', on_delete=models.CASCADE,
                                           blank=True, default='', null=True)
     current_location = models.ForeignKey(Church, on_delete=models.CASCADE, blank=True, default='', null=True)
