@@ -133,7 +133,7 @@ class Rite(models.Model):
 
 class Feast(models.Model):
     name = models.CharField(max_length=100)  #
-    date = PartialDateField(blank=True, null=True)
+    date = models.CharField(max_length=100, blank=True, default='')
 
     def __str__(self):
         return self.name
