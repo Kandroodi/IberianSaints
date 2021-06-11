@@ -27,6 +27,9 @@
         <a class="nav-link" id="Objectsa" data-toggle="tab" href="#Objects" role="tab" aria-controls="Objects" aria-selected="false">Objects</a>
     </li>
 	<li class="nav-item">
+        <a class="nav-link" id="Inscriptionsa" data-toggle="tab" href="#Inscriptions" role="tab" aria-controls="Inscriptions" aria-selected="false">Inscriptions</a>
+    </li>
+	<li class="nav-item">
         <a class="nav-link" id="Liturgicalmanuscriptsa" data-toggle="tab" href="#Liturgicalmanuscripts" role="tab" aria-controls="Liturgicalmanuscripts" aria-selected="false">Liturgical manuscripts</a>
     </li>
 </ul>
@@ -78,6 +81,32 @@
 		{% endfor %}
 		</table>
 	</div>
+
+	<!--Inscriptions -->
+	<div class="tab-pane fade" id="Inscriptions">
+		{{churchinscription_formset.management_form}}
+		<table class="table table-borderless">
+		<tr class ="d-flex">
+		    <th class="col-5">Inscription
+			<a class = "btn btn-link btn-sm ml-auto" target = "_blank"
+				href ="{% url 'saints:inscription-insert' %}" role="button">
+				 <i class="fa fa-plus"></i></a>
+			</th>
+            <th class="col-3">Start date </th>
+			<th class="col-3">End date </th>
+		    <th class="col-1" style="text-align:center"><i class="fa fa-times text-danger"></i></th>
+		</tr>
+		{% for f in churchinscription_formset.forms %}
+			<tr class ="d-flex">
+			<td class="col-5">{{f.inscription}} {{f.inscription.errors}}</td>
+            <td class="col-3">{{f.start_date}} {{f.start_date.errors}}</td>
+            <td class="col-3">{{f.end_date}} {{f.end_date.errors}}</td>
+			<td class="col-1" style="text-align:left">{{f.DELETE}} {{f.id}}</td>
+			</tr>
+		{% endfor %}
+		</table>
+	</div>
+
 	<!--Liturgicalmanuscripts -->
 	<div class="tab-pane fade" id="Liturgicalmanuscripts">
 		{{churchliturgicalmanuscript_formset.management_form}}
