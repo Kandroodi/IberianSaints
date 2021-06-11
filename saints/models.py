@@ -39,8 +39,8 @@ class Church(models.Model):
     start_date_upper = PartialDateField(blank=True, null=True)
     end_date_lower = PartialDateField(blank=True, null=True)
     end_date_upper = PartialDateField(blank=True, null=True)
-    coordinates = models.ForeignKey(Location, on_delete=models.CASCADE, default='', blank=True,
-                                    null=True)  # type: ForeignKey
+    coordinates_latitude = models.DecimalField(max_digits=8, decimal_places=5, blank=True, null=True, default=0)
+    coordinates_longitude = models.DecimalField(max_digits=8, decimal_places=5, blank=True, null=True, default=0)
     institution_type = models.ForeignKey(InstitutionType, on_delete=models.CASCADE, blank=True, default='', null=True)
     TEXTUAL = (
         ('Y', 'Yes'),

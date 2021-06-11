@@ -15,11 +15,8 @@
     </tr>
     <tr class="d-flex">
         <th class="col-2">Coordinates</th>
-        <td class="col-8">{{form.coordinates}}</td>
-        <td><a class = "btn btn-link btn-sm ml-auto" target = "_blank"
-           href ="{% url 'saints:location-insert' %}"
-           role="button"><i class="fa fa-plus"></i></a>
-        </td>
+        <td class="col-4">{{form.coordinates_latitude}}</td>
+        <td class="col-4">{{form.coordinates_longitude}}</td>
     </tr>
     <tr class="d-flex">
         <th class="col-2">Institution type</th>

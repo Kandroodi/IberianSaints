@@ -98,14 +98,18 @@ class ChurchForm(ModelForm):
     start_date_upper = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Please enter upper bound'}))
     end_date_lower = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Please enter lower bound'}))
     end_date_upper = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Please enter upper bound'}))
-    coordinates = forms.ModelChoiceField(
-        queryset=Location.objects.all(),
-        # this line refreshes the list when a new item is entered using the plus button
-        widget=CoordinatesWidget(
-            attrs={'data-placeholder': 'Select coordinates',
-                   'style': 'width:100%;', 'class': 'searching',
-                   'data-minimum-input-length': '1'}),
-        required=False)
+
+    coordinates_latitude = forms.DecimalField(widget=forms.TextInput(attrs={'placeholder': 'Latitude'}))
+    coordinates_longitude = forms.DecimalField(widget=forms.TextInput(attrs={'placeholder': 'Longitude'}))
+
+    # coordinates = forms.ModelChoiceField(
+    #     queryset=Location.objects.all(),
+    #     # this line refreshes the list when a new item is entered using the plus button
+    #     widget=CoordinatesWidget(
+    #         attrs={'data-placeholder': 'Select coordinates',
+    #                'style': 'width:100%;', 'class': 'searching',
+    #                'data-minimum-input-length': '1'}),
+    #     required=False)
     institution_type = forms.ModelChoiceField(
         queryset=InstitutionType.objects.all(),
         # this line refreshes the list when a new item is entered using the plus button
