@@ -422,6 +422,28 @@ class ChurchLitManuscriptRelationForm(ModelForm):
         fields = ('church', 'liturgical_manuscript', 'start_date', 'end_date')
 
 
+class InscriptionChurchRelationForm(ModelForm):
+    church = forms.ModelChoiceField(
+        queryset=Church.objects.all(),
+        widget=ChurchWidget(
+            attrs={'data-placeholder': 'Select church',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
+    )
+
+    inscription = forms.ModelChoiceField(
+        queryset=Inscription.objects.all(),
+        widget=InscriptionWidget(
+            attrs={'data-placeholder': 'Select inscription',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
+    )
+
+    class Meta:
+        model = InscriptionChurchRelation
+        fields = ('church', 'inscription', 'start_date', 'end_date')
+
+
 # Formsets
 
 saintchurch_formset = inlineformset_factory(
@@ -453,3 +475,8 @@ churchliturgicalmanuscript_formset = inlineformset_factory(
     Church, LitManuscriptChurchRelation, form=ChurchLitManuscriptRelationForm, extra=1)
 liturgicalmanuscriptchurch_formset = inlineformset_factory(
     LiturgicalManuscript, LitManuscriptChurchRelation, form=ChurchLitManuscriptRelationForm, extra=1)
+
+inscriptionchurch_formset = inlineformset_factory(
+    Inscription, InscriptionChurchRelation, form=InscriptionChurchRelationForm, extra=1)
+churchinscription_formset = inlineformset_factory(
+    Church, InscriptionChurchRelation, form=InscriptionChurchRelationForm, extra=1)

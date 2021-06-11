@@ -23,6 +23,9 @@
     <li class="nav-item">
         <a class="nav-link" id="Saintsa" data-toggle="tab" href="#Saints" role="tab" aria-controls="Saints" aria-selected="true">Saints</a>
     </li>
+	<li class="nav-item">
+        <a class="nav-link" id="Churchesa" data-toggle="tab" href="#Churches" role="tab" aria-controls="Churches" aria-selected="false">Churches</a>
+    </li>
 </ul>
 
 <div class="tab-content" id="myTabContent">
@@ -41,6 +44,31 @@
 		{% for f in inscriptionsaint_formset.forms %}
 			<tr class ="d-flex">
 			<td class="col-8">{{f.saint}} {{f.saint.errors}}</td>
+			<td class="col-1" style="text-align:left">{{f.DELETE}} {{f.id}}</td>
+			</tr>
+		{% endfor %}
+		</table>
+	</div>
+
+	<!--Churches -->
+    <div class="tab-pane fade" id="Churches">
+		{{inscriptionchurch_formset.management_form}}
+		<table class="table table-borderless">
+		<tr class ="d-flex">
+		    <th class="col-5">Church
+			<a class = "btn btn-link btn-sm ml-auto" target = "_blank"
+				href ="{% url 'saints:church-insert' %}" role="button">
+				 <i class="fa fa-plus"></i></a>
+			</th>
+            <th class="col-3">Start date </th>
+			<th class="col-3">End date </th>
+		    <th class="col-1" style="text-align:center"><i class="fa fa-times text-danger"></i></th>
+		</tr>
+		{% for f in inscriptionchurch_formset.forms %}
+			<tr class ="d-flex">
+			<td class="col-5">{{f.church}} {{f.church.errors}}</td>
+            <td class="col-3">{{f.start_date}} {{f.start_date.errors}}</td>
+            <td class="col-3">{{f.end_date}} {{f.end_date.errors}}</td>
 			<td class="col-1" style="text-align:left">{{f.DELETE}} {{f.id}}</td>
 			</tr>
 		{% endfor %}
