@@ -258,13 +258,7 @@ class LiturgicalManuscriptForm(ModelForm):
                    'style': 'width:100%;', 'class': 'searching',
                    'data-minimum-input-length': '1'}),
         required=False)
-    external_link = forms.ModelChoiceField(
-        queryset=ExternalLink.objects.all().order_by('link'),
-        widget=ExternalLinkWidget(
-            attrs={'data-placeholder': 'Select external link',
-                   'style': 'width:100%;', 'class': 'searching',
-                   'data-minimum-input-length': '1'}),
-        required=False)
+
     bibliography = forms.ModelChoiceField(
         queryset=Bibliography.objects.all(),
         widget=BibliographyWidget(
