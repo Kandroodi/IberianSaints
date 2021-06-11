@@ -346,35 +346,6 @@ class SaintTypeDeleteView(DeleteView):
     success_url = reverse_lazy("saints:sainttype-list")
 
 
-# ExternalLink
-# @method_decorator(login_required, name='dispatch')
-class ExternalLinkListView(ListView):
-    model = ExternalLink
-    template_name = 'installations/externallink_list.html'
-    context_object_name = 'externallinks'
-
-
-# @method_decorator(login_required, name='dispatch')
-class ExternalLinkCreatView(CreateView):
-    model = ExternalLink
-    fields = '__all__'
-    template_name = 'saints/externallink_form.html'
-    success_url = reverse_lazy('saints:externallink-list')
-
-
-# @method_decorator(login_required, name='dispatch')
-class ExternalLinkUpdateView(UpdateView):
-    model = ExternalLink
-    fields = '__all__'
-    success_url = reverse_lazy('saints:externallink-list')
-
-
-# @method_decorator(login_required, name='dispatch')
-class ExternalLinkDeleteView(DeleteView):
-    model = ExternalLink
-    success_url = reverse_lazy("saints:externallink-list")
-
-
 # Location
 # @method_decorator(login_required, name='dispatch')
 class LocationListView(ListView):

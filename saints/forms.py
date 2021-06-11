@@ -35,10 +35,6 @@ class LiturgicalManuscriptWidget(s2forms.ModelSelect2Widget):
     search_fields = ['shelf_no__icontains']
 
 
-class ExternalLinkWidget(s2forms.ModelSelect2Widget):
-    search_fields = ['link__icontains']
-
-
 class CoordinatesWidget(s2forms.ModelSelect2Widget):
     search_fields = ['latitude__icontains',
                      'longitude__icontains',

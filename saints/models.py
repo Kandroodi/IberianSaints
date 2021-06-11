@@ -33,13 +33,6 @@ class Location(models.Model):
     #     return 'Latitude: ' + str(round(self.latitude,7)) + ' | Longitude: ' + str(round(self.longitude,7))
 
 
-class ExternalLink(models.Model):
-    link = models.URLField(max_length=256, default='', blank=True)
-
-    def __str__(self):
-        return self.link
-
-
 class Church(models.Model):
     name = models.CharField(max_length=100, blank=False, default='')
     start_date_lower = PartialDateField(blank=True, null=True)
