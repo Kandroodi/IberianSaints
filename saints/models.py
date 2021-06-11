@@ -22,17 +22,6 @@ class Bibliography(models.Model):
         return self.short_title
 
 
-class Location(models.Model):
-    #     coordinates = models.PointField(srid=4326, blank=True)
-    # coordinates = models.CharField(max_length=50, blank=True,
-    #                                null=True)  # this is a placeholder and it will change to point field
-    latitude = models.DecimalField(max_digits=9, decimal_places=7, null=True, blank=True, default='0.0')
-    longitude = models.DecimalField(max_digits=9, decimal_places=7, null=True, blank=True, default='0.0')
-
-    # def __str__(self):
-    #     return 'Latitude: ' + str(round(self.latitude,7)) + ' | Longitude: ' + str(round(self.longitude,7))
-
-
 class Church(models.Model):
     name = models.CharField(max_length=100, blank=False, default='')
     start_date_lower = PartialDateField(blank=True, null=True)

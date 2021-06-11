@@ -346,35 +346,6 @@ class SaintTypeDeleteView(DeleteView):
     success_url = reverse_lazy("saints:sainttype-list")
 
 
-# Location
-# @method_decorator(login_required, name='dispatch')
-class LocationListView(ListView):
-    model = Location
-    template_name = 'installations/location_list.html'
-    context_object_name = 'locations'
-
-
-# @method_decorator(login_required, name='dispatch')
-class LocationCreatView(CreateView):
-    model = Location
-    fields = '__all__'
-    template_name = 'saints/location_form.html'
-    success_url = reverse_lazy('saints:location-list')
-
-
-# @method_decorator(login_required, name='dispatch')
-class LocationUpdateView(UpdateView):
-    model = Location
-    fields = '__all__'
-    success_url = reverse_lazy('saints:location-list')
-
-
-# @method_decorator(login_required, name='dispatch')
-class LocationDeleteView(DeleteView):
-    model = Location
-    success_url = reverse_lazy("saints:location-list")
-
-
 # InstitutionType
 # @method_decorator(login_required, name='dispatch')
 class InstitutionTypeListView(ListView):

@@ -35,12 +35,6 @@ class LiturgicalManuscriptWidget(s2forms.ModelSelect2Widget):
     search_fields = ['shelf_no__icontains']
 
 
-class CoordinatesWidget(s2forms.ModelSelect2Widget):
-    search_fields = ['latitude__icontains',
-                     'longitude__icontains',
-                     ]
-
-
 class InstitutionTypeWidget(s2forms.ModelSelect2Widget):
     search_fields = ['name__icontains']
 
@@ -99,17 +93,8 @@ class ChurchForm(ModelForm):
     end_date_lower = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Please enter lower bound'}))
     end_date_upper = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Please enter upper bound'}))
 
-    coordinates_latitude = forms.DecimalField(widget=forms.TextInput(attrs={'placeholder': 'Latitude'}))
-    coordinates_longitude = forms.DecimalField(widget=forms.TextInput(attrs={'placeholder': 'Longitude'}))
-
-    # coordinates = forms.ModelChoiceField(
-    #     queryset=Location.objects.all(),
-    #     # this line refreshes the list when a new item is entered using the plus button
-    #     widget=CoordinatesWidget(
-    #         attrs={'data-placeholder': 'Select coordinates',
-    #                'style': 'width:100%;', 'class': 'searching',
-    #                'data-minimum-input-length': '1'}),
-    #     required=False)
+    coordinates_latitude = forms.DecimalField(widget=forms.TextInput(attrs={'placeholder': 'Latitude'}), required=False)
+    coordinates_longitude = forms.DecimalField(widget=forms.TextInput(attrs={'placeholder': 'Longitude'}), required=False)
     institution_type = forms.ModelChoiceField(
         queryset=InstitutionType.objects.all(),
         # this line refreshes the list when a new item is entered using the plus button
@@ -274,6 +259,7 @@ class LiturgicalManuscriptForm(ModelForm):
         super(LiturgicalManuscriptForm, self).__init__(*args, **kwargs)
         self.fields['date_lower'].required = False
         self.fields['date_upper'].required = False
+
 
 class BibliographyForm(ModelForm):
     class Meta:
