@@ -127,7 +127,7 @@ class Object(models.Model):
         ('N', 'No'),
     )
     material_evidence = models.CharField(max_length=1, choices=MATERIAL, default='Y', blank=True, null=True)
-    external_link = models.ForeignKey(ExternalLink, on_delete=models.CASCADE, blank=True, default='', null=True)
+    external_link = models.URLField(max_length=256, default='', blank=True)
     bibliography = models.ForeignKey(Bibliography, on_delete=models.CASCADE, blank=True, default='', null=True)
     description = models.TextField(default='', blank=True, null=True)
 
