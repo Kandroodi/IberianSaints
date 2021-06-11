@@ -95,7 +95,7 @@ class Saint(models.Model):
     death_place = models.CharField(max_length=256, blank=True, null=True)
     type = models.ForeignKey(SaintType, related_name='saints', on_delete=models.CASCADE, blank=True, default='',
                              null=True)
-    external_link = models.ForeignKey(ExternalLink, on_delete=models.CASCADE, blank=True, default='', null=True)
+    external_link = models.URLField(max_length=256, default='', blank=True)
     description = models.TextField(default='', blank=True, null=True)
 
     def __str__(self):

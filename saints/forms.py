@@ -80,14 +80,6 @@ class SaintForm(forms.ModelForm):
                    'data-minimum-input-length': '1'}),
         required=False)
 
-    external_link = forms.ModelChoiceField(
-        queryset=ExternalLink.objects.all().order_by('link'),
-        # this line refreshes the list when a new item is entered using the plus button
-        widget=ExternalLinkWidget(
-            attrs={'data-placeholder': 'Select external link',
-                   'style': 'width:100%;', 'class': 'searching',
-                   'data-minimum-input-length': '1'}),
-        required=False)
     description = forms.CharField(widget=forms.Textarea(
         attrs={'style': 'width:100%', 'rows': 3}),
         required=False)
