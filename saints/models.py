@@ -24,10 +24,8 @@ class Bibliography(models.Model):
 
 class Church(models.Model):
     name = models.CharField(max_length=100, blank=False, default='')
-    start_date_lower = PartialDateField(blank=True, null=True)
-    start_date_upper = PartialDateField(blank=True, null=True)
-    end_date_lower = PartialDateField(blank=True, null=True)
-    end_date_upper = PartialDateField(blank=True, null=True)
+    date_lower = PartialDateField(blank=True, null=True)
+    date_upper = PartialDateField(blank=True, null=True)
     coordinates_latitude = models.DecimalField(max_digits=8, decimal_places=5, blank=True, null=True, default=0)
     coordinates_longitude = models.DecimalField(max_digits=8, decimal_places=5, blank=True, null=True, default=0)
     institution_type = models.ForeignKey(InstitutionType, on_delete=models.CASCADE, blank=True, default='', null=True)

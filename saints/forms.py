@@ -88,10 +88,8 @@ class ChurchForm(ModelForm):
             'name': 'Church Name'
         }
 
-    start_date_lower = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Please enter lower bound'}))
-    start_date_upper = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Please enter upper bound'}))
-    end_date_lower = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Please enter lower bound'}))
-    end_date_upper = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Please enter upper bound'}))
+    date_lower = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Please enter lower bound'}))
+    date_upper = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Please enter upper bound'}))
 
     coordinates_latitude = forms.DecimalField(widget=forms.TextInput(attrs={'placeholder': 'Latitude'}), required=False)
     coordinates_longitude = forms.DecimalField(widget=forms.TextInput(attrs={'placeholder': 'Longitude'}), required=False)
@@ -119,10 +117,9 @@ class ChurchForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(ChurchForm, self).__init__(*args, **kwargs)
         self.fields['name'].required = True
-        self.fields['start_date_lower'].required = False
-        self.fields['start_date_upper'].required = False
-        self.fields['end_date_lower'].required = False
-        self.fields['end_date_upper'].required = False
+
+        self.fields['date_lower'].required = False
+        self.fields['date_upper'].required = False
 
 
 class ObjectForm(ModelForm):
