@@ -77,6 +77,7 @@ class Saint(models.Model):
                              null=True)
     external_link = models.URLField(max_length=256, default='', blank=True)
     description = models.TextField(default='', blank=True, null=True)
+    status = models.BooleanField("Completed", default=False, help_text="Complete")
 
     def __str__(self):
         return self.name

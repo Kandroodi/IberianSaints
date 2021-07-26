@@ -74,10 +74,13 @@ class SaintForm(forms.ModelForm):
         attrs={'style': 'width:100%', 'rows': 3}),
         required=False)
 
+    status = forms.BooleanField()
+
     def __init__(self, *args, **kwargs):
         super(SaintForm, self).__init__(*args, **kwargs)
         self.fields['name'].required = True
         self.fields['type'].required = False
+        self.fields['status'].required = False
 
 
 class ChurchForm(ModelForm):
