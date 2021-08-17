@@ -116,6 +116,7 @@ class ChurchForm(ModelForm):
     description = forms.CharField(widget=forms.Textarea(
         attrs={'style': 'width:100%', 'rows': 3}),
         required=False)
+    status = forms.BooleanField()
 
     def __init__(self, *args, **kwargs):
         super(ChurchForm, self).__init__(*args, **kwargs)
@@ -123,6 +124,7 @@ class ChurchForm(ModelForm):
 
         self.fields['date_lower'].required = False
         self.fields['date_upper'].required = False
+        self.fields['status'].required = False
 
 
 class ObjectForm(ModelForm):

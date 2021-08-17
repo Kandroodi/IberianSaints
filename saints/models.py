@@ -42,6 +42,7 @@ class Church(models.Model):
     external_link = models.URLField(max_length=256, default='', blank=True)
     bibliography = models.ForeignKey(Bibliography, on_delete=models.CASCADE, blank=True, default='', null=True)
     description = models.TextField(default='', blank=True)
+    status = models.BooleanField("Completed", default=False, help_text="Complete")
 
     def __str__(self):
         return self.name

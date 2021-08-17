@@ -9,6 +9,7 @@
             <td>Church Name</td>
             <td>Date</td>
             <td>Institution type</td>
+            <td>Status</td>
             <td>
                  <a href="{% url 'saints:church-insert' %}" class="btn btn-outline-success"> <i class="fa fa-plus"></i> Add New</a>
             </td>
@@ -26,6 +27,13 @@
                     {% endif %}
                 </td>
                 <td>{{church.institution_type}}</td>
+                <td>
+                    {% if church.status %}
+                        <span class="Gdot"></span>
+                    {% else %}
+                        <span class="Rdot"></span>
+                    {% endif %}
+                </td>
                 <td>
                     <a href="{% url 'saints:church-update' church.id %}" class="btn text-secondary px-0"><i class="fa fa-edit fa-lg"></i></a>
                     <form action="{% url 'saints:church-delete' church.id %}" method="post" class="d-inline">
