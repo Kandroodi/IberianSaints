@@ -6,10 +6,14 @@
     <table class="table table-borderless">
         <thead class="border-bottom font-weight-bold">
             <tr>
+                <th scope="col"></th>
                 <th scope="col">Name</th>
                 <th scope="col">Feast</th>
-                <th scope="col">type</th>
-                <th scope="col">Status</th>
+                <th scope="col">Type</th>
+                <th scope="col">Church</th>
+                <th scope="col">Inscription</th>
+                <th scope="col">Object</th>
+                <th scope="col">Lit. manuscript</th>
                 <td>
                     <a href= "{% url 'saints:saint-insert' %}"
                        class="btn btn-outline-success"
@@ -22,15 +26,51 @@
         <tbody>
             {% for saint in saints %}
             <tr>
-                <td>{{saint.name}}</td>
-                <td>{{saint.feast_day}}</td>
-                <td>{{saint.type}}</td>
                 <td>
                     {% if saint.status %}
                         <span class="Gdot"></span>
                     {% else %}
                         <span class="Rdot"></span>
                     {% endif %}
+                </td>
+                <td>{{saint.name}}</td>
+                <td>{{saint.feast_day}}</td>
+                <td>{{saint.type}}</td>
+                <td>
+                    {% for t in saint.saintchurchrelation_set.all %}
+                        {% if t %}
+                            {{ t.church }}<br>
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for t in saint.saintinscriptionrelation_set.all %}
+                        {% if t %}
+                            {{ t.inscription }}<br>
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for t in saint.saintobjectrelation_set.all %}
+                        {% if t %}
+                            {{ t.object }}<br>
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for t in saint.saintlitmanuscriptrelation_set.all %}
+                        {% if t %}
+                            {{ t.liturgical_manuscript }}<br>
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+                    {% endfor %}
                 </td>
                 <td>
                     <a href="{% url 'saints:saint-update' saint.id %}" class="btn text-secondary px-0"><i class="fa fa-edit fa-lg"></i></a>
