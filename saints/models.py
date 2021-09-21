@@ -57,6 +57,7 @@ class Inscription(models.Model):
     bibliography = models.ForeignKey(Bibliography, on_delete=models.SET_NULL, blank=True, default='', null=True)
     text = models.TextField(max_length=256, blank=True, null=True)
     description = models.TextField(default='', blank=True, null=True)
+    status = models.BooleanField("Completed", default=False, help_text="Complete")
 
     def __str__(self):
         return self.reference_no

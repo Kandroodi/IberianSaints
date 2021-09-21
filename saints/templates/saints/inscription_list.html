@@ -11,6 +11,7 @@
                 <th scope="col">Original location</th>
                 <th scope="col">Date</th>
                 <th scope="col">Bibliography</th>
+                <th scope="col">Status</th>
                 <td>
                     <a href= "{% url 'saints:inscription-insert' %}"
                        class="btn btn-outline-success"
@@ -33,6 +34,13 @@
                     {% endif %}
                 </td>
                 <td>{{inscription.bibliography}}</td>
+                <td>
+                    {% if inscription.status %}
+                        <span class="Gdot"></span>
+                    {% else %}
+                        <span class="Rdot"></span>
+                    {% endif %}
+                </td>
                 <td>
                     <a href="{% url 'saints:inscription-update' inscription.id %}" class="btn text-secondary px-0"><i class="fa fa-edit fa-lg"></i></a>
                     <form action="{% url 'saints:inscription-delete' inscription.id %}" method="post" class="d-inline">
