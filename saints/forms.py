@@ -166,11 +166,13 @@ class ObjectForm(ModelForm):
     description = forms.CharField(widget=forms.Textarea(
         attrs={'style': 'width:100%', 'rows': 3}),
         required=False)
+    status = forms.BooleanField()
 
     def __init__(self, *args, **kwargs):
         super(ObjectForm, self).__init__(*args, **kwargs)
         self.fields['date_lower'].required = False
         self.fields['date_upper'].required = False
+        self.fields['status'].required = False
 
 
 class InscriptionForm(ModelForm):

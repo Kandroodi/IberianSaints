@@ -11,6 +11,7 @@
                 <th scope="col">Original location</th>
                 <th scope="col">Current location</th>
                 <th scope="col">type</th>
+                <th scope="col">Status</th>
                 <td>
                     <a href= "{% url 'saints:object-insert' %}"
                        class="btn btn-outline-success"
@@ -34,6 +35,13 @@
                 <td>{{object.original_location}}</td>
                 <td>{{object.current_location}}</td>
                 <td>{{object.type}}</td>
+                <td>
+                    {% if object.status %}
+                        <span class="Gdot"></span>
+                    {% else %}
+                        <span class="Rdot"></span>
+                    {% endif %}
+                </td>
                 <td>
                     <a href="{% url 'saints:object-update' object.id %}" class="btn text-secondary px-0"><i class="fa fa-edit fa-lg"></i></a>
                     <form action="{% url 'saints:object-delete' object.id %}" method="post" class="d-inline">
