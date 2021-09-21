@@ -72,7 +72,8 @@ class SaintType(models.Model):
 
 class Saint(models.Model):
     name = models.CharField(max_length=256)
-    feast_day = PartialDateField(blank=True, null=True)
+    feast_day = models.CharField(max_length=256, blank=True, null=True)
+    feast_day_old = PartialDateField(blank=True, null=True)
     death_date = PartialDateField(blank=True, null=True)
     death_place = models.CharField(max_length=256, blank=True, null=True)
     type = models.ForeignKey(SaintType, related_name='saints', on_delete=models.CASCADE, blank=True, default='',

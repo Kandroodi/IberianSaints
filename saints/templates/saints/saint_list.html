@@ -7,8 +7,7 @@
         <thead class="border-bottom font-weight-bold">
             <tr>
                 <th scope="col">Name</th>
-                <th scope="col">Date of death</th>
-                <th scope="col">Place of death</th>
+                <th scope="col">Feast</th>
                 <th scope="col">type</th>
                 <th scope="col">Status</th>
                 <td>
@@ -24,8 +23,7 @@
             {% for saint in saints %}
             <tr>
                 <td>{{saint.name}}</td>
-                <td>{{saint.death_date}}</td>
-                <td>{{saint.death_place}}</td>
+                <td>{{saint.feast_day}}</td>
                 <td>{{saint.type}}</td>
                 <td>
                     {% if saint.status %}
