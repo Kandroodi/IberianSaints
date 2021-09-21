@@ -11,6 +11,7 @@
                 <th scope="col">Type</th>
                 <th scope="col">Provenance</th>
                 <th scope="col">Date</th>
+                <th scope="col">Status</th>
                 <td>
                     <a href= "{% url 'saints:liturgicalmanuscript-insert' %}"
                        class="btn btn-outline-success"
@@ -32,6 +33,13 @@
                     {{liturgicalmanuscript.date_lower}}
                     {% else %}
                     {{liturgicalmanuscript.date_lower}} - {{liturgicalmanuscript.date_upper}}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if liturgicalmanuscript.status %}
+                        <span class="Gdot"></span>
+                    {% else %}
+                        <span class="Rdot"></span>
                     {% endif %}
                 </td>
                 <td>
