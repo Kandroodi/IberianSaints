@@ -94,18 +94,18 @@
                 {% endfor %}
             </td>
             <td class="col-3">
-                {% for t in saint.saintchurchrelation_set.all %}
+                {% for t in saint.saintobjectrelation_set.all %}
                     {% if t %}
-                        {{ t.church }}<br>
+                        {{ t.object }}<br>
                     {% else %}
                         &nbsp;
                     {% endif %}
                 {% endfor %}
             </td>
             <td class="col-3">
-                {% for t in saint.saintchurchrelation_set.all %}
+                {% for t in saint.saintlitmanuscriptrelation_set.all %}
                     {% if t %}
-                        {{ t.church }}<br>
+                        {{ t.liturgical_manuscript }}<br>
                     {% else %}
                         &nbsp;
                     {% endif %}
