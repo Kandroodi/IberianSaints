@@ -6,10 +6,12 @@
 <table class="table table-borderless">
     <thead class="border-bottom font-weight-bold">
         <tr>
-            <th scope="col">Church Name</th>
+            <th scope="col"></th>
+            <th scope="col">Name</th>
+            <th scope="col">Saints</th>
             <th scope="col">Date</th>
-            <th scope="col">Institution type</th>
-            <th scope="col">Status</th>
+            <th scope="col">Type</th>
+
             <td>
                  <a href="{% url 'saints:church-insert' %}" class="btn btn-outline-success"> <i class="fa fa-plus"></i> Add New</a>
             </td>
@@ -17,16 +19,7 @@
     </thead>
     <tbody>
         {% for church in church_list %}
-            <tr>
-                <td>{{church.name }}</td>
-                <td>
-                    {% if church.date_lower == church.date_upper %}
-                    {{church.end_date_lower}}
-                    {% else %}
-                    {{church.date_lower}} - {{church.date_upper}}
-                    {% endif %}
-                </td>
-                <td>{{church.institution_type}}</td>
+            <tr style="border-bottom:1px solid lightgrey">
                 <td>
                     {% if church.status %}
                         <span class="Gdot"></span>
@@ -34,6 +27,36 @@
                         <span class="Rdot"></span>
                     {% endif %}
                 </td>
+                <td>{{church.name }}</td>
+                <td>
+                    {% for t in church.saintchurchrelation_set.all %}
+                        {% if t %}
+                            {{ t.saint }}<br>
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+                    {% endfor %}
+                </td>
+                <td>
+                    {% if church.date_lower and church.date_upper %}
+                        {% if church.date_lower == church.date_upper %}
+                            {{church.end_date_lower}}
+                        {% else %}
+                            {{church.date_lower}} - {{church.date_upper}}
+                        {% endif %}
+                    {% elif church.date_lower %}
+                        {{church.date_lower}}
+                    {% elif church.date_upper %}
+                        {{church.date_upper}}
+                    {% endif %}
+
+                </td>
+                <td>
+                    {% if church.institution_type %}
+                        {{church.institution_type}}
+                    {% endif %}
+                </td>
+
                 <td>
                     <a href="{% url 'saints:church-update' church.id %}" class="btn text-secondary px-0"><i class="fa fa-edit fa-lg"></i></a>
                     <form action="{% url 'saints:church-delete' church.id %}" method="post" class="d-inline">
