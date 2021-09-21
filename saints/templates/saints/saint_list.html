@@ -33,7 +33,9 @@
                         <span class="Rdot"></span>
                     {% endif %}
                 </td>
-                <td>{{saint.name}}</td>
+                <td>
+                    <a href="{% url 'saints:saint-detail' saint.id %}"> {{saint.name}} </a>
+                </td>
                 <td>{{saint.feast_day}}</td>
                 <td>{{saint.type}}</td>
                 <td>

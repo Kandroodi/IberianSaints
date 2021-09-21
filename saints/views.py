@@ -147,6 +147,10 @@ class SaintDeleteView(DeleteView):
     success_url = reverse_lazy("saints:saint-list")
 
 
+class SaintDetailView(DetailView):
+    model = Saint
+
+
 # Object
 # @method_decorator(login_required, name='dispatch')
 class ObjectListView(ListView):

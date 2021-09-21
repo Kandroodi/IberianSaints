@@ -29,6 +29,7 @@ urlpatterns = [
     path('saint/new/<int:pk>', views.edit_saint, name='saint-update'),
     path('saint/new/<int:pk>/<str:focus>', views.edit_saint, name='saint-update'),
     url(r'^saint/delete/(?P<pk>\d+)/$', views.SaintDeleteView.as_view(), name='saint-delete'),
+    path('saint/<int:pk>', views.SaintDetailView.as_view(), name='saint-detail'),
     path('saint/list', views.SaintListView.as_view(), name='saint-list'),
     url(r'^object/new/$', views.edit_object, name='object-insert'),
     path('object/new/<int:pk>', views.edit_object, name='object-update'),
