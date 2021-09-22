@@ -27,7 +27,9 @@
                         <span class="Rdot"></span>
                     {% endif %}
                 </td>
-                <td>{{church.name }}</td>
+                <td>
+                    <a href="{% url 'saints:church-detail' church.id %}"> {{church.name }} </a>
+                </td>
                 <td>
                     {% for t in church.saintchurchrelation_set.all %}
                         {% if t %}

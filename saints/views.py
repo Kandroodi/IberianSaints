@@ -32,6 +32,10 @@ def churchDelete(request, id):
     return redirect('saints:church-list')
 
 
+class ChurchDetailView(DetailView):
+    model = Church
+
+
 def bibliographyCreate(request, id=0):
     if request.method == "GET":
         if id == 0:
