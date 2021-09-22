@@ -182,6 +182,10 @@ class ObjectDeleteView(DeleteView):
     success_url = reverse_lazy("saints:object-list")
 
 
+class ObjectDetailView(DetailView):
+    model = Object
+
+
 # Feast
 # @method_decorator(login_required, name='dispatch')
 class FeastListView(ListView):

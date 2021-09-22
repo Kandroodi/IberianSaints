@@ -34,7 +34,7 @@
                     {% endif %}
                 </td>
                 <td>
-                    {{object.name}}
+                    <a href="{% url 'saints:object-detail' object.id %}"> {{object.name}} </a>
                 </td>
                 <td>
                     {% for t in object.saintobjectrelation_set.all %}

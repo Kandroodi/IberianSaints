@@ -37,6 +37,7 @@ urlpatterns = [
     path('object/new/<int:pk>/<str:focus>', views.edit_object, name='object-update'),
     url(r'^object/delete/(?P<pk>\d+)/$', views.ObjectDeleteView.as_view(), name='object-delete'),
     path('object/list', views.ObjectListView.as_view(), name='object-list'),
+    path('object/<int:pk>', views.ObjectDetailView.as_view(), name='object-detail'),
     url(r'^feast/new/$', views.FeastCreatView.as_view(), name='feast-insert'),
     url(r'^feast/new/(?P<pk>\d+)/$', views.FeastUpdateView.as_view(), name='feast-update'),
     url(r'^feast/delete/(?P<pk>\d+)/$', views.FeastDeleteView.as_view(), name='feast-delete'),
