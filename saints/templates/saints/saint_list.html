@@ -41,7 +41,7 @@
                 <td>
                     {% for t in saint.saintchurchrelation_set.all %}
                         {% if t %}
-                            {{ t.church }}<br>
+                            <a href="{% url 'saints:church-detail' t.church.id %}"> {{ t.church }} </a><br>
                         {% else %}
                             &nbsp;
                         {% endif %}
