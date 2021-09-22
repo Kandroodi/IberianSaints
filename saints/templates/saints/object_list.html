@@ -6,12 +6,14 @@
     <table class="table table-borderless">
         <thead class="border-bottom font-weight-bold">
             <tr>
+                <th scope="col"></th>
                 <th scope="col">Name</th>
-                <th scope="col">Date</th>
+                <th scope="col">Saints</th>
                 <th scope="col">Original location</th>
                 <th scope="col">Current location</th>
+                <th scope="col">Date</th>
                 <th scope="col">type</th>
-                <th scope="col">Status</th>
+
                 <td>
                     <a href= "{% url 'saints:object-insert' %}"
                        class="btn btn-outline-success"
@@ -23,18 +25,7 @@
         </thead>
         <tbody>
             {% for object in objects %}
-            <tr>
-                <td>{{object.name}}</td>
-                <td>
-                    {% if object.date_lower == object.date_upper %}
-                    {{object.date_lower}}
-                    {% else %}
-                    {{object.date_lower}} - {{object.date_upper}}
-                    {% endif %}
-                </td>
-                <td>{{object.original_location}}</td>
-                <td>{{object.current_location}}</td>
-                <td>{{object.type}}</td>
+            <tr style="border-bottom:1px solid lightgrey">
                 <td>
                     {% if object.status %}
                         <span class="Gdot"></span>
@@ -42,6 +33,47 @@
                         <span class="Rdot"></span>
                     {% endif %}
                 </td>
+                <td>
+                    {{object.name}}
+                </td>
+                <td>
+                    {% for t in object.saintobjectrelation_set.all %}
+                        {% if t %}
+                            <a href="{% url 'saints:saint-detail' t.saint.id %}"> {{ t.saint }} </a><br>
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+                    {% endfor %}
+                </td>
+                <td>
+                    {% if object.original_location %}
+                        <a href="{% url 'saints:church-detail' object.original_location.id %}"> {{object.original_location}} </a>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if object.current_location %}
+                        <a href="{% url 'saints:church-detail' object.current_location.id %}"> {{object.current_location}} </a>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if object.date_lower and object.date_upper %}
+                        {% if object.date_lower == object.date_upper %}
+                            {{object.date_lower}}
+                        {% else %}
+                            {{object.date_lower}} - {{object.date_upper}}
+                        {% endif %}
+                    {% elif object.date_lower %}
+                        {{object.date_lower}}
+                    {% elif cobject.date_upper %}
+                        {{object.date_upper}}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if object.type %}
+                        {{object.type}}
+                    {% endif %}
+                </td>
+
                 <td>
                     <a href="{% url 'saints:object-update' object.id %}" class="btn text-secondary px-0"><i class="fa fa-edit fa-lg"></i></a>
                     <form action="{% url 'saints:object-delete' object.id %}" method="post" class="d-inline">
