@@ -7,11 +7,12 @@
     <table class="table table-borderless">
         <thead class="border-bottom font-weight-bold">
             <tr>
+                <th scope="col"></th>
                 <th scope="col">Reference</th>
+                <th scope="col">Saints</th>
                 <th scope="col">Original location</th>
                 <th scope="col">Date</th>
-                <th scope="col">Bibliography</th>
-                <th scope="col">Status</th>
+
                 <td>
                     <a href= "{% url 'saints:inscription-insert' %}"
                        class="btn btn-outline-success"
@@ -23,17 +24,7 @@
         </thead>
         <tbody>
             {% for inscription in inscriptions %}
-            <tr>
-                <td>{{inscription.reference_no}}</td>
-                <td>{{inscription.original_location}}</td>
-                <td>
-                    {% if inscription.date_lower == inscription.date_upper %}
-                    {{inscription.date_lower}}
-                    {% else %}
-                    {{inscription.date_lower}} - {{inscription.date_upper}}
-                    {% endif %}
-                </td>
-                <td>{{inscription.bibliography}}</td>
+            <tr style="border-bottom:1px solid lightgrey">
                 <td>
                     {% if inscription.status %}
                         <span class="Gdot"></span>
@@ -41,6 +32,35 @@
                         <span class="Rdot"></span>
                     {% endif %}
                 </td>
+                <td>{{inscription.reference_no}}</td>
+                <td>
+                    {% for t in inscription.saintinscriptionrelation_set.all %}
+                        {% if t %}
+                            <a href="{% url 'saints:saint-detail' t.saint.id %}"> {{ t.saint }} </a><br>
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+                    {% endfor %}
+                </td>
+                <td>
+                    {% if inscription.original_location %}
+                        <a href="{% url 'saints:church-detail' inscription.original_location.id %}"> {{inscription.original_location}} </a>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if inscription.date_lower and inscription.date_upper %}
+                        {% if inscription.date_lower == inscription.date_upper %}
+                            {{inscription.date_lower}}
+                        {% else %}
+                            {{inscription.date_lower}} - {{inscription.date_upper}}
+                        {% endif %}
+                    {% elif inscription.date_lower %}
+                        {{inscription.date_lower}}
+                    {% elif inscription.date_upper %}
+                        {{inscription.date_upper}}
+                    {% endif %}
+                </td>
+
                 <td>
                     <a href="{% url 'saints:inscription-update' inscription.id %}" class="btn text-secondary px-0"><i class="fa fa-edit fa-lg"></i></a>
                     <form action="{% url 'saints:inscription-delete' inscription.id %}" method="post" class="d-inline">
