@@ -36,8 +36,16 @@
                 <td>
                     <a href="{% url 'saints:saint-detail' saint.id %}"> {{saint.name}} </a>
                 </td>
-                <td>{{saint.feast_day}}</td>
-                <td>{{saint.type}}</td>
+                <td>
+                    {% if saint.feast_day %}
+                        {{saint.feast_day}}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if saint.type %}
+                        {{saint.type}}
+                    {% endif %}
+                </td>
                 <td>
                     {% for t in saint.saintchurchrelation_set.all %}
                         {% if t %}
@@ -50,7 +58,7 @@
                 <td>
                     {% for t in saint.saintinscriptionrelation_set.all %}
                         {% if t %}
-                            {{ t.inscription }}<br>
+                            <a href="{% url 'saints:inscription-detail' t.inscription.id %}"> {{ t.inscription }} </a><br>
                         {% else %}
                             &nbsp;
                         {% endif %}
@@ -59,7 +67,7 @@
                 <td>
                     {% for t in saint.saintobjectrelation_set.all %}
                         {% if t %}
-                            {{ t.object }}<br>
+                            <a href="{% url 'saints:object-detail' t.object.id %}"> {{ t.object }} </a><br>
                         {% else %}
                             &nbsp;
                         {% endif %}
@@ -68,7 +76,7 @@
                 <td>
                     {% for t in saint.saintlitmanuscriptrelation_set.all %}
                         {% if t %}
-                            {{ t.liturgical_manuscript }}<br>
+                            <a href="{% url 'saints:liturgicalmanuscript-detail' t.liturgical_manuscript.id %}"> {{ t.liturgical_manuscript }} </a><br>
                         {% else %}
                             &nbsp;
                         {% endif %}

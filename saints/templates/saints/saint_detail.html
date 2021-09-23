@@ -105,7 +105,7 @@
             <td class="col-3">
                 {% for t in saint.saintlitmanuscriptrelation_set.all %}
                     {% if t %}
-                        {{ t.liturgical_manuscript }}<br>
+                        <a href="{% url 'saints:liturgicalmanuscript-detail' t.liturgical_manuscript.id %}"> {{ t.liturgical_manuscript }} </a><br>
                     {% else %}
                         &nbsp;
                     {% endif %}
