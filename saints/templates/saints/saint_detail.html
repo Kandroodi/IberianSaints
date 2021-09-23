@@ -87,7 +87,7 @@
             <td class="col-3">
                 {% for t in saint.saintinscriptionrelation_set.all %}
                     {% if t %}
-                        {{ t.inscription }}<br>
+                        <a href="{% url 'saints:inscription-detail' t.inscription.id %}"> {{ t.inscription }} </a><br>
                     {% else %}
                         &nbsp;
                     {% endif %}
@@ -96,7 +96,7 @@
             <td class="col-3">
                 {% for t in saint.saintobjectrelation_set.all %}
                     {% if t %}
-                        {{ t.object }}<br>
+                        <a href="{% url 'saints:object-detail' t.object.id %}"> {{ t.object }} </a><br>
                     {% else %}
                         &nbsp;
                     {% endif %}

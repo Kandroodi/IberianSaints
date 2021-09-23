@@ -25,6 +25,7 @@ urlpatterns = [
     # url(r'^inscription/new/(?P<pk>\d+)/$', views.InscriptionUpdateView.as_view(), name='inscription-update'),
     url(r'^inscription/delete/(?P<pk>\d+)/$', views.InscriptionDeleteView.as_view(), name='inscription-delete'),
     path('inscription/list', views.InscriptionListView.as_view(), name='inscription-list'),
+    path('inscription/<int:pk>', views.InscriptionDetailView.as_view(), name='inscription-detail'),
     url(r'^saint/new/$', views.edit_saint, name='saint-insert'),
     path('saint/new/<str:view>/', views.edit_saint, name='saint-insert'),
     path('saint/new/<int:pk>', views.edit_saint, name='saint-update'),

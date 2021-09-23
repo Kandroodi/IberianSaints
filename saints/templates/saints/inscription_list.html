@@ -32,7 +32,9 @@
                         <span class="Rdot"></span>
                     {% endif %}
                 </td>
-                <td>{{inscription.reference_no}}</td>
+                <td>
+                    <a href="{% url 'saints:inscription-detail' inscription.id %}"> {{inscription.reference_no}} </a>
+                </td>
                 <td>
                     {% for t in inscription.saintinscriptionrelation_set.all %}
                         {% if t %}

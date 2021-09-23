@@ -124,6 +124,10 @@ class InscriptionDeleteView(DeleteView):
     success_url = reverse_lazy("saints:inscription-list")
 
 
+class InscriptionDetailView(DetailView):
+    model = Inscription
+
+
 # Saint
 # @method_decorator(login_required, name='dispatch')
 class SaintListView(ListView):
