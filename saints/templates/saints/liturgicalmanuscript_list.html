@@ -6,12 +6,12 @@
     <table class="table table-borderless">
         <thead class="border-bottom font-weight-bold">
             <tr>
+                <th scope="col"></th>
                 <th scope="col">Shelf no</th>
-                <th scope="col">Rite</th>
-                <th scope="col">Type</th>
+                <th scope="col">Saints</th>
                 <th scope="col">Provenance</th>
                 <th scope="col">Date</th>
-                <th scope="col">Status</th>
+
                 <td>
                     <a href= "{% url 'saints:liturgicalmanuscript-insert' %}"
                        class="btn btn-outline-success"
@@ -24,17 +24,6 @@
         <tbody>
             {% for liturgicalmanuscript in liturgicalmanuscripts %}
             <tr>
-                <td>{{liturgicalmanuscript.shelf_no}}</td>
-                <td>{{liturgicalmanuscript.rite}}</td>
-                <td>{{liturgicalmanuscript.type}}</td>
-                <td>{{liturgicalmanuscript.provenance}}</td>
-                <td>
-                    {% if liturgicalmanuscript.date_lower == liturgicalmanuscript.date_upper %}
-                    {{liturgicalmanuscript.date_lower}}
-                    {% else %}
-                    {{liturgicalmanuscript.date_lower}} - {{liturgicalmanuscript.date_upper}}
-                    {% endif %}
-                </td>
                 <td>
                     {% if liturgicalmanuscript.status %}
                         <span class="Gdot"></span>
@@ -42,6 +31,27 @@
                         <span class="Rdot"></span>
                     {% endif %}
                 </td>
+                <td>{{liturgicalmanuscript.shelf_no}}</td>
+                <td>
+                    {% for t in liturgicalmanuscript.saintlitmanuscriptrelation_set.all %}
+                        {% if t %}
+                            <a href="{% url 'saints:saint-detail' t.saint.id %}"> {{ t.saint }} </a><br>
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+                    {% endfor %}
+                </td>
+                <td>
+                    {% if liturgicalmanuscript.provenance %}
+                        <a href="{% url 'saints:church-detail' liturgicalmanuscript.provenance.id %}"> {{liturgicalmanuscript.provenance}} </a>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if liturgicalmanuscript.date_upper %}
+                        {{liturgicalmanuscript.date_upper}}
+                    {% endif %}
+                </td>
+
                 <td>
                     <a href="{% url 'saints:liturgicalmanuscript-update' liturgicalmanuscript.id %}" class="btn text-secondary px-0"><i class="fa fa-edit fa-lg"></i></a>
                     <form action="{% url 'saints:liturgicalmanuscript-delete' liturgicalmanuscript.id %}" method="post" class="d-inline">
