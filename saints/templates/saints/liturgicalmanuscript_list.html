@@ -23,7 +23,7 @@
         </thead>
         <tbody>
             {% for liturgicalmanuscript in liturgicalmanuscripts %}
-            <tr>
+            <tr style="border-bottom:1px solid lightgrey">
                 <td>
                     {% if liturgicalmanuscript.status %}
                         <span class="Gdot"></span>
@@ -31,7 +31,9 @@
                         <span class="Rdot"></span>
                     {% endif %}
                 </td>
-                <td>{{liturgicalmanuscript.shelf_no}}</td>
+                <td>
+                    <a href="{% url 'saints:liturgicalmanuscript-detail' liturgicalmanuscript.id %}">  {{liturgicalmanuscript.shelf_no}} </a>
+                </td>
                 <td>
                     {% for t in liturgicalmanuscript.saintlitmanuscriptrelation_set.all %}
                         {% if t %}

@@ -246,6 +246,10 @@ class LiturgicalManuscriptDeleteView(DeleteView):
     success_url = reverse_lazy("saints:liturgicalmanuscript-list")
 
 
+class LiturgicalManuscriptDetailView(DetailView):
+    model = LiturgicalManuscript
+
+
 # Rite
 # @method_decorator(login_required, name='dispatch')
 class RiteListView(ListView):
