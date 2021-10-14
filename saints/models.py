@@ -40,7 +40,9 @@ class Church(models.Model):
     )
     material_evidence = models.CharField(max_length=1, choices=MATERIAL, default='Y', blank=True, null=True)
     external_link = models.URLField(max_length=256, default='', blank=True)
-    bibliography = models.ForeignKey(Bibliography, on_delete=models.CASCADE, blank=True, default='', null=True)
+    bibliography = models.ForeignKey(Bibliography, on_delete=models.CASCADE, blank=True, default='', null=True) # this will not be
+    # used in the future. I didn't delete this because there is data saved for some entries on the database.
+    bibliography_many = models.ManyToManyField(Bibliography, related_name='bibliographies', blank=True, default='')
     description = models.TextField(default='', blank=True)
     status = models.BooleanField("Completed", default=False, help_text="Complete")
 

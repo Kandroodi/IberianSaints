@@ -55,6 +55,10 @@ class BibliographyWidget(s2forms.ModelSelect2Widget):
     search_fields = ['short_title__icontains']
 
 
+class BibliographyWidgetMulti(s2forms.ModelSelect2MultipleWidget):
+    search_fields = ['short_title__icontains']
+
+
 # Forms
 class SaintForm(forms.ModelForm):
     class Meta:
@@ -95,7 +99,8 @@ class ChurchForm(ModelForm):
     date_upper = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Please enter upper bound'}))
 
     coordinates_latitude = forms.DecimalField(widget=forms.TextInput(attrs={'placeholder': 'Latitude'}), required=False)
-    coordinates_longitude = forms.DecimalField(widget=forms.TextInput(attrs={'placeholder': 'Longitude'}), required=False)
+    coordinates_longitude = forms.DecimalField(widget=forms.TextInput(attrs={'placeholder': 'Longitude'}),
+                                               required=False)
     institution_type = forms.ModelChoiceField(
         queryset=InstitutionType.objects.all(),
         # this line refreshes the list when a new item is entered using the plus button
@@ -113,6 +118,14 @@ class ChurchForm(ModelForm):
                    'style': 'width:100%;', 'class': 'searching',
                    'data-minimum-input-length': '1'}),
         required=False)
+    bibliography_many = forms.ModelMultipleChoiceField(
+        queryset=Bibliography.objects.all(),
+        widget=BibliographyWidgetMulti(
+            attrs={'data-placeholder': 'Select bibliography',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
+        required=False)
+
     description = forms.CharField(widget=forms.Textarea(
         attrs={'style': 'width:100%', 'rows': 3}),
         required=False)
