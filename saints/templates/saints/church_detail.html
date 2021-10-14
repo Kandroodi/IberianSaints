@@ -66,9 +66,13 @@
     <tr class="d-flex">
         <th class="col-2">Bibliography:</th>
         <td class="col-8">
-            {% if church.bibliography %}
-                {{church.bibliography}}
-            {% endif %}
+            {% for t in church.bibliography_many.all %}
+                        {% if t %}
+                            {{ t }},
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+                    {% endfor %}
         </td>
     </tr>
     <tr class="d-flex">

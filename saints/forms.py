@@ -121,7 +121,7 @@ class ChurchForm(ModelForm):
     bibliography_many = forms.ModelMultipleChoiceField(
         queryset=Bibliography.objects.all(),
         widget=BibliographyWidgetMulti(
-            attrs={'data-placeholder': 'Select bibliography',
+            attrs={'data-placeholder': '',
                    'style': 'width:100%;', 'class': 'searching',
                    'data-minimum-input-length': '1'}),
         required=False)
