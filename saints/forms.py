@@ -56,7 +56,10 @@ class BibliographyWidget(s2forms.ModelSelect2Widget):
 
 
 class BibliographyWidgetMulti(s2forms.ModelSelect2MultipleWidget):
-    search_fields = ['short_title__icontains']
+    search_fields = [
+        'short_title__icontains',
+        'author__icontains',
+    ]
 
 
 # Forms
@@ -109,19 +112,19 @@ class ChurchForm(ModelForm):
                    'style': 'width:100%;', 'class': 'searching',
                    'data-minimum-input-length': '1'}),
         required=False)
-
-    bibliography = forms.ModelChoiceField(
-        queryset=Bibliography.objects.all(),
-        # this line refreshes the list when a new item is entered using the plus button
-        widget=BibliographyWidget(
-            attrs={'data-placeholder': 'Select bibliography',
-                   'style': 'width:100%;', 'class': 'searching',
-                   'data-minimum-input-length': '1'}),
-        required=False)
+    #
+    # bibliography = forms.ModelChoiceField(
+    #     queryset=Bibliography.objects.all(),
+    #     # this line refreshes the list when a new item is entered using the plus button
+    #     widget=BibliographyWidget(
+    #         attrs={'data-placeholder': 'Select bibliography',
+    #                'style': 'width:100%;', 'class': 'searching',
+    #                'data-minimum-input-length': '1'}),
+    #     required=False)
     bibliography_many = forms.ModelMultipleChoiceField(
         queryset=Bibliography.objects.all(),
         widget=BibliographyWidgetMulti(
-            attrs={'data-placeholder': 'Select bibliography',
+            attrs={'data-placeholder': '',
                    'style': 'width:100%;', 'class': 'searching',
                    'data-minimum-input-length': '1'}),
         required=False)
@@ -179,7 +182,7 @@ class ObjectForm(ModelForm):
     bibliography_many = forms.ModelMultipleChoiceField(
         queryset=Bibliography.objects.all(),
         widget=BibliographyWidgetMulti(
-            attrs={'data-placeholder': 'Select bibliography',
+            attrs={'data-placeholder': '',
                    'style': 'width:100%;', 'class': 'searching',
                    'data-minimum-input-length': '1'}),
         required=False)
@@ -215,6 +218,13 @@ class InscriptionForm(ModelForm):
         queryset=Bibliography.objects.all(),
         widget=BibliographyWidget(
             attrs={'data-placeholder': 'Select bibliography',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
+        required=False)
+    bibliography_many = forms.ModelMultipleChoiceField(
+        queryset=Bibliography.objects.all(),
+        widget=BibliographyWidgetMulti(
+            attrs={'data-placeholder': '',
                    'style': 'width:100%;', 'class': 'searching',
                    'data-minimum-input-length': '1'}),
         required=False)

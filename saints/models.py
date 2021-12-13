@@ -56,7 +56,9 @@ class Inscription(models.Model):
     date_lower = PartialDateField(blank=True, null=True)
     date_upper = PartialDateField(blank=True, null=True)
     external_link = models.URLField(max_length=256, default='', blank=True)
-    bibliography = models.ForeignKey(Bibliography, on_delete=models.SET_NULL, blank=True, default='', null=True)
+    bibliography = models.ForeignKey(Bibliography, on_delete=models.SET_NULL, blank=True, default='', null=True) # this will not be
+    # used in the future. I didn't delete this because there is data saved for some entries on the database.
+    bibliography_many = models.ManyToManyField(Bibliography, related_name='bibliographies_inscription', blank=True, default='')
     text = models.TextField(max_length=256, blank=True, null=True)
     description = models.TextField(default='', blank=True, null=True)
     status = models.BooleanField("Completed", default=False, help_text="Complete")
