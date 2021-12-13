@@ -71,9 +71,13 @@
     <tr class="d-flex">
         <th class="col-2">Bibliography:</th>
         <td class="col-8">
-            {% if object.bibliography %}
-                {{object.bibliography}}
-            {% endif %}
+            {% for t in object.bibliography_many.all %}
+                        {% if t %}
+                            {{ t }},
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+                    {% endfor %}
         </td>
     </tr>
     <tr class="d-flex">
