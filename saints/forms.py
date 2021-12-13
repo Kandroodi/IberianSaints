@@ -287,6 +287,13 @@ class LiturgicalManuscriptForm(ModelForm):
                    'style': 'width:100%;', 'class': 'searching',
                    'data-minimum-input-length': '1'}),
         required=False)
+    bibliography_many = forms.ModelMultipleChoiceField(
+        queryset=Bibliography.objects.all(),
+        widget=BibliographyWidgetMulti(
+            attrs={'data-placeholder': '',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
+        required=False)
     description = forms.CharField(widget=forms.Textarea(
         attrs={'style': 'width:100%', 'rows': 3}),
         required=False)

@@ -157,7 +157,9 @@ class LiturgicalManuscript(models.Model):
     provenance = models.ForeignKey(Church, on_delete=models.SET_NULL, blank=True, default='', null=True)
     feast = models.ForeignKey(Feast, on_delete=models.SET_NULL, blank=True, default='', null=True)
     external_link = models.URLField(max_length=256, default='', blank=True)
-    bibliography = models.ForeignKey(Bibliography, on_delete=models.SET_NULL, blank=True, default='', null=True)
+    bibliography = models.ForeignKey(Bibliography, on_delete=models.SET_NULL, blank=True, default='', null=True) # this will not be
+    # used in the future. I didn't delete this because there is data saved for some entries on the database.
+    bibliography_many = models.ManyToManyField(Bibliography, related_name='bibliographies_litman', blank=True, default='')
     description = models.TextField(default='', blank=True, null=True)
     status = models.BooleanField("Completed", default=False, help_text="Complete")
 
