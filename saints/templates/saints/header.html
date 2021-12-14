@@ -68,6 +68,9 @@
     <!-- Log in and Sign up     -->
     <ul class="navbar-nav ml-auto">
     {% if user.is_authenticated %}
+      <li class="nav-item">
+        <a class="nav-link" href="#">Hi {{ user.username }}!</a>
+      </li>
        <li class="nav-item">
         <a class="nav-link" href="{% url 'saints:logout' %}">Logout</a>
       </li>

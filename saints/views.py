@@ -14,8 +14,6 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
 
-
-
 # Create your views here.
 
 def register(request):
@@ -106,27 +104,32 @@ def home(request):
     return render(request, 'saints/home.html')
 
 
+@login_required(login_url='/login/')
 def edit_church(request, pk=None, focus='', view='complete'):
     names = 'churchsaint_formset,churchobject_formset,churchinscription_formset,churchliturgicalmanuscript_formset'
     return edit_model(request, __name__, 'Church', 'saints', pk, formset_names=names,
                       focus=focus, view=view)
 
 
+@login_required(login_url='/login/')
 def churchList(request):
     context = {'church_list': Church.objects.all()}
     return render(request, 'saints/church_list.html', context)
 
 
+@login_required(login_url='/login/')
 def churchDelete(request, id):
     city = get_object_or_404(Church, pk=id)
     city.delete()
     return redirect('saints:church-list')
 
 
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class ChurchDetailView(DetailView):
     model = Church
 
 
+@login_required(login_url='/login/')
 def bibliographyCreate(request, id=0):
     if request.method == "GET":
         if id == 0:
@@ -146,17 +149,20 @@ def bibliographyCreate(request, id=0):
         return redirect('saints:bibliography-list')  # after save redirect to the city list
 
 
+@login_required(login_url='/login/')
 def bibliographyList(request):
     context = {'bibliography_list': Bibliography.objects.all()}
     return render(request, 'saints/bibliography_list.html', context)
 
 
+@login_required(login_url='/login/')
 def bibliographyDelete(request, id):
     city = get_object_or_404(Church, pk=id)
     city.delete()
     return redirect('saints:bibliography-list')
 
 
+@login_required(login_url='/login/')
 def institutionTypeCreate(request, id=0):
     if request.method == "GET":
         if id == 0:
@@ -176,11 +182,13 @@ def institutionTypeCreate(request, id=0):
         return redirect('saints:institutionType-list')  # after save redirect to the city list
 
 
+@login_required(login_url='/login/')
 def institutionTypeList(request):
     context = {'institutionType_list': InstitutionType.objects.all()}
     return render(request, 'saints/institutionType_list.html', context)
 
 
+@login_required(login_url='/login/')
 def institutionTypeDelete(request, id):
     city = get_object_or_404(Church, pk=id)
     city.delete()
@@ -189,107 +197,113 @@ def institutionTypeDelete(request, id):
 
 # Class Based Views
 # -----------------------------------------------------------------------------------------------------------------------
-# @method_decorator(login_required, name='dispatch')
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class InscriptionListView(ListView):
     model = Inscription
     template_name = 'installations/inscription_list.html'
     context_object_name = 'inscriptions'
 
 
+@login_required(login_url='/login/')
 def edit_inscription(request, pk=None, focus='', view='complete'):
     names = 'inscriptionsaint_formset,inscriptionchurch_formset'
     return edit_model(request, __name__, 'Inscription', 'saints', pk, formset_names=names,
                       focus=focus, view=view)
 
 
-# @method_decorator(login_required, name='dispatch')
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class InscriptionUpdateView(UpdateView):
     model = Inscription
     fields = '__all__'
     success_url = reverse_lazy('saints:inscription-list')
 
 
-# @method_decorator(login_required, name='dispatch')
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class InscriptionDeleteView(DeleteView):
     model = Inscription
     success_url = reverse_lazy("saints:inscription-list")
 
 
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class InscriptionDetailView(DetailView):
     model = Inscription
 
 
 # Saint
-# @method_decorator(login_required, name='dispatch')
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class SaintListView(ListView):
     model = Saint
     template_name = 'installations/saint_list.html'
     context_object_name = 'saints'
 
 
+@login_required(login_url='/login/')
 def edit_saint(request, pk=None, focus='', view='complete'):
     names = 'saintchurch_formset,saintinscription_formset,saintobject_formset,saintliturgicalmanuscript_formset'
     return edit_model(request, __name__, 'Saint', 'saints', pk, formset_names=names,
                       focus=focus, view=view)
 
 
-# @method_decorator(login_required, name='dispatch')
+@login_required(login_url='/login/')
 class SaintUpdateView(UpdateView):
     model = Saint
     fields = '__all__'
     success_url = reverse_lazy('saints:saint-list')
 
 
-# @method_decorator(login_required, name='dispatch')
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class SaintDeleteView(DeleteView):
     model = Saint
     success_url = reverse_lazy("saints:saint-list")
 
 
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class SaintDetailView(DetailView):
     model = Saint
 
 
 # Object
-# @method_decorator(login_required, name='dispatch')
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class ObjectListView(ListView):
     model = Object
     template_name = 'installations/object_list.html'
     context_object_name = 'objects'
 
 
+@login_required(login_url='/login/')
 def edit_object(request, pk=None, focus='', view='complete'):
     names = 'objectsaint_formset,objectchurch_formset'
     return edit_model(request, __name__, 'Object', 'saints', pk, formset_names=names,
                       focus=focus, view=view)
 
 
-# @method_decorator(login_required, name='dispatch')
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class ObjectUpdateView(UpdateView):
     model = Object
     fields = '__all__'
     success_url = reverse_lazy('saints:object-list')
 
 
-# @method_decorator(login_required, name='dispatch')
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class ObjectDeleteView(DeleteView):
     model = Object
     success_url = reverse_lazy("saints:object-list")
 
 
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class ObjectDetailView(DetailView):
     model = Object
 
 
 # Feast
-# @method_decorator(login_required, name='dispatch')
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class FeastListView(ListView):
     model = Feast
     template_name = 'installations/feast_list.html'
     context_object_name = 'feasts'
 
 
-# @method_decorator(login_required, name='dispatch')
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class FeastCreatView(CreateView):
     model = Feast
     fields = '__all__'
@@ -297,59 +311,61 @@ class FeastCreatView(CreateView):
     success_url = reverse_lazy('saints:feast-list')
 
 
-# @method_decorator(login_required, name='dispatch')
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class FeastUpdateView(UpdateView):
     model = Feast
     fields = '__all__'
     success_url = reverse_lazy('saints:feast-list')
 
 
-# @method_decorator(login_required, name='dispatch')
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class FeastDeleteView(DeleteView):
     model = Feast
     success_url = reverse_lazy("saints:feast-list")
 
 
 # LiturgicalManuscript
-# @method_decorator(login_required, name='dispatch')
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class LiturgicalManuscriptListView(ListView):
     model = LiturgicalManuscript
     template_name = 'installations/liturgicalmanuscript_list.html'
     context_object_name = 'liturgicalmanuscripts'
 
 
+@login_required(login_url='/login/')
 def edit_liturgicalmanuscript(request, pk=None, focus='', view='complete'):
     names = 'liturgicalmanuscriptsaint_formset,liturgicalmanuscriptchurch_formset'
     return edit_model(request, __name__, 'LiturgicalManuscript', 'saints', pk, formset_names=names,
                       focus=focus, view=view)
 
 
-# @method_decorator(login_required, name='dispatch')
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class LiturgicalManuscriptUpdateView(UpdateView):
     model = LiturgicalManuscript
     fields = '__all__'
     success_url = reverse_lazy('saints:liturgicalmanuscript-list')
 
 
-# @method_decorator(login_required, name='dispatch')
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class LiturgicalManuscriptDeleteView(DeleteView):
     model = LiturgicalManuscript
     success_url = reverse_lazy("saints:liturgicalmanuscript-list")
 
 
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class LiturgicalManuscriptDetailView(DetailView):
     model = LiturgicalManuscript
 
 
 # Rite
-# @method_decorator(login_required, name='dispatch')
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class RiteListView(ListView):
     model = Rite
     template_name = 'installations/rite_list.html'
     context_object_name = 'rites'
 
 
-# @method_decorator(login_required, name='dispatch')
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class RiteCreatView(CreateView):
     model = Rite
     fields = '__all__'
@@ -357,28 +373,28 @@ class RiteCreatView(CreateView):
     success_url = reverse_lazy('saints:rite-list')
 
 
-# @method_decorator(login_required, name='dispatch')
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class RiteUpdateView(UpdateView):
     model = Rite
     fields = '__all__'
     success_url = reverse_lazy('saints:rite-list')
 
 
-# @method_decorator(login_required, name='dispatch')
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class RiteDeleteView(DeleteView):
     model = Rite
     success_url = reverse_lazy("saints:rite-list")
 
 
 # ManuscriptType
-# @method_decorator(login_required, name='dispatch')
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class ManuscriptTypeListView(ListView):
     model = ManuscriptType
     template_name = 'installations/manuscripttype_list.html'
     context_object_name = 'manuscripttypes'
 
 
-# @method_decorator(login_required, name='dispatch')
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class ManuscriptTypeCreatView(CreateView):
     model = ManuscriptType
     fields = '__all__'
@@ -386,28 +402,28 @@ class ManuscriptTypeCreatView(CreateView):
     success_url = reverse_lazy('saints:manuscripttype-list')
 
 
-# @method_decorator(login_required, name='dispatch')
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class ManuscriptTypeUpdateView(UpdateView):
     model = ManuscriptType
     fields = '__all__'
     success_url = reverse_lazy('saints:manuscripttype-list')
 
 
-# @method_decorator(login_required, name='dispatch')
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class ManuscriptTypeDeleteView(DeleteView):
     model = ManuscriptType
     success_url = reverse_lazy("saints:manuscripttype-list")
 
 
 # ObjectType
-# @method_decorator(login_required, name='dispatch')
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class ObjectTypeListView(ListView):
     model = ObjectType
     template_name = 'installations/objecttype_list.html'
     context_object_name = 'objecttypes'
 
 
-# @method_decorator(login_required, name='dispatch')
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class ObjectTypeCreatView(CreateView):
     model = ObjectType
     fields = '__all__'
@@ -415,28 +431,28 @@ class ObjectTypeCreatView(CreateView):
     success_url = reverse_lazy('saints:objecttype-list')
 
 
-# @method_decorator(login_required, name='dispatch')
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class ObjectTypeUpdateView(UpdateView):
     model = ObjectType
     fields = '__all__'
     success_url = reverse_lazy('saints:objecttype-list')
 
 
-# @method_decorator(login_required, name='dispatch')
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class ObjectTypeDeleteView(DeleteView):
     model = ObjectType
     success_url = reverse_lazy("saints:objecttype-list")
 
 
 # SaintType
-# @method_decorator(login_required, name='dispatch')
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class SaintTypeListView(ListView):
     model = SaintType
     template_name = 'installations/sainttype_list.html'
     context_object_name = 'sainttypes'
 
 
-# @method_decorator(login_required, name='dispatch')
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class SaintTypeCreatView(CreateView):
     model = SaintType
     fields = '__all__'
@@ -444,28 +460,28 @@ class SaintTypeCreatView(CreateView):
     success_url = reverse_lazy('saints:sainttype-list')
 
 
-# @method_decorator(login_required, name='dispatch')
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class SaintTypeUpdateView(UpdateView):
     model = SaintType
     fields = '__all__'
     success_url = reverse_lazy('saints:sainttype-list')
 
 
-# @method_decorator(login_required, name='dispatch')
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class SaintTypeDeleteView(DeleteView):
     model = SaintType
     success_url = reverse_lazy("saints:sainttype-list")
 
 
 # InstitutionType
-# @method_decorator(login_required, name='dispatch')
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class InstitutionTypeListView(ListView):
     model = InstitutionType
     template_name = 'installations/institutiontype_list.html'
     context_object_name = 'institutiontypes'
 
 
-# @method_decorator(login_required, name='dispatch')
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class InstitutionTypeCreatView(CreateView):
     model = InstitutionType
     fields = '__all__'
@@ -473,14 +489,14 @@ class InstitutionTypeCreatView(CreateView):
     success_url = reverse_lazy('saints:institutiontype-list')
 
 
-# @method_decorator(login_required, name='dispatch')
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class InstitutionTypeUpdateView(UpdateView):
     model = InstitutionType
     fields = '__all__'
     success_url = reverse_lazy('saints:institutiontype-list')
 
 
-# @method_decorator(login_required, name='dispatch')
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class InstitutionTypeDeleteView(DeleteView):
     model = InstitutionType
     success_url = reverse_lazy("saints:institutiontype-list")
