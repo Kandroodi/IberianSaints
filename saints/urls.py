@@ -6,6 +6,9 @@ from . import views
 app_name = 'saints'
 
 urlpatterns = [
+    path('register/', views.register , name='register'), # Sign up
+    path('logout/', views.user_logout, name='logout'), # Logout
+    path('login/', views.user_login, name='user_login'), # Login
     path('', views.home, name='home'), # get and post req. for insert operation
     path('church/new/', views.edit_church, name='church-insert'), # get and post req. for insert operation
     path('church/new/<str:view>/', views.edit_church, name='church-insert'),
