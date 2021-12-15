@@ -244,6 +244,8 @@ def objectsimplesearch(request, app_name, model_name):
                 Q(name__icontains=qs) |
                 Q(date_lower__icontains=qs) |
                 Q(date_upper__icontains=qs) |
+                Q(original_location__name__icontains=qs) |
+                Q(current_location__name__icontains=qs) |
                 Q(type__name__icontains=qs) |
                 Q(bibliography_many__short_title__icontains=qs) |
                 Q(external_link__icontains=qs) |
