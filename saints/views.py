@@ -12,7 +12,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from utilities.views import saintsimplesearch, churchsimplesearch, objectsimplesearch
+from utilities.views import saintsimplesearch, churchsimplesearch, objectsimplesearch, inscriptionsimplesearch
 
 
 # Create your views here.
@@ -203,11 +203,21 @@ def institutionTypeDelete(request, id):
 
 # Class Based Views
 # -----------------------------------------------------------------------------------------------------------------------
-@method_decorator(login_required(login_url='/login/'), name='dispatch')
-class InscriptionListView(ListView):
-    model = Inscription
-    template_name = 'installations/inscription_list.html'
-    context_object_name = 'inscriptions'
+# @method_decorator(login_required(login_url='/login/'), name='dispatch')
+# class InscriptionListView(ListView):
+#     model = Inscription
+#     template_name = 'installations/inscription_list.html'
+#     context_object_name = 'inscriptions'
+
+
+@login_required(login_url='/login/')
+def InscriptionList(request):
+    query_set = inscriptionsimplesearch(request, 'saints', 'inscription')
+    query = request.GET.get("q", "")
+    context = {'inscription_list': query_set,
+               'nentries': len(query_set),
+               'query': query}
+    return render(request, 'saints/inscription_list.html', context)
 
 
 @login_required(login_url='/login/')
@@ -275,13 +285,6 @@ class SaintDetailView(DetailView):
 
 
 # Object
-# @method_decorator(login_required(login_url='/login/'), name='dispatch')
-# class ObjectListView(ListView):
-#     model = Object
-#     template_name = 'installations/object_list.html'
-#     context_object_name = 'objects'
-#
-#
 @login_required(login_url='/login/')
 def ObjectList(request):
     query_set = objectsimplesearch(request, 'saints', 'object')
