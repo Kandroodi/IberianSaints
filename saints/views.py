@@ -12,7 +12,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from utilities.views import saintsimplesearch, churchsimplesearch, objectsimplesearch, inscriptionsimplesearch
+from utilities.views import saintsimplesearch, churchsimplesearch, objectsimplesearch, inscriptionsimplesearch, liturgicalmanuscriptsimplesearch
 
 
 # Create your views here.
@@ -350,11 +350,21 @@ class FeastDeleteView(DeleteView):
 
 
 # LiturgicalManuscript
-@method_decorator(login_required(login_url='/login/'), name='dispatch')
-class LiturgicalManuscriptListView(ListView):
-    model = LiturgicalManuscript
-    template_name = 'installations/liturgicalmanuscript_list.html'
-    context_object_name = 'liturgicalmanuscripts'
+# @method_decorator(login_required(login_url='/login/'), name='dispatch')
+# class LiturgicalManuscriptListView(ListView):
+#     model = LiturgicalManuscript
+#     template_name = 'installations/liturgicalmanuscript_list.html'
+#     context_object_name = 'liturgicalmanuscripts'
+
+
+@login_required(login_url='/login/')
+def LiturgicalManuscriptList(request):
+    query_set = liturgicalmanuscriptsimplesearch(request, 'saints', 'liturgicalmanuscript')
+    query = request.GET.get("q", "")
+    context = {'liturgicalmanuscript_list': query_set,
+               'nentries': len(query_set),
+               'query': query}
+    return render(request, 'saints/liturgicalmanuscript_list.html', context)
 
 
 @login_required(login_url='/login/')

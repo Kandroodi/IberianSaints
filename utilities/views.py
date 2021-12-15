@@ -289,3 +289,37 @@ def inscriptionsimplesearch(request, app_name, model_name):
         query_set = model.objects.all().order_by(order_by)
 
     return query_set.distinct()
+
+
+
+def liturgicalmanuscriptsimplesearch(request, app_name, model_name):
+    '''Search function between all fields in a model.
+    app_name : saints
+    model_name : liturgicalmanuscript
+    '''
+    model = apps.get_model(app_name, model_name)
+    query = request.GET.get("q", "")
+    order_by = request.GET.get("order_by", "id")
+    query_set = model.objects.all().order_by(order_by)
+    # -----------------------------------------------------------
+    queries = query.split()
+    if query is not None:
+        query_setall = model.objects.none()
+        for qs in queries:
+            query_seti = query_set.filter(
+                Q(shelf_no__icontains=qs) |
+                Q(rite__name__icontains=qs) |
+                Q(type__name__icontains=qs) |
+                Q(provenance__name__icontains=qs) |
+                Q(date_lower__icontains=qs) |
+                Q(date_upper__icontains=qs) |
+                Q(bibliography_many__short_title__icontains=qs) |
+                Q(external_link__icontains=qs) |
+                Q(description__icontains=qs)
+            )
+            query_setall = query_setall | query_seti
+        query_set = query_setall.order_by(order_by)
+    if query == "":
+        query_set = model.objects.all().order_by(order_by)
+
+    return query_set.distinct()
