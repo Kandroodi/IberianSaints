@@ -8,6 +8,10 @@ from utils import view_util
 from utils.view_util import Crud, Cruds, make_tabs, FormsetFactoryManager
 from .models import copy_complete
 from utilities.search import Search
+from django.db.models import Q
+from django.db.models.functions import Lower
+
+
 
 
 def list_view(request, model_name, app_name):
@@ -52,7 +56,7 @@ def edit_model(request, name_space, model_name, app_name, instance_id=None,
                     show_messages(request, button, model_name)
                     if button == 'add_another':
                         # return HttpResponseRedirect(reverse(app_name + ':add_' + model_name.lower()))
-                        return HttpResponseRedirect(reverse(app_name + ':' + model_name.lower()+'-insert'))
+                        return HttpResponseRedirect(reverse(app_name + ':' + model_name.lower() + '-insert'))
                     # return HttpResponseRedirect(reverse(
                     #     app_name + ':edit_' + model_name.lower(),
                     #     kwargs={'pk': instance.pk, 'focus': focus}))
@@ -156,3 +160,36 @@ def show_messages(request, button, model_name):
 def close(request):
     '''page that closes itself for on the fly creation of model instances (loaded in a new tab).'''
     return render(request, 'utilities/close.html')
+
+
+# Search functions
+# -----------------------------------------------------------------------------------------------------------------------
+def saintsimplesearch(request, app_name, model_name):
+    '''Search function between all fields in a model.
+    app_name : saints
+    model_name : saint
+    '''
+    model = apps.get_model(app_name, model_name)
+    query = request.GET.get("q", "")
+    order_by = request.GET.get("order_by", "id")
+    query_set = model.objects.all().order_by(order_by)
+    # -----------------------------------------------------------
+    queries = query.split()
+    if query is not None:
+        query_setall = model.objects.none()
+        for qs in queries:
+            query_seti = query_set.filter(
+                Q(name__icontains=qs) |
+                Q(feast_day__icontains=qs) |
+                Q(death_date__icontains=qs) |
+                Q(death_place__icontains=qs) |
+                Q(type__name__icontains=qs) |
+                Q(external_link__icontains=qs) |
+                Q(description__icontains=qs)
+            )
+            query_setall = query_setall | query_seti
+        query_set = query_setall.order_by(order_by)
+    if query == "":
+        query_set = model.objects.all().order_by(order_by)
+
+    return query_set.distinct()

@@ -12,6 +12,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from utilities.views import saintsimplesearch
 
 
 # Create your views here.
@@ -230,11 +231,24 @@ class InscriptionDetailView(DetailView):
 
 
 # Saint
-@method_decorator(login_required(login_url='/login/'), name='dispatch')
-class SaintListView(ListView):
-    model = Saint
-    template_name = 'installations/saint_list.html'
-    context_object_name = 'saints'
+# @method_decorator(login_required(login_url='/login/'), name='dispatch')
+# class SaintListView(ListView):
+#     model = Saint
+#     template_name = 'installations/saint_list.html'
+#     context_object_name = 'saints'
+
+
+@login_required(login_url='/login/')
+def SaintList(request):
+    query_set = saintsimplesearch(request, 'saints', 'saint')
+    query = request.GET.get("q", "")
+    # query_set = Installation.objects.all()
+    # if query is not None:
+    #     query_set = query_set.filter(name__icontains=query)
+    context = {'saint_list': query_set,
+               'nentries': len(query_set),
+               'query': query}
+    return render(request, 'saints/saint_list.html', context)
 
 
 @login_required(login_url='/login/')

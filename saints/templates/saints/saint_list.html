@@ -2,18 +2,41 @@
 {% load widget_tweaks %}
 
 {% block main_content %}
+{% include 'utilities/list_search_bar.html' %}
+
     <h2>Saint list</h2>
     <table class="table table-borderless">
         <thead class="border-bottom font-weight-bold">
             <tr>
                 <th scope="col"></th>
-                <th scope="col">Name</th>
-                <th scope="col">Feast</th>
-                <th scope="col">Type</th>
-                <th scope="col">Church</th>
-                <th scope="col">Inscription</th>
-                <th scope="col">Object</th>
-                <th scope="col">Lit. manuscript</th>
+                <th scope="col">Name
+                    <a href="?q={{query}}&order_by=name"> <i class="fa fa-arrow-circle-o-down" style="font-size:18px"></i> </a>
+                    <a href="?q={{query}}&order_by=-name"> <i class="fa fa-arrow-circle-o-up" style="font-size:18px"></i> </a>
+                </th>
+                <th scope="col">Feast
+                    <a href="?q={{query}}&order_by=feast_day"> <i class="fa fa-arrow-circle-o-down" style="font-size:18px"></i> </a>
+                    <a href="?q={{query}}&order_by=-feast_day"> <i class="fa fa-arrow-circle-o-up" style="font-size:18px"></i> </a>
+                </th>
+                <th scope="col">Type
+                    <a href="?q={{query}}&order_by=type"> <i class="fa fa-arrow-circle-o-down" style="font-size:18px"></i> </a>
+                    <a href="?q={{query}}&order_by=-type"> <i class="fa fa-arrow-circle-o-up" style="font-size:18px"></i> </a>
+                </th>
+                <th scope="col">Church
+                    <a href="?q={{query}}&order_by=saintchurchrelation__church"> <i class="fa fa-arrow-circle-o-down" style="font-size:18px"></i> </a>
+                    <a href="?q={{query}}&order_by=-saintchurchrelation__church"> <i class="fa fa-arrow-circle-o-up" style="font-size:18px"></i> </a>
+                </th>
+                <th scope="col">Inscription
+                    <a href="?q={{query}}&order_by=saintinscriptionrelation__inscription"> <i class="fa fa-arrow-circle-o-down" style="font-size:18px"></i> </a>
+                    <a href="?q={{query}}&order_by=-saintinscriptionrelation__inscription"> <i class="fa fa-arrow-circle-o-up" style="font-size:18px"></i> </a>
+                </th>
+                <th scope="col">Object
+                    <a href="?q={{query}}&order_by=saintobjectrelation__object"> <i class="fa fa-arrow-circle-o-down" style="font-size:18px"></i> </a>
+                    <a href="?q={{query}}&order_by=-saintobjectrelation__object"> <i class="fa fa-arrow-circle-o-up" style="font-size:18px"></i> </a>
+                </th>
+                <th scope="col">Lit. manuscript
+                    <a href="?q={{query}}&order_by=saintlitmanuscriptrelation__liturgical_manuscript"> <i class="fa fa-arrow-circle-o-down" style="font-size:18px"></i> </a>
+                    <a href="?q={{query}}&order_by=-saintlitmanuscriptrelation__liturgical_manuscript"> <i class="fa fa-arrow-circle-o-up" style="font-size:18px"></i> </a>
+                </th>
                 <td>
                     <a href= "{% url 'saints:saint-insert' %}"
                        class="btn btn-outline-success"
@@ -24,7 +47,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for saint in saints %}
+            {% for saint in saint_list %}
             <tr style="border-bottom:1px solid lightgrey">
                 <td>
                     {% if saint.status %}
