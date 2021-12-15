@@ -12,7 +12,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from utilities.views import saintsimplesearch
+from utilities.views import saintsimplesearch, churchsimplesearch
 
 
 # Create your views here.
@@ -114,8 +114,13 @@ def edit_church(request, pk=None, focus='', view='complete'):
 
 @login_required(login_url='/login/')
 def churchList(request):
-    context = {'church_list': Church.objects.all()}
+    query_set = churchsimplesearch(request, 'saints', 'church')
+    query = request.GET.get("q", "")
+    context = {'church_list': query_set,
+               'nentries': len(query_set),
+               'query': query}
     return render(request, 'saints/church_list.html', context)
+
 
 
 @login_required(login_url='/login/')
