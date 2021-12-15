@@ -12,7 +12,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from utilities.views import saintsimplesearch, churchsimplesearch
+from utilities.views import saintsimplesearch, churchsimplesearch, objectsimplesearch
 
 
 # Create your views here.
@@ -235,14 +235,7 @@ class InscriptionDetailView(DetailView):
     model = Inscription
 
 
-# Saint
-# @method_decorator(login_required(login_url='/login/'), name='dispatch')
-# class SaintListView(ListView):
-#     model = Saint
-#     template_name = 'installations/saint_list.html'
-#     context_object_name = 'saints'
-
-
+#Saint
 @login_required(login_url='/login/')
 def SaintList(request):
     query_set = saintsimplesearch(request, 'saints', 'saint')
@@ -282,11 +275,21 @@ class SaintDetailView(DetailView):
 
 
 # Object
-@method_decorator(login_required(login_url='/login/'), name='dispatch')
-class ObjectListView(ListView):
-    model = Object
-    template_name = 'installations/object_list.html'
-    context_object_name = 'objects'
+# @method_decorator(login_required(login_url='/login/'), name='dispatch')
+# class ObjectListView(ListView):
+#     model = Object
+#     template_name = 'installations/object_list.html'
+#     context_object_name = 'objects'
+#
+#
+@login_required(login_url='/login/')
+def ObjectList(request):
+    query_set = objectsimplesearch(request, 'saints', 'object')
+    query = request.GET.get("q", "")
+    context = {'object_list': query_set,
+               'nentries': len(query_set),
+               'query': query}
+    return render(request, 'saints/object_list.html', context)
 
 
 @login_required(login_url='/login/')
