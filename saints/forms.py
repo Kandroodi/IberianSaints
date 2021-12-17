@@ -377,10 +377,39 @@ class LiturgicalManuscriptForm(ModelForm):
                    'style': 'width:100%;', 'class': 'searching',
                    'data-minimum-input-length': '1'}),
         required=False)
+    original_location = forms.ModelChoiceField(
+        queryset=Church.objects.all(),
+        widget=ChurchWidget(
+            attrs={'data-placeholder': 'Select Church',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
+        required=False)
+
+    original_location_city = forms.ModelChoiceField(
+        queryset=City.objects.all(),
+        widget=CityWidget(
+            attrs={'data-placeholder': 'Select City',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
+        required=False)
+    original_location_region = forms.ModelChoiceField(
+        queryset=Region.objects.all(),
+        widget=RegionWidget(
+            attrs={'data-placeholder': 'Select Region',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
+        required=False)
     provenance = forms.ModelChoiceField(
         queryset=Church.objects.all(),
         widget=ChurchWidget(
-            attrs={'data-placeholder': 'Select provenance',
+            attrs={'data-placeholder': 'Select Church',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
+        required=False)
+    provenance_museum = forms.ModelChoiceField(
+        queryset=Museum.objects.all(),
+        widget=ChurchWidget(
+            attrs={'data-placeholder': 'Select Museum',
                    'style': 'width:100%;', 'class': 'searching',
                    'data-minimum-input-length': '1'}),
         required=False)

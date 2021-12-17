@@ -207,7 +207,12 @@ class LiturgicalManuscript(models.Model):
     type = models.ForeignKey(ManuscriptType, on_delete=models.SET_NULL, blank=True, default='', null=True)
     date_lower = PartialDateField(blank=True, null=True)
     date_upper = PartialDateField(blank=True, null=True)
+    original_location = models.ForeignKey(Church, related_name='originallocationslitman',
+                                          on_delete=models.SET_NULL, blank=True, default='', null=True)
+    original_location_city = models.ForeignKey(City, on_delete=models.CASCADE, blank=True, default='', null=True)
+    original_location_region = models.ForeignKey(Region, on_delete=models.CASCADE, blank=True, default='', null=True)
     provenance = models.ForeignKey(Church, on_delete=models.SET_NULL, blank=True, default='', null=True)
+    provenance_museum = models.ForeignKey(Museum, on_delete=models.SET_NULL, blank=True, default='', null=True)
     feast = models.ForeignKey(Feast, on_delete=models.SET_NULL, blank=True, default='', null=True)
     external_link = models.URLField(max_length=256, default='', blank=True)
     bibliography = models.ForeignKey(Bibliography, on_delete=models.SET_NULL, blank=True, default='', null=True) # this will not be
