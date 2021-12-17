@@ -81,4 +81,8 @@ urlpatterns = [
     url(r'^region/new/(?P<pk>\d+)/$', views.RegionUpdateView.as_view(), name='region-update'),
     url(r'^region/delete/(?P<pk>\d+)/$', views.RegionDeleteView.as_view(), name='region-delete'),
     path('region/list', views.RegionListView.as_view(), name='region-list'),
+    url(r'^museum/new/$', views.MuseumCreatView.as_view(), name='museum-insert'),
+    url(r'^museum/new/(?P<pk>\d+)/$', views.MuseumUpdateView.as_view(), name='museum-update'),
+    url(r'^museum/delete/(?P<pk>\d+)/$', views.MuseumDeleteView.as_view(), name='museum-delete'),
+    path('museum/list', views.MuseumListView.as_view(), name='museum-list'),
 ]

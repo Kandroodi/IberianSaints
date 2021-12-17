@@ -44,6 +44,15 @@ class Region(models.Model):
         return st
 
 
+class Museum(models.Model):
+    name = models.CharField(max_length=100, blank=False)
+    city = models.ForeignKey(City, on_delete=models.CASCADE, blank=True, null=True)
+    description = models.TextField(default='', blank=True)
+
+    def __str__(self):
+        return self.name
+
+
 class InstitutionType(models.Model):
     name = models.CharField(max_length=100)
 

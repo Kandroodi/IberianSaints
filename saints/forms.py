@@ -102,6 +102,16 @@ class RegionForms(ModelForm):
         fields = ('city', 'region_number', 'extent_shapefile')
 
 
+class MuseumForms(ModelForm):
+    description = forms.CharField(widget=forms.Textarea(
+        attrs={'style': 'width:100%', 'rows': 3}),
+        required=False)
+
+    class Meta:
+        model = Museum
+        fields = ('name', 'city', 'description')
+
+
 # Forms
 class SaintForm(forms.ModelForm):
     class Meta:

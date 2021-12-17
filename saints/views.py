@@ -593,3 +593,32 @@ class RegionUpdateView(UpdateView):
 class RegionDeleteView(DeleteView):
     model = Region
     success_url = reverse_lazy("saints:region-list")
+
+
+# Museum
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
+class MuseumListView(ListView):
+    model = Museum
+    template_name = 'installations/museum_list.html'
+    context_object_name = 'museum_list'
+
+
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
+class MuseumCreatView(CreateView):
+    model = Museum
+    fields = '__all__'
+    template_name = 'saints/museum_form.html'
+    success_url = reverse_lazy('saints:museum-list')
+
+
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
+class MuseumUpdateView(UpdateView):
+    model = Museum
+    fields = '__all__'
+    success_url = reverse_lazy('saints:museum-list')
+
+
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
+class MuseumDeleteView(DeleteView):
+    model = Museum
+    success_url = reverse_lazy("saints:museum-list")
