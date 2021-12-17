@@ -89,7 +89,8 @@ class Church(models.Model):
     )
     material_evidence = models.CharField(max_length=1, choices=MATERIAL, default='Y', blank=True, null=True)
     external_link = models.URLField(max_length=256, default='', blank=True)
-    bibliography = models.ForeignKey(Bibliography, on_delete=models.CASCADE, blank=True, default='', null=True) # this will not be
+    bibliography = models.ForeignKey(Bibliography, on_delete=models.CASCADE, blank=True, default='',
+                                     null=True)  # this will not be
     # used in the future. I didn't delete this because there is data saved for some entries on the database.
     bibliography_many = models.ManyToManyField(Bibliography, related_name='bibliographies', blank=True, default='')
     description = models.TextField(default='', blank=True)
@@ -101,7 +102,8 @@ class Church(models.Model):
 
 class Inscription(models.Model):
     reference_no = models.CharField(max_length=100, blank=False, default='')
-    original_location = models.ForeignKey(Church, related_name='originallocationsinscription', on_delete=models.SET_NULL, blank=True, default='', null=True)
+    original_location = models.ForeignKey(Church, related_name='originallocationsinscription',
+                                          on_delete=models.SET_NULL, blank=True, default='', null=True)
     original_location_city = models.ForeignKey(City, on_delete=models.CASCADE, blank=True, default='', null=True)
     original_location_region = models.ForeignKey(Region, on_delete=models.CASCADE, blank=True, default='', null=True)
     current_location = models.ForeignKey(Church, on_delete=models.CASCADE, blank=True, default='', null=True)
@@ -109,9 +111,11 @@ class Inscription(models.Model):
     date_lower = PartialDateField(blank=True, null=True)
     date_upper = PartialDateField(blank=True, null=True)
     external_link = models.URLField(max_length=256, default='', blank=True)
-    bibliography = models.ForeignKey(Bibliography, on_delete=models.SET_NULL, blank=True, default='', null=True) # this will not be
+    bibliography = models.ForeignKey(Bibliography, on_delete=models.SET_NULL, blank=True, default='',
+                                     null=True)  # this will not be
     # used in the future. I didn't delete this because there is data saved for some entries on the database.
-    bibliography_many = models.ManyToManyField(Bibliography, related_name='bibliographies_inscription', blank=True, default='')
+    bibliography_many = models.ManyToManyField(Bibliography, related_name='bibliographies_inscription', blank=True,
+                                               default='')
     text = models.TextField(max_length=256, blank=True, null=True)
     description = models.TextField(default='', blank=True, null=True)
     status = models.BooleanField("Completed", default=False, help_text="Complete")
@@ -135,7 +139,7 @@ class Saint(models.Model):
     death_place = models.CharField(max_length=256, blank=True, null=True)
     type = models.ForeignKey(SaintType, related_name='saints', on_delete=models.CASCADE, blank=True, default='',
                              null=True)
-    external_link = models.URLField(max_length=256, default='', blank=True)
+    # external_link = models.URLField(max_length=256, default='', blank=True) # It is replaced with SaintLinkRElation in order to have multiple external links
     description = models.TextField(default='', blank=True, null=True)
     status = models.BooleanField("Completed", default=False, help_text="Complete")
 
@@ -154,7 +158,8 @@ class Object(models.Model):
     name = models.CharField(max_length=256, blank=False, default='')
     date_lower = PartialDateField(blank=True, null=True)
     date_upper = PartialDateField(blank=True, null=True)
-    original_location = models.ForeignKey(Church, related_name='originallocations', on_delete=models.CASCADE, blank=True, default='', null=True)
+    original_location = models.ForeignKey(Church, related_name='originallocations', on_delete=models.CASCADE,
+                                          blank=True, default='', null=True)
     original_location_city = models.ForeignKey(City, on_delete=models.CASCADE, blank=True, default='', null=True)
     original_location_region = models.ForeignKey(Region, on_delete=models.CASCADE, blank=True, default='', null=True)
     current_location = models.ForeignKey(Church, on_delete=models.CASCADE, blank=True, default='', null=True)
@@ -171,9 +176,11 @@ class Object(models.Model):
     )
     material_evidence = models.CharField(max_length=1, choices=MATERIAL, default='Y', blank=True, null=True)
     external_link = models.URLField(max_length=256, default='', blank=True)
-    bibliography = models.ForeignKey(Bibliography, on_delete=models.CASCADE, blank=True, default='', null=True) # this will not be
+    bibliography = models.ForeignKey(Bibliography, on_delete=models.CASCADE, blank=True, default='',
+                                     null=True)  # this will not be
     # used in the future. I didn't delete this because there is data saved for some entries on the database.
-    bibliography_many = models.ManyToManyField(Bibliography, related_name='bibliographies_object', blank=True, default='')
+    bibliography_many = models.ManyToManyField(Bibliography, related_name='bibliographies_object', blank=True,
+                                               default='')
     description = models.TextField(default='', blank=True, null=True)
     status = models.BooleanField("Completed", default=False, help_text="Complete")
 
@@ -217,9 +224,11 @@ class LiturgicalManuscript(models.Model):
     provenance_museum = models.ForeignKey(Museum, on_delete=models.SET_NULL, blank=True, default='', null=True)
     feast = models.ForeignKey(Feast, on_delete=models.SET_NULL, blank=True, default='', null=True)
     external_link = models.URLField(max_length=256, default='', blank=True)
-    bibliography = models.ForeignKey(Bibliography, on_delete=models.SET_NULL, blank=True, default='', null=True) # this will not be
+    bibliography = models.ForeignKey(Bibliography, on_delete=models.SET_NULL, blank=True, default='',
+                                     null=True)  # this will not be
     # used in the future. I didn't delete this because there is data saved for some entries on the database.
-    bibliography_many = models.ManyToManyField(Bibliography, related_name='bibliographies_litman', blank=True, default='')
+    bibliography_many = models.ManyToManyField(Bibliography, related_name='bibliographies_litman', blank=True,
+                                               default='')
     description = models.TextField(default='', blank=True, null=True)
     status = models.BooleanField("Completed", default=False, help_text="Complete")
 
@@ -312,3 +321,13 @@ class InscriptionChurchRelation(models.Model):
 #     def __str__(self):
 #         message = self.church + "and" + self.liturgical_manuscript
 #         return message
+
+
+# Multiple external links
+class SaintLinkRelation(models.Model):
+    saint = models.ForeignKey(Saint, on_delete=models.CASCADE, blank=True)
+    link = models.URLField(max_length=256, default='', blank=True)
+
+    def __str__(self):
+        message = self.saint + "and" + self.link
+        return message

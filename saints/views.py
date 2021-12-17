@@ -261,7 +261,7 @@ def SaintList(request):
 
 @login_required(login_url='/login/')
 def edit_saint(request, pk=None, focus='', view='complete'):
-    names = 'saintchurch_formset,saintinscription_formset,saintobject_formset,saintliturgicalmanuscript_formset'
+    names = 'saintchurch_formset,saintinscription_formset,saintobject_formset,saintliturgicalmanuscript_formset,saintlink_formset'
     return edit_model(request, __name__, 'Saint', 'saints', pk, formset_names=names,
                       focus=focus, view=view)
 

@@ -39,11 +39,15 @@
         </td>
     </tr>
     <tr class="d-flex">
-        <th class="col-2">External link:</th>
+        <th class="col-2">External links:</th>
         <td class="col-8">
-            {% if saint.external_link %}
-                {{saint.external_link}}
-            {% endif %}
+            {% for t in saint.saintlinkrelation_set.all %}
+                    {% if t %}
+                        <a href="{{ t.link }}"> {{ t.link }} </a><br>
+                    {% else %}
+                        &nbsp;
+                    {% endif %}
+                {% endfor %}
         </td>
     </tr>
     <tr class="d-flex">

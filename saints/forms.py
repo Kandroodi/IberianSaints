@@ -25,7 +25,7 @@ class CityWidget(s2forms.ModelSelect2Widget):
 
 class RegionWidget(s2forms.ModelSelect2Widget):
     search_fields = ['city__name__icontains',
-                     'region_number__icontains',]
+                     'region_number__icontains', ]
 
 
 class MuseumWidget(s2forms.ModelSelect2Widget):
@@ -634,6 +634,22 @@ class InscriptionChurchRelationForm(ModelForm):
         fields = ('church', 'inscription', 'start_date', 'end_date')
 
 
+# Multiple Links
+
+class SaintLinkRelationForm(ModelForm):
+    saint = forms.ModelChoiceField(
+        queryset=Saint.objects.all(),
+        widget=SaintWidget(
+            attrs={'data-placeholder': 'Select saint',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
+    )
+
+    class Meta:
+        model = SaintLinkRelation
+        fields = ('saint', 'link')
+
+
 # Formsets
 
 saintchurch_formset = inlineformset_factory(
@@ -670,3 +686,7 @@ inscriptionchurch_formset = inlineformset_factory(
     Inscription, InscriptionChurchRelation, form=InscriptionChurchRelationForm, extra=1)
 churchinscription_formset = inlineformset_factory(
     Church, InscriptionChurchRelation, form=InscriptionChurchRelationForm, extra=1)
+
+# Multiple Links
+saintlink_formset = inlineformset_factory(
+    Saint, SaintLinkRelation, form=SaintLinkRelationForm, extra=1)

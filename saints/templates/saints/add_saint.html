@@ -32,6 +32,9 @@
 	<li class="nav-item">
         <a class="nav-link" id="Liturgicalmanuscriptsa" data-toggle="tab" href="#Liturgicalmanuscripts" role="tab" aria-controls="Liturgicalmanuscripts" aria-selected="false">Liturgical manuscripts</a>
     </li>
+	<li class="nav-item">
+        <a class="nav-link" id="Linksa" data-toggle="tab" href="#Links" role="tab" aria-controls="Links" aria-selected="false">External Links</a>
+    </li>
 </ul>
 
 <div class="tab-content" id="myTabContent">
@@ -114,6 +117,22 @@
 			<tr class ="d-flex">
 			<td class="col-8">{{f.liturgical_manuscript}} {{f.liturgical_manuscript.errors}}</td>
 			<td class="col-1">{{f.DELETE}} {{f.id}}</td>
+			</tr>
+		{% endfor %}
+		</table>
+	</div>
+	<!--Links -->
+    <div class="tab-pane fade" id="Links">
+		{{saintlink_formset.management_form}}
+		<table class="table table-borderless">
+		<tr class ="d-flex">
+		<th class="col-8">Link</th>
+		<th class="col-1" style="text-align:center"><i class="fa fa-times text-danger"></i></th>
+		</tr>
+		{% for f in saintlink_formset.forms %}
+			<tr class ="d-flex">
+			<td class="col-8">{{f.link}} {{f.link.errors}}</td>
+			<td class="col-1" style="text-align:left">{{f.DELETE}} {{f.id}}</td>
 			</tr>
 		{% endfor %}
 		</table>
