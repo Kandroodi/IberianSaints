@@ -73,4 +73,8 @@ urlpatterns = [
     url(r'^institutiontype/new/(?P<pk>\d+)/$', views.InstitutionTypeUpdateView.as_view(), name='institutiontype-update'),
     url(r'^institutiontype/delete/(?P<pk>\d+)/$', views.InstitutionTypeDeleteView.as_view(), name='institutiontype-delete'),
     path('institutiontype/list', views.InstitutionTypeListView.as_view(), name='institutiontype-list'),
+    url(r'^city/new/$', views.CityCreatView.as_view(), name='city-insert'),
+    url(r'^city/new/(?P<pk>\d+)/$', views.CityUpdateView.as_view(), name='city-update'),
+    url(r'^city/delete/(?P<pk>\d+)/$', views.CityDeleteView.as_view(), name='city-delete'),
+    path('city/list', views.CityListView.as_view(), name='city-list'),
 ]

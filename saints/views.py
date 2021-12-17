@@ -12,7 +12,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from utilities.views import saintsimplesearch, churchsimplesearch, objectsimplesearch, inscriptionsimplesearch, liturgicalmanuscriptsimplesearch
+from utilities.views import saintsimplesearch, churchsimplesearch, objectsimplesearch, inscriptionsimplesearch, \
+    liturgicalmanuscriptsimplesearch
 
 
 # Create your views here.
@@ -120,7 +121,6 @@ def churchList(request):
                'nentries': len(query_set),
                'query': query}
     return render(request, 'saints/church_list.html', context)
-
 
 
 @login_required(login_url='/login/')
@@ -245,7 +245,7 @@ class InscriptionDetailView(DetailView):
     model = Inscription
 
 
-#Saint
+# Saint
 @login_required(login_url='/login/')
 def SaintList(request):
     query_set = saintsimplesearch(request, 'saints', 'saint')
@@ -535,3 +535,31 @@ class InstitutionTypeUpdateView(UpdateView):
 class InstitutionTypeDeleteView(DeleteView):
     model = InstitutionType
     success_url = reverse_lazy("saints:institutiontype-list")
+
+# City
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
+class CityListView(ListView):
+    model = City
+    template_name = 'installations/city_list.html'
+    context_object_name = 'city_list'
+
+
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
+class CityCreatView(CreateView):
+    model = City
+    fields = '__all__'
+    template_name = 'saints/city_form.html'
+    success_url = reverse_lazy('saints:city-list')
+
+
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
+class CityUpdateView(UpdateView):
+    model = City
+    fields = '__all__'
+    success_url = reverse_lazy('saints:city-list')
+
+
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
+class CityDeleteView(DeleteView):
+    model = City
+    success_url = reverse_lazy("saints:city-list")

@@ -77,6 +77,21 @@ class UserProfileInfoForm(forms.ModelForm):
         # fields = ('portfolio_site', 'profile_pic')
         fields = ()
 
+# Location forms: City, Region, Museum, Church as a location
+class CityForm(ModelForm):
+    class Meta:
+        model = City
+        fields = ['name', 'latitude', 'longitude']
+        labels = {
+            'name': 'City Name'
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(CityForm, self).__init__(*args, **kwargs)
+        self.fields['latitude'].required = False
+        self.fields['longitude'].required = False
+        self.helper = FormHelper()
+
 
 # Forms
 class SaintForm(forms.ModelForm):

@@ -23,6 +23,15 @@ class UserProfileInfo(models.Model):
         return self.user.username
 
 
+# Location models: City, Region, Museum, Church as a location
+class City(models.Model):
+    name = models.CharField(max_length=100, blank=False)
+    latitude = models.DecimalField(max_digits=7, decimal_places=5, default=0)
+    longitude = models.DecimalField(max_digits=7, decimal_places=5, default=0)
+
+    def __str__(self):
+        return self.name
+
 
 class InstitutionType(models.Model):
     name = models.CharField(max_length=100)
