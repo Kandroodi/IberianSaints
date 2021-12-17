@@ -77,6 +77,7 @@ class UserProfileInfoForm(forms.ModelForm):
         # fields = ('portfolio_site', 'profile_pic')
         fields = ()
 
+
 # Location forms: City, Region, Museum, Church as a location
 class CityForm(ModelForm):
     class Meta:
@@ -91,6 +92,14 @@ class CityForm(ModelForm):
         self.fields['latitude'].required = False
         self.fields['longitude'].required = False
         self.helper = FormHelper()
+
+
+class RegionForms(ModelForm):
+    extent_shapefile = forms.FileField(widget=forms.ClearableFileInput)
+
+    class Meta:
+        model = Region
+        fields = ('city', 'region_number', 'extent_shapefile')
 
 
 # Forms

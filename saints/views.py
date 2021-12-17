@@ -536,6 +536,7 @@ class InstitutionTypeDeleteView(DeleteView):
     model = InstitutionType
     success_url = reverse_lazy("saints:institutiontype-list")
 
+
 # City
 @method_decorator(login_required(login_url='/login/'), name='dispatch')
 class CityListView(ListView):
@@ -563,3 +564,32 @@ class CityUpdateView(UpdateView):
 class CityDeleteView(DeleteView):
     model = City
     success_url = reverse_lazy("saints:city-list")
+
+
+# Region
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
+class RegionListView(ListView):
+    model = Region
+    template_name = 'installations/region_list.html'
+    context_object_name = 'region_list'
+
+
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
+class RegionCreatView(CreateView):
+    model = Region
+    fields = '__all__'
+    template_name = 'saints/region_form.html'
+    success_url = reverse_lazy('saints:region-list')
+
+
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
+class RegionUpdateView(UpdateView):
+    model = Region
+    fields = '__all__'
+    success_url = reverse_lazy('saints:region-list')
+
+
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
+class RegionDeleteView(DeleteView):
+    model = Region
+    success_url = reverse_lazy("saints:region-list")

@@ -33,6 +33,17 @@ class City(models.Model):
         return self.name
 
 
+class Region(models.Model):
+    city = models.ForeignKey(City, on_delete=models.CASCADE, blank=False, null=False, default='')
+    region_number = models.PositiveIntegerField(null=True, blank=True)
+    extent_shapefile = models.FileField(upload_to='shapefiles/', max_length=50, null=True,
+                                        blank=True)
+
+    def __str__(self):
+        st = self.city.name + ' ' + str(self.region_number)
+        return st
+
+
 class InstitutionType(models.Model):
     name = models.CharField(max_length=100)
 

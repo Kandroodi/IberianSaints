@@ -77,4 +77,8 @@ urlpatterns = [
     url(r'^city/new/(?P<pk>\d+)/$', views.CityUpdateView.as_view(), name='city-update'),
     url(r'^city/delete/(?P<pk>\d+)/$', views.CityDeleteView.as_view(), name='city-delete'),
     path('city/list', views.CityListView.as_view(), name='city-list'),
+    url(r'^region/new/$', views.RegionCreatView.as_view(), name='region-insert'),
+    url(r'^region/new/(?P<pk>\d+)/$', views.RegionUpdateView.as_view(), name='region-update'),
+    url(r'^region/delete/(?P<pk>\d+)/$', views.RegionDeleteView.as_view(), name='region-delete'),
+    path('region/list', views.RegionListView.as_view(), name='region-list'),
 ]
