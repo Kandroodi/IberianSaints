@@ -297,7 +297,7 @@ def ObjectList(request):
 
 @login_required(login_url='/login/')
 def edit_object(request, pk=None, focus='', view='complete'):
-    names = 'objectsaint_formset,objectchurch_formset'
+    names = 'objectsaint_formset,objectchurch_formset,objectlink_formset'
     return edit_model(request, __name__, 'Object', 'saints', pk, formset_names=names,
                       focus=focus, view=view)
 

@@ -175,7 +175,7 @@ class Object(models.Model):
         ('N', 'No'),
     )
     material_evidence = models.CharField(max_length=1, choices=MATERIAL, default='Y', blank=True, null=True)
-    external_link = models.URLField(max_length=256, default='', blank=True)
+    # external_link = models.URLField(max_length=256, default='', blank=True) # It is replaced with ObjectLinkRelation in order to have multiple external links
     bibliography = models.ForeignKey(Bibliography, on_delete=models.CASCADE, blank=True, default='',
                                      null=True)  # this will not be
     # used in the future. I didn't delete this because there is data saved for some entries on the database.
@@ -340,4 +340,13 @@ class ChurchLinkRelation(models.Model):
 
     def __str__(self):
         message = self.church + "and" + self.link
+        return message
+
+
+class ObjectLinkRelation(models.Model):
+    object = models.ForeignKey(Object, on_delete=models.CASCADE, blank=True)
+    link = models.URLField(max_length=256, default='', blank=True)
+
+    def __str__(self):
+        message = self.object + "and" + self.link
         return message

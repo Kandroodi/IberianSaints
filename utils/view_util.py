@@ -423,7 +423,7 @@ def make_tabs(tab_type, focus=0, focus_names=''):
         relations = Tab(t, focus)
         return Tabs([minimize, relations], 'minimize,relations', focus_names)
     if tab_type == 'object':
-        t = 'Saints, Churches'
+        t = 'Saints, Churches, External links'
         relations = Tab(t, focus)
         return Tabs([minimize, relations], 'minimize,relations', focus_names)
     if tab_type == 'inscription':

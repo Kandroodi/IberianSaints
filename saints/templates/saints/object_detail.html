@@ -63,9 +63,13 @@
     <tr class="d-flex">
         <th class="col-2">External link:</th>
         <td class="col-8">
-            {% if object.external_link %}
-                {{object.external_link}}
-            {% endif %}
+            {% for t in object.objectlinkrelation_set.all %}
+                    {% if t %}
+                        <a href="{{ t.link }}"> {{ t.link }} </a><br>
+                    {% else %}
+                        &nbsp;
+                    {% endif %}
+                {% endfor %}
         </td>
     </tr>
     <tr class="d-flex">
