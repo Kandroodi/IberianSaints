@@ -675,6 +675,19 @@ class ObjectLinkRelationForm(ModelForm):
     class Meta:
         model = ObjectLinkRelation
         fields = ('object', 'link')
+
+class InscriptionLinkRelationForm(ModelForm):
+    inscription = forms.ModelChoiceField(
+        queryset=Inscription.objects.all(),
+        widget=InscriptionWidget(
+            attrs={'data-placeholder': 'Select inscription',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
+    )
+
+    class Meta:
+        model = InscriptionLinkRelation
+        fields = ('inscription', 'link')
 # Formsets
 
 saintchurch_formset = inlineformset_factory(
@@ -721,3 +734,6 @@ churchlink_formset = inlineformset_factory(
 
 objectlink_formset = inlineformset_factory(
     Object, ObjectLinkRelation, form=ObjectLinkRelationForm, extra=1)
+
+inscriptionlink_formset = inlineformset_factory(
+    Inscription, InscriptionLinkRelation, form=InscriptionLinkRelationForm, extra=1)

@@ -110,7 +110,7 @@ class Inscription(models.Model):
     current_location_museum = models.ForeignKey(Museum, on_delete=models.CASCADE, blank=True, default='', null=True)
     date_lower = PartialDateField(blank=True, null=True)
     date_upper = PartialDateField(blank=True, null=True)
-    external_link = models.URLField(max_length=256, default='', blank=True)
+    # external_link = models.URLField(max_length=256, default='', blank=True) # It is replaced with InscriptionLinkRelation in order to have multiple external links
     bibliography = models.ForeignKey(Bibliography, on_delete=models.SET_NULL, blank=True, default='',
                                      null=True)  # this will not be
     # used in the future. I didn't delete this because there is data saved for some entries on the database.
@@ -349,4 +349,12 @@ class ObjectLinkRelation(models.Model):
 
     def __str__(self):
         message = self.object + "and" + self.link
+        return message
+
+class InscriptionLinkRelation(models.Model):
+    inscription = models.ForeignKey(Inscription, on_delete=models.CASCADE, blank=True)
+    link = models.URLField(max_length=256, default='', blank=True)
+
+    def __str__(self):
+        message = self.inscription + "and" + self.link
         return message

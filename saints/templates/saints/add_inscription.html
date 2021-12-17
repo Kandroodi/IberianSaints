@@ -26,6 +26,9 @@
 	<li class="nav-item">
         <a class="nav-link" id="Churchesa" data-toggle="tab" href="#Churches" role="tab" aria-controls="Churches" aria-selected="false">Churches</a>
     </li>
+	<li class="nav-item">
+        <a class="nav-link" id="Linksa" data-toggle="tab" href="#Links" role="tab" aria-controls="Links" aria-selected="false">External Links</a>
+    </li>
 </ul>
 
 <div class="tab-content" id="myTabContent">
@@ -69,6 +72,22 @@
 			<td class="col-5">{{f.church}} {{f.church.errors}}</td>
             <td class="col-3">{{f.start_date}} {{f.start_date.errors}}</td>
             <td class="col-3">{{f.end_date}} {{f.end_date.errors}}</td>
+			<td class="col-1" style="text-align:left">{{f.DELETE}} {{f.id}}</td>
+			</tr>
+		{% endfor %}
+		</table>
+	</div>
+		<!--Links -->
+    <div class="tab-pane fade" id="Links">
+		{{inscriptionlink_formset.management_form}}
+		<table class="table table-borderless">
+		<tr class ="d-flex">
+		<th class="col-8">Link</th>
+		<th class="col-1" style="text-align:center"><i class="fa fa-times text-danger"></i></th>
+		</tr>
+		{% for f in inscriptionlink_formset.forms %}
+			<tr class ="d-flex">
+			<td class="col-8">{{f.link}} {{f.link.errors}}</td>
 			<td class="col-1" style="text-align:left">{{f.DELETE}} {{f.id}}</td>
 			</tr>
 		{% endfor %}

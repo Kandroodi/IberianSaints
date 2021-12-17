@@ -222,7 +222,7 @@ def InscriptionList(request):
 
 @login_required(login_url='/login/')
 def edit_inscription(request, pk=None, focus='', view='complete'):
-    names = 'inscriptionsaint_formset,inscriptionchurch_formset'
+    names = 'inscriptionsaint_formset,inscriptionchurch_formset,inscriptionlink_formset'
     return edit_model(request, __name__, 'Inscription', 'saints', pk, formset_names=names,
                       focus=focus, view=view)
 
