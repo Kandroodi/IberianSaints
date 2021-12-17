@@ -167,6 +167,20 @@ class ChurchForm(ModelForm):
     coordinates_latitude = forms.DecimalField(widget=forms.TextInput(attrs={'placeholder': 'Latitude'}), required=False)
     coordinates_longitude = forms.DecimalField(widget=forms.TextInput(attrs={'placeholder': 'Longitude'}),
                                                required=False)
+    city = forms.ModelChoiceField(
+        queryset=City.objects.all(),
+        widget=CityWidget(
+            attrs={'data-placeholder': 'Select City',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
+        required=False)
+    region = forms.ModelChoiceField(
+        queryset=Region.objects.all(),
+        widget=RegionWidget(
+            attrs={'data-placeholder': 'Select Region',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
+        required=False)
     institution_type = forms.ModelChoiceField(
         queryset=InstitutionType.objects.all(),
         # this line refreshes the list when a new item is entered using the plus button
