@@ -108,7 +108,7 @@ def home(request):
 
 @login_required(login_url='/login/')
 def edit_church(request, pk=None, focus='', view='complete'):
-    names = 'churchsaint_formset,churchobject_formset,churchinscription_formset,churchliturgicalmanuscript_formset'
+    names = 'churchsaint_formset,churchobject_formset,churchinscription_formset,churchliturgicalmanuscript_formset,churchlink_formset'
     return edit_model(request, __name__, 'Church', 'saints', pk, formset_names=names,
                       focus=focus, view=view)
 

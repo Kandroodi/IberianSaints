@@ -635,7 +635,6 @@ class InscriptionChurchRelationForm(ModelForm):
 
 
 # Multiple Links
-
 class SaintLinkRelationForm(ModelForm):
     saint = forms.ModelChoiceField(
         queryset=Saint.objects.all(),
@@ -649,6 +648,19 @@ class SaintLinkRelationForm(ModelForm):
         model = SaintLinkRelation
         fields = ('saint', 'link')
 
+
+class ChurchLinkRelationForm(ModelForm):
+    church = forms.ModelChoiceField(
+        queryset=Church.objects.all(),
+        widget=SaintWidget(
+            attrs={'data-placeholder': 'Select saint',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
+    )
+
+    class Meta:
+        model = ChurchLinkRelation
+        fields = ('church', 'link')
 
 # Formsets
 
@@ -690,3 +702,7 @@ churchinscription_formset = inlineformset_factory(
 # Multiple Links
 saintlink_formset = inlineformset_factory(
     Saint, SaintLinkRelation, form=SaintLinkRelationForm, extra=1)
+
+
+churchlink_formset = inlineformset_factory(
+    Church, ChurchLinkRelation, form=ChurchLinkRelationForm, extra=1)
