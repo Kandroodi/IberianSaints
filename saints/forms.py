@@ -293,7 +293,35 @@ class InscriptionForm(ModelForm):
     original_location = forms.ModelChoiceField(
         queryset=Church.objects.all(),
         widget=ChurchWidget(
-            attrs={'data-placeholder': 'Select original location',
+            attrs={'data-placeholder': 'Select Church',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
+        required=False)
+    original_location_city = forms.ModelChoiceField(
+        queryset=City.objects.all(),
+        widget=CityWidget(
+            attrs={'data-placeholder': 'Select City',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
+        required=False)
+    original_location_region = forms.ModelChoiceField(
+        queryset=Region.objects.all(),
+        widget=RegionWidget(
+            attrs={'data-placeholder': 'Select Region',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
+        required=False)
+    current_location = forms.ModelChoiceField(
+        queryset=Church.objects.all(),
+        widget=ChurchWidget(
+            attrs={'data-placeholder': 'Select Church',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
+        required=False)
+    current_location_museum = forms.ModelChoiceField(
+        queryset=Museum.objects.all(),
+        widget=MuseumWidget(
+            attrs={'data-placeholder': 'Select Museum',
                    'style': 'width:100%;', 'class': 'searching',
                    'data-minimum-input-length': '1'}),
         required=False)
