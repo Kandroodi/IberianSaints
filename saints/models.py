@@ -148,9 +148,11 @@ class Object(models.Model):
     name = models.CharField(max_length=256, blank=False, default='')
     date_lower = PartialDateField(blank=True, null=True)
     date_upper = PartialDateField(blank=True, null=True)
-    original_location = models.ForeignKey(Church, related_name='originallocations', on_delete=models.CASCADE,
-                                          blank=True, default='', null=True)
+    original_location = models.ForeignKey(Church, related_name='originallocations', on_delete=models.CASCADE, blank=True, default='', null=True)
+    original_location_city = models.ForeignKey(City, on_delete=models.CASCADE, blank=True, default='', null=True)
+    original_location_region = models.ForeignKey(Region, on_delete=models.CASCADE, blank=True, default='', null=True)
     current_location = models.ForeignKey(Church, on_delete=models.CASCADE, blank=True, default='', null=True)
+    current_location_museum = models.ForeignKey(Museum, on_delete=models.CASCADE, blank=True, default='', null=True)
     type = models.ForeignKey(ObjectType, on_delete=models.CASCADE, blank=True, default='', null=True)
     TEXTUAL = (
         ('Y', 'Yes'),
