@@ -688,6 +688,20 @@ class InscriptionLinkRelationForm(ModelForm):
     class Meta:
         model = InscriptionLinkRelation
         fields = ('inscription', 'link')
+
+
+class LitManuscriptLinkRelationForm(ModelForm):
+    liturgical_manuscript = forms.ModelChoiceField(
+        queryset=LiturgicalManuscript.objects.all(),
+        widget=LiturgicalManuscriptWidget(
+            attrs={'data-placeholder': 'Select liturgical manuscript',
+                   'style': 'width:100%;', 'class': 'searching',
+                   'data-minimum-input-length': '1'}),
+    )
+
+    class Meta:
+        model = LitManuscriptLinkRelation
+        fields = ('liturgical_manuscript', 'link')
 # Formsets
 
 saintchurch_formset = inlineformset_factory(
@@ -737,3 +751,6 @@ objectlink_formset = inlineformset_factory(
 
 inscriptionlink_formset = inlineformset_factory(
     Inscription, InscriptionLinkRelation, form=InscriptionLinkRelationForm, extra=1)
+
+litmanuscriptlink_formset = inlineformset_factory(
+    LiturgicalManuscript, LitManuscriptLinkRelation, form=LitManuscriptLinkRelationForm, extra=1)

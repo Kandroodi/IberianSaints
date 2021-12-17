@@ -369,7 +369,7 @@ def LiturgicalManuscriptList(request):
 
 @login_required(login_url='/login/')
 def edit_liturgicalmanuscript(request, pk=None, focus='', view='complete'):
-    names = 'liturgicalmanuscriptsaint_formset,liturgicalmanuscriptchurch_formset'
+    names = 'liturgicalmanuscriptsaint_formset,liturgicalmanuscriptchurch_formset,litmanuscriptlink_formset'
     return edit_model(request, __name__, 'LiturgicalManuscript', 'saints', pk, formset_names=names,
                       focus=focus, view=view)
 

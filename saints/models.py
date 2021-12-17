@@ -223,7 +223,7 @@ class LiturgicalManuscript(models.Model):
     provenance = models.ForeignKey(Church, on_delete=models.SET_NULL, blank=True, default='', null=True)
     provenance_museum = models.ForeignKey(Museum, on_delete=models.SET_NULL, blank=True, default='', null=True)
     feast = models.ForeignKey(Feast, on_delete=models.SET_NULL, blank=True, default='', null=True)
-    external_link = models.URLField(max_length=256, default='', blank=True)
+    # external_link = models.URLField(max_length=256, default='', blank=True) # It is replaced with litmanLinkRelation in order to have multiple external links
     bibliography = models.ForeignKey(Bibliography, on_delete=models.SET_NULL, blank=True, default='',
                                      null=True)  # this will not be
     # used in the future. I didn't delete this because there is data saved for some entries on the database.
@@ -351,10 +351,20 @@ class ObjectLinkRelation(models.Model):
         message = self.object + "and" + self.link
         return message
 
+
 class InscriptionLinkRelation(models.Model):
     inscription = models.ForeignKey(Inscription, on_delete=models.CASCADE, blank=True)
     link = models.URLField(max_length=256, default='', blank=True)
 
     def __str__(self):
         message = self.inscription + "and" + self.link
+        return message
+
+
+class LitManuscriptLinkRelation(models.Model):
+    liturgical_manuscript = models.ForeignKey(LiturgicalManuscript, on_delete=models.CASCADE, blank=True)
+    link = models.URLField(max_length=256, default='', blank=True)
+
+    def __str__(self):
+        message = self.liturgical_manuscript + "and" + self.link
         return message
